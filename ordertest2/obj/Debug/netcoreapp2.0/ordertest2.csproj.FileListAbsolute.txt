@@ -1,0 +1,16 @@
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ordertest2.deps.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ordertest2.runtimeconfig.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ordertest2.runtimeconfig.dev.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ordertest2.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ordertest2.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/tanya_orders.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/tanya_orders.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ordertest2.csprojResolveAssemblyReference.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ordertest2.csproj.CoreCompileInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ordertest2.AssemblyInfoInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ordertest2.AssemblyInfo.cs
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ordertest2.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ordertest2.pdb
