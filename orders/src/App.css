@@ -1,0 +1,118 @@
+.App {
+  text-align: center;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.login, .catalog-title {
+  text-align: center;
+}
+
+.product-list {
+  text-align: left;
+}
+
+/*HEADER*/
+.App-header {
+  display: flex;
+  justify-content: space-between;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+  }
+.logo-title {
+  display: flex;
+  justify-content: flex-start;
+  order: 0;
+}
+  /*Navigation links*/
+  ul.navs {
+    display: flex;
+    justify-content: center;
+    order: 1;
+  }
+  
+  ul.navs li {
+    display: inline-block;
+    padding: .5rem;
+  }
+
+  ul.navs li:hover {
+    background-color: #ecc6c6;
+    border-radius: 2px; 
+  }
+
+  /*Acct Icon*/
+.accticon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  order: 2;
+}
+
+/*Cart icon*/
+.cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .5rem;
+  margin: .25rem;
+  background-color: #cc0000;
+  border-radius: 10%;
+  box-shadow: 1px 1px 2px #990000;
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+
+  /*FOOTER*/
+.footer {
+  position: fixed; 
+  bottom: 0px;
+  right: 0px;
+  border: 1px solid #000000;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+
+/*PRODUCT DISPLAY*/
+.prod-display-alt1, .prod-display-alt2 {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  margin: .5rem;
+  background-color: white;
+}
+
+.prod-display-alt2 {
+  background-color: #f2f2f2;
+}
+
+.prod-img {
+ margin-right: 1rem;
+ width: 10rem;
+ height: 10rem;
+ background-color: #cc0000;
+}
+
+.prod-div {
+  flex-direction: column;
+  width: 11rem;
+  padding: .2rem;
+  
+}
+
+.prod-div input {
+  width: 50px;
+  font-size: 1em;
+}
