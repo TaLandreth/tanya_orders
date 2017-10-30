@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ordersAPI.Models
+namespace orders_library
 {
     public class UserModel
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ordersAPI
+namespace orders_library
 {
     public class ShippingMethod
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ordersAPI.Models
+namespace orders_library
 {
     public class Instructions
     {

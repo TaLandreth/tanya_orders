@@ -1,28 +1,29 @@
-﻿<Properties StartupConfiguration="{FDF882CE-5527-41EE-BF60-CB24CB24CB6D}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
+﻿<Properties StartupConfiguration="{5A407D47-D871-4F7C-B664-699CE7CA44D6}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.ItemProperties.tanya__orders PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LineOrderUnitTests/LineOrderUnitTests.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="orders_library/Data/OrderContext.cs">
     <Files>
-      <File FileName="tanya_orders/Program.cs" Line="233" Column="59" />
-      <File FileName="tanya_orders/Services/OrderManager.cs" Line="34" Column="87" />
-      <File FileName="LineOrderUnitTests/LineOrderUnitTests.cs" Line="174" Column="68" />
+      <File FileName="ordersAPI/Controllers/OrdersController.cs" Line="45" Column="48" />
+      <File FileName="orders_library/Services/OrderManager.cs" Line="88" Column="10" />
+      <File FileName="orders_library/Services/ProductManager.cs" Line="25" Column="75" />
+      <File FileName="../sds-react-project/project/backend/backend/Controllers/PageController.cs" Line="18" Column="72" />
+      <File FileName="../sds-react-project/project/backend/backend/Controllers/MainController.cs" Line="19" Column="52" />
+      <File FileName="../sds-react-project/project/backend/backend/Store/Store.cs" Line="43" Column="1" />
+      <File FileName="orders_library/Models/Product.cs" Line="4" Column="25" />
+      <File FileName="orders_library/Models/UserModel.cs" Line="4" Column="18" />
+      <File FileName="orders_library/Models/Instructions.cs" Line="6" Column="18" />
+      <File FileName="tanya_orders/Program.cs" Line="204" Column="69" />
+      <File FileName="orders_library/Data/OrderContext.cs" Line="4" Column="41" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="tanya_orders" expanded="True">
-            <Node name="LineOrderUnitTests" expanded="True">
-              <Node name="LineOrderUnitTests" expanded="True">
-                <Node name="UnitTest1" expanded="True">
-                  <Node name="CreateOrderTest" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
+          <Node name="tanya_orders" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.ordersAPI PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

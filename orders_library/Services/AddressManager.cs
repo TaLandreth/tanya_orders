@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace ordersAPI.Services
+namespace orders_library.Services
 {
     public class AddressManager
     {

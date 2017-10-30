@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ordersAPI
+namespace orders_library
 {
     public class LineItem
     {

@@ -1,25 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace ordersAPI.Services
+namespace orders_library.Services
 {
     public class ProductManager
     {
-        /*
-         * 
-        //RETRIEVE--------
-        public Product GetProduct(int prodnum) //by Product ID#
+
+        //GET COUNT
+        public int GetCount()
         {
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
+            using (var context = DbContextFactory.Create())
             {
-                //RETRIEVE BY Product NUMBER
-                var query = context.Product.FirstOrDefault(p => p.Id == prodnum);
+                var query = context.Product;
+
+                var recordcount = query.Count();
+
+                return recordcount;
+            }
+        }
+
+        //RETRIEVE--------
+        public IEnumerable<Product> GetProducts(Instructions instructions)
+        {
+            //view amt
+            //start val
+            //user id
+
+            using (var context = DbContextFactory.Create())  {
+                var query = context.Product.Skip(instructions.startVal).Take(instructions.viewAmt).ToList();
 
                 return query;
             }
         }
 
+        /*
+         * 
         //UPDATE--------
         public void UpdateProduct(Product prod)
         {

@@ -1,13 +1,11 @@
-﻿namespace ordersAPI
+﻿namespace orders_library
 {
     using System.ComponentModel.DataAnnotations;
     using Microsoft.EntityFrameworkCore;
-    using ordersAPI.Models;
 
     public class OrderDBContext : DbContext
     {
-        public OrderDBContext(DbContextOptions<OrderDBContext> options)
-        : base(options)
+        public OrderDBContext(DbContextOptions<OrderDBContext> options): base(options)
         { }
 
         public DbSet<Address> Address { get; set; }
@@ -26,7 +24,7 @@
         public static OrderDBContext Create()
         {
             var optionsBuilder = new DbContextOptionsBuilder<OrderDBContext>();
-            optionsBuilder.UseMySQL(_connectionString);
+            optionsBuilder.UseMySql(_connectionString);
 
             //Ensure database creation
             var context = new OrderDBContext(optionsBuilder.Options);
@@ -34,5 +32,4 @@
 
             return context;
         }
-
 }}

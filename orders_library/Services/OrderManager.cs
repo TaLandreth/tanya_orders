@@ -1,34 +1,48 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ordersAPI.Models;
 
-namespace ordersAPI.Services
+namespace orders_library.Services
 {
     public class OrderManager
     {
-
         //LOGIN
         public UserModel Login(UserModel credential) //by order id
         {
             using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
             {
+                
                 //RETRIEVE BY id
-                var query = context.UserDetails.FirstOrDefault(a => a.username == credential.username);
+                var query = context.UserDetails.FirstOrDefault(a => a.username == credential.username && a.password == credential.password);
 
                 try
                 {
-                    return query;
+                    var verify = context.UserDetails.First(u => u.id == query.id);
+                    Console.WriteLine("Logged in successfully!");
+                    return verify;
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("*** Error retrieving order...");
+                    Console.WriteLine("*** Error logging in");
                     return null;
                 }
             }
         }
 
+        //GET COUNT
+        public int GetOrderCount()
+        {
+            using (var context = DbContextFactory.Create())
+            {
+                var query = context.OrderDetails;
+
+                var recordcount = query.Count();
+
+                return recordcount;
+            }
+        }
 
         //RETRIEVE - SINGULAR
         public OrderDetails GetOrder(int id) //by order id
@@ -54,7 +68,7 @@ namespace ordersAPI.Services
         }
 
         //RETRIEVE - BY CUSTOMER ID & FILTER
-        public IEnumerable<OrderDetails> GetCustomerOrders(Instructions instr) //by cust id/status
+        public IEnumerable<CustomerOrders> GetCustomerOrders(Instructions instr) //by cust id/status
         {
             using (var context = DbContextFactory.Create())
             {
@@ -63,21 +77,21 @@ namespace ordersAPI.Services
                     var ord = context.OrderDetails                                    
                                      .Include(l => l.Lineitems).ThenInclude(p => p.ProductDetails)
                                      .Where(o => o.CustomerDetails.Id == instr.userid).Skip(instr.startVal).Take(instr.viewAmt)
-                                     .Select(x => new
+                                     .Select(x => new CustomerOrders
                                      {
                                          OrderId = x.Id,
                                          Date = x.OrderDate,
                                          CustomerId = x.CustomerDetailsId,
                                          OrderStat = x.OrderStatus,
                         Total = x.Lineitems.Sum(item => item.Quantity * item.ProductDetails.Price)
-                                     });
+                    }).ToList();
 
-                    return (IEnumerable<OrderDetails>)ord;
+                    return ord;
                 
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("\t*** Error retrieving orders....");
+                    Console.WriteLine("*** Error retrieving orders....");
                     return null;
                 }
             }
