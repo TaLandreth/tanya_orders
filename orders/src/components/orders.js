@@ -2,22 +2,22 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 import InfiniteScroll from 'react-infinite-scroll-component'
 import '../App.css'
-import { getProducts, getProductCount } from "../dispatcher/actions"
-import Product from './product'
-import { withRouter } from 'react-router-dom'
+import { getOrders, getOrderCount } from "../dispatcher/actions"
+import OrderDetails from "./orderdetails"
+import { Route, withRouter } from 'react-router-dom'
 
-class Catalog extends Component {
+class Orders extends Component {
   constructor() {
     super();
     this.state = {
       //Paging
-      moreProds: true,
+      moreOrds: true,
       startVal: 0,
       viewAmt: 10,
       //Filter/Product selection
       filter: "all"
     };
-    this.getMoreProducts = this.getMoreProducts.bind(this);
+    this.getMoreOrders = this.getMoreOrders.bind(this);
   }
 
   componentDidMount() {
@@ -27,15 +27,15 @@ class Catalog extends Component {
       userid: this.props.userid
     }
     //console.log(instructions)
-    getProducts(this.props.dispatch, instructions)
-    getProductCount(this.props.dispatch, instructions)
+    getOrders(this.props.dispatch, instructions)
+    getOrderCount(this.props.dispatch, instructions)
   }
 
   changeInputs = e => { this.setState({ [e.target.name]: e.target.value }) }
 
   refresh() {}
 
-  getMoreProducts() {
+  getMoreOrders() {
     //Establish records to pull
     var start = this.state.startVal
     var view = this.state.viewAmt
@@ -52,33 +52,38 @@ class Catalog extends Component {
     this.setState(instructions)
 
     //If exceed # of records pulled, stop scrolling
-    if (this.props.productCount === this.props.productList.length) {
-      this.setState({ moreProds: false })
+    if (this.props.orderCount === this.props.orderList.length) {
+      this.setState({ moreOrds: false })
     }
     //Send instructions:
-    getProducts(this.props.dispatch, instructions)
+    getOrders(this.props.dispatch, instructions)
   }
 
   render() {
-    //console.log("Product count: " + this.props.productCount)
-    //console.log("Product list count: " + this.props.productList.length)
-    //console.log(this.props.productList)
+    //console.log("Order count: " + this.props.orderCount)
+    //console.log("OrderList count: " + this.props.orderList.length)
+    //console.log(this.props.orderList)
 
     let i = 0
 
     return (
+      <Route component='/orders'>
+       <h2>Testing</h2>
+      
+      
       <div className="catalog-title">
-        <h1>Catalog</h1>
+        <h1>Order History</h1>
         <div className="product-list">
         <InfiniteScroll
+        key={i++}
           refreshFunction={this.refresh}
-          next={this.getMoreProducts.bind(this)}
-          hasMore={this.state.moreProds} >
-          {this.props.productList.map((b) => <Product key={this.props.productCount.length + i++} prod={b} />)}
+          next={this.getMoreOrders.bind(this)}
+          hasMore={this.state.moreOrds} >
+          {this.props.orderList.map((b) => <OrderDetails key={this.props.orderCount.length + i++} order={b} />)}
         </InfiniteScroll>
         </div>
       </div>
-    )
+    </Route>)
   }// end render
 }//end component
 
@@ -86,10 +91,11 @@ export default withRouter(connect(
   store => ({
     productList: store.productList,
     userid: store.userid,
-    productCount: store.productCount,
-    shoppingCart: store.shoppingCart
+    orderCount: store.orderCount,
+    orderList: store.orderList
+    
   })
-)(Catalog));
+)(Orders));
 
 //TO DO
 //-- UPDATE QUANTITY IN CART

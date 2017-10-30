@@ -1,7 +1,8 @@
 export default class LineItem {
-    constructor(lineid, productid, quantity) {
-        this.lineid = lineid
-        this.productid = productid
-        this.quantity = quantity
+    constructor(productid, name, price, quantity) {
+        this.productdetailsid = productid || 0
+        this.productname = name || ''
+        this.productprice = price || 0
+        this.quantity = quantity || 0
     }
 }

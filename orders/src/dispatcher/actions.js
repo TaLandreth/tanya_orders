@@ -1,22 +1,19 @@
 import axios from "axios";
 
 const BASE_URL = "http://localhost:5000/api"
-
 var AXIOS_CONFIG = { headers: { 'Authorization': '' } }
 
 export function onLogin(user, dispatch) {
-
     dispatch({
         type: "LOGIN_STARTED"
     })
-
     axios.post(BASE_URL + "/login", {
         username: user.username,
-        password: user.password
-    }, )
+        password: user.password}, )
+
         .then((response) => {
-            //Set the header to be used for future authentication
-            //AXIOS_CONFIG.headers.Authorization = response.data.id
+            //Set the header to be used for future authentication --> not utilized... yet?
+            AXIOS_CONFIG.headers.Authorization = response.data.id
             dispatch({ type: "LOGIN_FINISHED", payload: response.data })
         })
         .catch((err) => {
@@ -24,16 +21,14 @@ export function onLogin(user, dispatch) {
         })
 }
 
+//RETRIEVE PRODUCTS
 export function getProducts(dispatch, instructions) {
-
     dispatch({
         type: "GET_PRODUCTS_STARTED"
     })
     axios.post(BASE_URL + "/products", instructions)
         .then((response) => {
-
-            console.log("Size of data: " + response.data.length)
-
+            //console.log("Size of data: " + response.data.length)
             dispatch({ type: "GET_PRODUCTS_FINISHED", payload: response.data })
         })
         .catch((err) => {
@@ -41,14 +36,15 @@ export function getProducts(dispatch, instructions) {
         })
 }
 
-//RETRIEVE - 
-export function getOrders(dispatch, id) {
-
+//RETRIEVE ORDERS - 
+export function getOrders(dispatch, instructions) {
     dispatch({
         type: "GET_ORDERS_STARTED"
     })
+    axios.post(BASE_URL + "/orders", instructions)
 
-    axios.get(BASE_URL + "/" + id)
+    console.log(instructions)
+    
         .then((response) => {
             dispatch({ type: "GET_ORDERS_FINISHED", payload: response.data })
         })
@@ -59,32 +55,49 @@ export function getOrders(dispatch, id) {
 
 //Add to cart
 export function addToCart(dispatch, newItem) {
-
-    console.log("Actions: " + newItem.productid + ", " + newItem.quantity)
+    //console.log("Actions: " + newItem.productdetailsid + ", " + newItem.quantity)
     dispatch({
         type: "ADD_TO_CART_STARTED"
     })
-
     dispatch({ type: "ADD_TO_CART_FINISHED", payload: newItem })
 }
 
-export function getCount(dispatch) {
-
+//Add to cart
+export function updateCart(dispatch, newCart) {
+    console.log("In dispatcher: " + newCart)
     dispatch({
-        type: "GET_COUNT_STARTED"
+        type: "UPDATE_CART_STARTED"
     })
+    dispatch({ type: "UPDATE_CART_FINISHED", payload: newCart })
+}
 
+//Product count
+export function getProductCount(dispatch) {
+    dispatch({
+        type: "GET_PRODUCT_COUNT_STARTED"
+    })
     axios.get(BASE_URL + "/products")
         .then((response) => {
-            dispatch({ type: "GET_COUNT_FINISHED", payload: response.data })
+            dispatch({ type: "GET_PRODUCT_COUNT_FINISHED", payload: response.data })
         })
         .catch((err) => {
             dispatch({ type: "CALL_FAILED", payload: err })
         })
 }
 
-
-
+//Order count
+export function getOrderCount(dispatch) {
+    dispatch({
+        type: "GET_ORDER_COUNT_STARTED"
+    })
+    axios.get(BASE_URL + "/orders")
+        .then((response) => {
+            dispatch({ type: "GET_ORDER_COUNT_FINISHED", payload: response.data })
+        })
+        .catch((err) => {
+            dispatch({ type: "CALL_FAILED", payload: err })
+        })
+}
 
 
 /*
@@ -105,24 +118,6 @@ export function getPagedBooks(dispatch, instructions) {
             dispatch({ type: "CALL_FAILED", payload: err })
         })
 }
-
-
-//GET COUNT
-export function getCount(dispatch) {
-    
-        dispatch({
-            type: "GET_COUNT_STARTED"
-        })
-    
-        axios.get("http://localhost:5000/api/search")
-            .then((response) => {
-                dispatch({ type: "GET_COUNT_FINISHED", payload: response.data })
-            })
-            .catch((err) => {
-                dispatch({ type: "CALL_FAILED", payload: err })
-            })
-    }
-    
 
 //ADD
 export function addABook(dispatch, newBook) {
@@ -183,7 +178,6 @@ export function searchFor(dispatch, forThis) {
         .catch((err) => {
             dispatch({ type: "CALL_FAILED", payload: err })
         })
-
 }
 
 //SORT
@@ -237,25 +231,4 @@ export function filterBy(dispatch, instructions) {
             })
     
     }
-
-
-/* //GET NEW VIEW
-export function changeView(dispatch, criteria) { //how many to view, where to start from
-
-    console.log("Query Criteria - dispatcher")
-    console.log(criteria)
-
-    dispatch({
-        type: "GET_VIEW_STARTED"
-    })
-
-    axios.post(BASE_URL + "/pg/", criteria)
-        .then((response) => {
-            dispatch({ type: "GET_VIEW_FINISHED", payload: response.data })
-        })
-        .catch((err) => {
-            dispatch({ type: "CALL_FAILED", payload: err })
-        })
-} */
-
-
+    */

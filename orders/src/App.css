@@ -1,3 +1,5 @@
+@import url('popup.css') screen;
+
 .App {
   text-align: center;
 }
@@ -71,6 +73,25 @@
   font-weight: bold;
 }
 
+/*Cart popup details*/
+.cart-div, .cart-header {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: left;
+  padding: 2px;
+}
+
+.cart-header {
+  font-weight: bold;
+  text-decoration: underline;
+  border: 1px solid black;
+}
+
+button .fromcart {
+  background-color: gray;
+}
 
   /*FOOTER*/
 .footer {
