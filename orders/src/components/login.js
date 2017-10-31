@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { onLogin } from "../dispatcher/actions"
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import Catalog from './catalog'
+//import Catalog from './catalog'
 
 const fakeAuth = {
     isAuthenticated: false,
@@ -50,7 +50,7 @@ class Login extends Component {
     render() {
         if (this.props.userId) {
             return (
-                <Catalog location={'/catalog'} />
+                <Redirect to="/catalog" />
             )
         }
         else {

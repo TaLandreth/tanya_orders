@@ -6,7 +6,7 @@ export default class Footer extends Component {
 
         return (
         <footer>
-            <div className="footer">Social Media links</div>
+            <div className="footer">HISTORY  BLOG  FAQS  ORDER TRACKING  CONTACT</div>
         </footer>
         
         )

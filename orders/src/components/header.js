@@ -1,74 +1,82 @@
 import React, { Component } from 'react'
-import logo from '../images/logo.png'
 import '../App.css'
 import Popup from 'react-popup'
 import { connect } from "react-redux"
+import { goToCart, modalOpen, modalClose } from "../dispatcher/actions"
 import Cart from './cart'
-import Catalog from './catalog'
-import Orders from './orders'
-import { Link, Route, Router, withRouter } from 'react-router-dom'
-
+import { Link, withRouter } from 'react-router-dom'
+import ReactModal from 'react-modal'
 
 class Header extends Component {
 
-    seeCart(e) {
-        if (this.props.shoppingCart.length !== 0) {
-            let total = 0
-            this.props.shoppingCart.map((b) => total += b.quantity * b.productprice)
+    constructor() {
+        super();
+        this.state = {
+            modalIsOpen: false
+        }
 
-            Popup.create({
-                title: 'Shopping Cart: Total: $' + total.toFixed(2),
-                content:
-                this.props.shoppingCart.map((b) => <Cart
-                    line={b} />),
-                buttons: {
-                    left: ['cancel'],
-                    right: [
-                        {
-                            text: 'Checkout ->',
-                            className: 'success',
-                            action: function (popup) { popup.close() }
-                        }]}});
-        }
-        else {
-            Popup.create({
-                title: null, // or string
-                content: <Cart line={"No items"} />,
-                buttons: {
-                    right: ['ok']
-                }
-            });
-        }
+        this.readyToCheckout = this.readyToCheckout.bind(this)
+
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+
+
+    }
+
+    handleOpenModal() {
+        this.setState({ showModal: true });
+    }
+
+    handleCloseModal() {
+        this.setState({ showModal: false });
+    }
+
+    seeCart(e) {
+
+
+    }
+
+    readyToCheckout() {
+        //goToCart(this.props.dispatch)        
     }
 
     render() {
+
+        console.log("Modal state:" + this.state.modalIsOpen)
+
         return (
-            <header className="App-header">
-                <Popup />
-                <div className="logo-title"><img src={logo} alt="Logo" /></div>
+            <header className="header-container">
+                <div className="logo-title">BEST METAL LLC</div>
                 <div className="navigation">
                     <ul className="navs">
-                        <li>Home</li>
-                        <li><Link to="/catalog">Products</Link></li>
-                        <li><Link to="/orders">Order History</Link></li>
-                        <li>Contact</li>
+                        <li>HOME</li>
+                        <li>PRODUCTS</li>
+                        <li>ORDERS</li>
+                        <li>CONTACT</li>
                     </ul>
                 </div>
                 <div className="accticon">
-                    <div className="cart">
-                        {this.props.userId ? "Hi, " + this.props.userId.username : "Welcome... "}
-                    </div>
-                    <div className="cart" onClick={this.seeCart.bind(this)}>
-                        CART: {this.props.shoppingCart.length}
-                    </div>
+                    <button className="cart" onClick={this.handleOpenModal}>
+                        <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button>
                 </div>
-            </header>
-        )}
+                <ReactModal
+                    isOpen={this.state.showModal}
+                    contentLabel="Shopping Cart"
+                    className="modal-content"
+                    overlayClassName="modal-overlay"
+                >
+                    {this.props.shoppingCart ? this.props.shoppingCart.map((b) => <Cart line={b} />) : "No Items"}
+                    <button onClick={this.handleCloseModal}>Close Modal</button>
+                </ReactModal>
+            </header >
+        )
+    }
 }
 export default withRouter(connect(
     store => ({
-        userId: store.userId,        
         shoppingCart: store.shoppingCart,
-        productList: store.productList,
+        clearPopup: store.clearPopup
     })
 )(Header));
+
+//

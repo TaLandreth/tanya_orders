@@ -1,0 +1,8 @@
+
+{/* <InfiniteScroll
+refreshFunction={this.refresh}
+next={this.getMoreProducts.bind(this)}
+hasMore={this.state.moreProds} >
+{this.props.productList.map((b) =>
+  <Product key={this.props.productCount.length + i++} prod={b} />)}
+</InfiniteScroll> */}

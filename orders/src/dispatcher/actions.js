@@ -36,6 +36,16 @@ export function getProducts(dispatch, instructions) {
         })
 }
 
+//VIEW A PRODUCT
+export function viewProduct(dispatch, product) {
+    dispatch({
+        type: "VIEW_PRODUCT_STARTED"
+    })
+
+    console.log(product)
+    dispatch({ type: "VIEW_PRODUCT_FINISHED", payload: product })
+}
+
 //RETRIEVE ORDERS - 
 export function getOrders(dispatch, instructions) {
     dispatch({
@@ -62,13 +72,21 @@ export function addToCart(dispatch, newItem) {
     dispatch({ type: "ADD_TO_CART_FINISHED", payload: newItem })
 }
 
-//Add to cart
+//Update cart
 export function updateCart(dispatch, newCart) {
     console.log("In dispatcher: " + newCart)
     dispatch({
         type: "UPDATE_CART_STARTED"
     })
     dispatch({ type: "UPDATE_CART_FINISHED", payload: newCart })
+}
+
+//Go to checkout
+export function goToCart(dispatch) {
+    dispatch({
+        type: "CHECKOUT_VIEW_STARTED"
+    })
+    dispatch({ type: "CHECKOUT_VIEW_FINISHED", payload: true })
 }
 
 //Product count

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import '../App.css'
-import LineItem from '../models/lineitem'
-import { addToCart } from "../dispatcher/actions"
-import Popup from 'react-popup'
+//import LineItem from '../models/lineitem'
+//import Popup from 'react-popup'
 import { withRouter } from 'react-router-dom'
 
 class OrderDetails extends Component {

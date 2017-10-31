@@ -5,9 +5,11 @@ let initialState = {
     orderCount: 0,
     shoppingCart: [],
     productList: [],
+    productDetails: {},
     processing: '',
     APICallInProgress: false,
     APICallFailed: null,
+    cartView: false
 
 }
 export default function reducer(store = initialState, action) {
@@ -79,6 +81,16 @@ export default function reducer(store = initialState, action) {
             return { ...store, shoppingCart: action.payload, APICallInProgress: false }
         }
 
+        //CHECKOUT - GO TO CART_____________________________________________________________:
+        case "CHECKOUT_VIEW_STARTED": {
+            console.log("### VIEWING cart.......")
+            return { ...store, APICallInProgress: true, APICallFailed: null }
+        }
+        case "CHECKOUT_VIEW_FINISHED": {
+            console.log('### Now VIEWING cart')
+            return { ...store, cartView: true, APICallInProgress: false }
+        }
+
         //GET PRODUCTS_______________________________________________________________________:
         case "GET_PRODUCTS_STARTED": {
             console.log("### Retrieving PRODUCTS.....")
@@ -89,6 +101,8 @@ export default function reducer(store = initialState, action) {
             //console.log("Length of payload " + action.payload.length)
             //console.log("Length of store list " + store.productList.length)
 
+            //For infinite scroll:
+            /*
             var newProds = store.productList.slice()
 
             //console.log("Length of list copy " + newProds.length)
@@ -99,13 +113,30 @@ export default function reducer(store = initialState, action) {
             }
             else {
                 action.payload.forEach(a => newProds.push(a))
-                console.log("If list count is good :" + newProds.length)
+                //console.log("If list count is good :" + newProds.length)
             }
+            */
 
-            return { ...store, productList: newProds, APICallInProgress: false }
+
+            return { ...store, productList: action.payload, APICallInProgress: false }
         }
 
-        //GET COUNT
+
+        //VIEW A PRODUCT_______________________________________________________________________:
+        case "VIEW_PRODUCT_STARTED": {
+            console.log("### View product started.....")
+            return { ...store, APICallInProgress: true, APICallFailed: null }
+        }
+        case "VIEW_PRODUCT_FINISHED": {
+            console.log("### View product finished.....")
+            console.log(action.payload)
+
+            return { ...store, productDetails: action.payload, APICallInProgress: false }
+        }
+
+
+
+        //GET PRODUCT COUNT
         case "GET_PRODUCT_COUNT_STARTED": {
             console.log("### Counting books.....")
             return { ...store, APICallInProgress: true, APICallFailed: null }
@@ -115,7 +146,7 @@ export default function reducer(store = initialState, action) {
             return { ...store, productCount: action.payload, APICallInProgress: false }
         }
 
-        //GET COUNT
+        //GET ORDER COUNT
         case "GET_ORDER_COUNT_STARTED": {
             console.log("### Counting books.....")
             return { ...store, APICallInProgress: true, APICallFailed: null }
