@@ -23,7 +23,7 @@ namespace orders_library.Services
                         Console.WriteLine($"\tProduct: {line.ProductDetails}");
                         //Console.WriteLine($"\tOrder ID: {line.OrderDetailsId}");
                         Console.WriteLine($"\tQty: {line.Quantity}");
-                        Console.WriteLine($"\tDiscount: {line.Discount}");
+
                     }
                 }
                 catch (Exception)
@@ -49,8 +49,8 @@ namespace orders_library.Services
                     //Update:
                     query.ProductDetails = updatedLine.ProductDetails;
                     query.Quantity = updatedLine.Quantity;
-                    //query.OrderDetailsId = updatedLine.OrderDetailsId;
-                    query.Discount = updatedLine.Discount;
+                    query.OrderDetails = updatedLine.OrderDetails;
+
 
                     //If Id matches...
                     if (query.Id == updatedLine.Id)

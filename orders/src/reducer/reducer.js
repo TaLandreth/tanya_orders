@@ -1,9 +1,10 @@
 let initialState = {
     orderList: [],
-    userId: '',
+    userId: {},
     productCount: 0,
     orderCount: 0,
     shoppingCart: [],
+    lastOrder: {},
     productList: [],
     productDetails: {},
     processing: '',
@@ -27,13 +28,16 @@ export default function reducer(store = initialState, action) {
         }
 
         case "LOGIN_FINISHED": {
-            console.log('### Login Finished! Payload:' + action.payload)
-            return { ...store, userId: action.payload, APICallInProgress: false }
+            console.log('### Login Finished! Payload:' + action.payload.id)
+
+            var userData = { id: action.payload.id, username: action.payload.username }
+
+            return { ...store, userId: userData, APICallInProgress: false, APICallFailed: false}
         }
 
         case "LOGIN_FAILED": {
             console.log('### Login Failed! Reason: ' + action.payload)
-            return { ...store, APICallFailed: action.payload, APICallInProgress: false }
+            return { ...store, APICallFailed: action.payload, APICallInProgress: false, APICallFailed: true  }
         }
 
         //GET ORDERS_______________________________________________________________________:
@@ -44,13 +48,7 @@ export default function reducer(store = initialState, action) {
         case "GET_ORDERS_FINISHED": {
             console.log('### Retrieval finished!')
 
-            var newContent = store.orderList.slice()
-            if (store.orderList.length > store.productCount) {
-                newContent = store.orderList.slice()
-            }
-            else { action.payload.forEach(a => newContent.push(a)) }
-
-            return { ...store, orderList: newContent, APICallInProgress: false }
+            return { ...store, orderList: action.payload, APICallInProgress: false }
         }
 
         //ADD TO CART_____________________________________________________________:
@@ -61,7 +59,7 @@ export default function reducer(store = initialState, action) {
         case "ADD_TO_CART_FINISHED": {
             console.log('### Add to cart finished!')
 
-            console.log("Reducer: " + action.payload.productid)
+            //console.log("Reducer: " + action.payload)
             var newCart = store.shoppingCart.slice()
             newCart.push(action.payload)
 
@@ -81,15 +79,30 @@ export default function reducer(store = initialState, action) {
             return { ...store, shoppingCart: action.payload, APICallInProgress: false }
         }
 
-        //CHECKOUT - GO TO CART_____________________________________________________________:
-        case "CHECKOUT_VIEW_STARTED": {
-            console.log("### VIEWING cart.......")
+        //CLEAR CART_____________________________________________________________:
+        case "CLEAR_CART_STARTED": {
+            console.log("### Clearing cart.......")
             return { ...store, APICallInProgress: true, APICallFailed: null }
         }
-        case "CHECKOUT_VIEW_FINISHED": {
-            console.log('### Now VIEWING cart')
-            return { ...store, cartView: true, APICallInProgress: false }
+        case "CLEAR_CART_FINISHED": {
+            console.log('### Cart cleared!')
+
+            return { ...store, shoppingCart: action.payload, APICallInProgress: false }
         }
+
+        //PLACE ORDER_____________________________________________________________:
+        case "PLACE_ORDER_STARTED": {
+            console.log("### Placing order.......")
+            return { ...store, APICallInProgress: true, APICallFailed: null }
+        }
+        case "PLACE_ORDER_FINISHED": {
+            console.log('### Order placed!')
+
+            //console.log("In reducer: " + action.payload)
+
+            return { ...store, lastOrder: action.payload, APICallInProgress: false }
+        }
+
 
         //GET PRODUCTS_______________________________________________________________________:
         case "GET_PRODUCTS_STARTED": {
@@ -97,27 +110,6 @@ export default function reducer(store = initialState, action) {
             return { ...store, APICallInProgress: true, APICallFailed: null }
         }
         case "GET_PRODUCTS_FINISHED": {
-            //console.log('### PRODUCTS Retrieval finished!')
-            //console.log("Length of payload " + action.payload.length)
-            //console.log("Length of store list " + store.productList.length)
-
-            //For infinite scroll:
-            /*
-            var newProds = store.productList.slice()
-
-            //console.log("Length of list copy " + newProds.length)
-
-            if (store.productList.length === store.productCount) {
-                newProds = store.productList.slice()
-                console.log("If list count > product count: " + newProds.length)
-            }
-            else {
-                action.payload.forEach(a => newProds.push(a))
-                //console.log("If list count is good :" + newProds.length)
-            }
-            */
-
-
             return { ...store, productList: action.payload, APICallInProgress: false }
         }
 
@@ -129,26 +121,28 @@ export default function reducer(store = initialState, action) {
         }
         case "VIEW_PRODUCT_FINISHED": {
             console.log("### View product finished.....")
-            console.log(action.payload)
+            //console.log(action.payload)
 
             return { ...store, productDetails: action.payload, APICallInProgress: false }
         }
 
 
 
-        //GET PRODUCT COUNT
+        //GET PRODUCT COUNT -----------------------------------------------------------
         case "GET_PRODUCT_COUNT_STARTED": {
-            console.log("### Counting books.....")
+            console.log("### Counting products.....")
             return { ...store, APICallInProgress: true, APICallFailed: null }
         }
         case "GET_PRODUCT_COUNT_FINISHED": {
             console.log('### Counting finished!')
+
+            //console.log("# of products: " + action.payload)
             return { ...store, productCount: action.payload, APICallInProgress: false }
         }
 
         //GET ORDER COUNT
         case "GET_ORDER_COUNT_STARTED": {
-            console.log("### Counting books.....")
+            console.log("### Counting orders.....")
             return { ...store, APICallInProgress: true, APICallFailed: null }
         }
         case "GET_ORDER_COUNT_FINISHED": {

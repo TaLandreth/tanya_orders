@@ -1,0 +1,13 @@
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/bin/Debug/netcoreapp2.0/ordersAPI.deps.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/bin/Debug/netcoreapp2.0/ordersAPI.runtimeconfig.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/bin/Debug/netcoreapp2.0/ordersAPI.runtimeconfig.dev.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/bin/Debug/netcoreapp2.0/ordersAPI.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/bin/Debug/netcoreapp2.0/ordersAPI.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/bin/Debug/netcoreapp2.0/orders_library.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/bin/Debug/netcoreapp2.0/orders_library.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/obj/Debug/netcoreapp2.0/ordersAPI.csprojResolveAssemblyReference.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/obj/Debug/netcoreapp2.0/ordersAPI.csproj.CoreCompileInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/obj/Debug/netcoreapp2.0/ordersAPI.AssemblyInfoInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/obj/Debug/netcoreapp2.0/ordersAPI.AssemblyInfo.cs
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/obj/Debug/netcoreapp2.0/ordersAPI.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordersAPI/obj/Debug/netcoreapp2.0/ordersAPI.pdb

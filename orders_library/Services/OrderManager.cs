@@ -13,15 +13,25 @@ namespace orders_library.Services
         {
             using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
             {
-                
+
                 //RETRIEVE BY id
                 var query = context.UserDetails.FirstOrDefault(a => a.username == credential.username && a.password == credential.password);
 
+                var cust = context.Customer.First(c => query.CustomerId == c.Id);
+
                 try
                 {
-                    var verify = context.UserDetails.First(u => u.id == query.id);
+                    var verify = context.UserDetails.First(a => a.id == query.id);
+
+                    UserModel userVerified = new UserModel();
+
+                    userVerified.id = cust.Id;
+                    userVerified.CustomerId = cust.Id;
+                    userVerified.username = query.username;
+                    userVerified.password = query.password;
+
                     Console.WriteLine("Logged in successfully!");
-                    return verify;
+                    return userVerified;
                 }
                 catch (Exception)
                 {
@@ -40,32 +50,12 @@ namespace orders_library.Services
 
                 var recordcount = query.Count();
 
+                Console.Write(recordcount);
+
                 return recordcount;
             }
         }
 
-        //RETRIEVE - SINGULAR
-        public OrderDetails GetOrder(int id) //by order id
-        {
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
-            {
-                //RETRIEVE BY id
-                var query = context.OrderDetails.FirstOrDefault(a => a.Id == id);
-
-                try
-                {
-                    Console.WriteLine($"\tOrder ID: {query.Id}");
-                    Console.WriteLine($"\tOrder Status: {query.OrderStatus}");
-
-                    return query;
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("*** Error retrieving order...");
-                    return null;
-                }
-            }
-        }
 
         //RETRIEVE - BY CUSTOMER ID & FILTER
         public IEnumerable<CustomerOrders> GetCustomerOrders(Instructions instr) //by cust id/status
@@ -74,20 +64,23 @@ namespace orders_library.Services
             {
                 try
                 {
-                    var ord = context.OrderDetails                                    
+                    var ord = context.OrderDetails.OrderByDescending(n => n.Id)
                                      .Include(l => l.Lineitems).ThenInclude(p => p.ProductDetails)
                                      .Where(o => o.CustomerDetails.Id == instr.userid).Skip(instr.startVal).Take(instr.viewAmt)
                                      .Select(x => new CustomerOrders
                                      {
                                          OrderId = x.Id,
                                          Date = x.OrderDate,
-                                         CustomerId = x.CustomerDetailsId,
+                                         CustomerId = x.CustomerDetails.Id,
                                          OrderStat = x.OrderStatus,
-                        Total = x.Lineitems.Sum(item => item.Quantity * item.ProductDetails.Price)
-                    }).ToList();
+                                         Total = x.Lineitems.Sum(item => item.Quantity * item.ProductDetails.Price)
+                                     }).ToList();
+
+                    Console.WriteLine($"Orders retrieved for user {ord.First().CustomerId}");
+                    Console.WriteLine($"Orders retrieved for user {ord.Count()}");
 
                     return ord;
-                
+
                 }
                 catch (Exception)
                 {
@@ -97,71 +90,48 @@ namespace orders_library.Services
             }
         }
 
-        /*
-        //CREATE
-        //This should take CUSTOMER ID, SHIPPING DETAILS, ARRAY OF LINE ITEMS & CREATE ORDER
-        public void CreateOrder(OrderDetails newOrder)
+
+        //CANCEL ORDER 
+        public OrderDetails CancelOrder(int id)
         {
-            //Console.WriteLine($"Order date: {newOrder.Date}");
-
-            LineItemManager linemgr = new LineItemManager();
-
             using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
             {
                 try
                 {
-                    //Add order
-                    context.OrderDetails.Add(newOrder);
-                    context.SaveChanges();
+                    //Locate order
+                    var query = context.OrderDetails.FirstOrDefault(x => x.Id == id);
 
-                    //For each line in newOrder, update it with new ID
-                    foreach (LineItem l in newOrder.Lineitems)
-                    {
-                        //linemgr.UpdateLineItem(l); 
-                        //Console.WriteLine(l.OrderDetailsId);
-                    }
 
-                    Console.WriteLine($"Order #{newOrder.Id} added.");
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Unable to add order....");
-                }
-            }
-        }
-
-        //REMOVE --> can we change this function to be handled in the UPDATE function?
-        public void CancelOrder(int id)
-        {
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
-            {
-                //Locate order
-                var query = context.OrderDetails.FirstOrDefault(x => x.Id == id);
-                try
-                {
                     //Check if the queried ID = passed id
                     if (query == null)
                     {
                         Console.WriteLine("Order does not exist");
+                        Console.WriteLine(id);
+                        return null;
                     }
                     if (query.OrderStatus == OrderDetails.ShippingStatus.COMPLETED)
                     {
                         Console.WriteLine("Cannot cancel order -- already completed.");
+                        return null;
                     }
-                    else if (query.Id == id)
-                    {
-                        query.OrderStatus = OrderDetails.ShippingStatus.CANCELED;
 
-                        //Update the order to CANCELED
-                        UpdateOrder(query);
-                        context.SaveChanges();
-                        Console.WriteLine($"Order ID {id} cancelled successfully");
-                    }
+                    query.OrderStatus = OrderDetails.ShippingStatus.CANCELED;
+
+                    //Update the order to CANCELED
+                    UpdateOrder(query);
+                    context.SaveChanges();
+                    Console.WriteLine($"Order ID {id} cancelled successfully");
+
+                    return query;
+
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("\t*** Unable to cancel order.");
+                    return null;
                 }
+
+
             }
         }
 
@@ -187,7 +157,7 @@ namespace orders_library.Services
                         Console.WriteLine("Query id matches passed value...");
 
                         query.OrderStatus = ord.OrderStatus;
-                        query.ShipmethodId = ord.ShipmethodId;
+                        query.Shipmethod.Id = ord.Shipmethod.Id;
 
                         //Then Save changes to order
                         context.Entry(query).State = EntityState.Modified;
@@ -227,7 +197,65 @@ namespace orders_library.Services
 
         }//end update
 
+        //CREATE
+        //This should take CUSTOMER ID, SHIPPING DETAILS, ARRAY OF LINE ITEMS & CREATE ORDER
+        public OrderDetails CreateOrder(NewOrderDetails orderdetails)
+        {
+            LineItemManager linemgr = new LineItemManager();
 
-        */
+            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
+            {
+                var cust = context.Customer.Include(a => a.Addresses).FirstOrDefault(c => c.Id == orderdetails.CustomerId);
+
+                var shipmethod = context.ShippingMethod.FirstOrDefault(s => s.Id == orderdetails.ShippingMethodId);
+
+                var status = context.OrderDetails.FirstOrDefault(s => Convert.ToInt32(s.OrderStatus) == orderdetails.Status);
+
+                var product = context.Product;
+
+                var lines = new List<LineItem>();
+
+                foreach(NewLine l in orderdetails.LineItems)
+                {
+                    var prod = product.FirstOrDefault(t => t.Id == l.ProductId);
+
+                    LineItem newLine = new LineItem
+                    {
+                        Id = 0,
+                        ProductDetails = prod,
+                        Quantity = l.Quantity,
+                        OrderDetails = null
+                    };
+
+                    lines.Add(newLine);
+                }
+
+                OrderDetails newOrder = new OrderDetails {
+                    CustomerDetails = cust,
+                    Shipmethod = shipmethod,
+                    Lineitems = lines,
+                    OrderStatus = status.OrderStatus,
+                    OrderDate = orderdetails.OrderDate
+                };
+
+                try
+                {
+                    //Add order
+                    context.OrderDetails.Add(newOrder);
+                    context.SaveChanges();
+
+                    Console.WriteLine($"Order {newOrder.Id} added....");
+
+                    return newOrder;
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Unable to add order....");
+                    return null;
+                }
+            }
+        }
+
     }//end order mgr
 }//end namespace

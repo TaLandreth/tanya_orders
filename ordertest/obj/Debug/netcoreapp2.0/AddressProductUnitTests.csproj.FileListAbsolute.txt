@@ -1,4 +1,0 @@
-/Users/tanyalandreth/Desktop/tanya_orders/ordertest/obj/Debug/netcoreapp2.0/AddressProductUnitTests.csprojResolveAssemblyReference.cache
-/Users/tanyalandreth/Desktop/tanya_orders/ordertest/obj/Debug/netcoreapp2.0/AddressProductUnitTests.csproj.CoreCompileInputs.cache
-/Users/tanyalandreth/Desktop/tanya_orders/ordertest/obj/Debug/netcoreapp2.0/AddressProductUnitTests.AssemblyInfoInputs.cache
-/Users/tanyalandreth/Desktop/tanya_orders/ordertest/obj/Debug/netcoreapp2.0/AddressProductUnitTests.AssemblyInfo.cs

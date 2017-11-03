@@ -193,7 +193,11 @@ namespace tanya_orders
             {
                 OrderDate = DateTime.Now.ToString("yyyy-MM-dd"),
                 CustomerDetailsId = 2,
-                ShipmethodId = 1,
+                Shipmethod = {
+                    Id = 1,
+                    Carrier= "UPS",
+                    Method= "Overnight"
+                },
                 Lineitems = new LineItem[]
                 {
                     new LineItem { ProductDetailsId = 6, Quantity = 22,
@@ -212,7 +216,7 @@ namespace tanya_orders
             {
                 Id = 3,
                 Lineitems = null,
-                ShipmethodId = 1,
+                Shipmethod = { Id = 1 },
                 OrderStatus = OrderDetails.ShippingStatus.COMPLETED
             };
 

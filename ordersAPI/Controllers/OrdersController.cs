@@ -15,7 +15,7 @@ namespace ordersAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]UserModel credentials)
         {
-            
+
             if (credentials == null)
             {
                 return BadRequest();
@@ -23,11 +23,13 @@ namespace ordersAPI.Controllers
 
             var user = new OrderManager().Login(credentials);
 
-            if (user != null)
-                return new ObjectResult(user);
+            if (user != null) { return new ObjectResult(user); }
 
-            Console.WriteLine("Failed to login user: {0}", credentials.username);
-            return Unauthorized();
+            else
+            {
+                Console.WriteLine("Failed to login user: {0}", credentials.username);
+                return Unauthorized();
+            }
         }
     }
 
@@ -35,7 +37,7 @@ namespace ordersAPI.Controllers
     [Route("api/orders")]
     public class OrdersController : Controller
     {
-        
+
         // GET api/values
         [HttpPost]
         public IActionResult RetrieveOrders([FromBody] Instructions instructions)
@@ -51,6 +53,41 @@ namespace ordersAPI.Controllers
             var retrieval = new OrderManager().GetOrderCount();
 
             return retrieval;
+        }
+
+    }
+
+    //CANCEL order
+    [Route("api/ordercancel")]
+    public class OrderCancelController : Controller
+    {
+
+        // GET api/values
+        [HttpPost("{id}")]
+        public IActionResult CancelOrder(int id)
+        {
+            var retrieval = new OrderManager().CancelOrder(id);
+
+            return new ObjectResult(retrieval);
+        }
+
+
+
+    }
+
+    //CREATE order
+    [Route("api/ordernew")]
+    public class OrderNewController : Controller
+    {
+
+        // GET api/values
+        [HttpPost]
+        public IActionResult CreateOrder([FromBody] NewOrderDetails orderdetails)
+        {
+            //CHECK IF NULL - RETURN BAD REQUEST
+            var retrieval = new OrderManager().CreateOrder(orderdetails);
+
+            return new ObjectResult(retrieval);
 
         }
 
@@ -76,7 +113,6 @@ namespace ordersAPI.Controllers
 
             Console.WriteLine("Failed to retrieve products...");
             return BadRequest();
-
         }
 
         [HttpGet]
@@ -87,10 +123,5 @@ namespace ordersAPI.Controllers
             return retrieval;
 
         }
-
-
-
     }
-
-
 }

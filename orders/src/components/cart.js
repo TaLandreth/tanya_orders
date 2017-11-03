@@ -7,14 +7,10 @@ import { withRouter } from 'react-router-dom'
 class Cart extends Component {
 
     removeItem(lineid) {
-
         var index = this.props.shoppingCart.findIndex(i => i.productdetailsid === lineid);
-
         var newCart = this.props.shoppingCart.slice()   //copy
         newCart.splice(index, 1) //cut out the right one
-
         console.log("On remove click: " + newCart)
-
         //Send it off to cart store
         updateCart(this.props.dispatch, newCart)
     }
@@ -27,7 +23,10 @@ class Cart extends Component {
             )
         }
         else {
-            let i = 0
+            var i, total = 0
+            for (i ; i < this.props.line.count; i++)
+            { total += this.props.line.productprice * this.props.line.quantity }
+
             return (
                 <div>
                     <div className="cart-div">
@@ -35,12 +34,8 @@ class Cart extends Component {
                         <div className="cart-div" key={this.props.line.quantity}>Qty: {this.props.line.quantity}</div>
                         <div className="cart-div" key={this.props.line.productprice}>${this.props.line.productprice.toFixed(2)}</div>
                         <div className="cart-div" key={i++}>
-                            <button className="fromcart" onClick={this.removeItem.bind(this, this.props.line.productdetailsid)} title="Remove Item"> x </button>
+                            <button className="fromcart" onClick={this.removeItem.bind(this, this.props.line.productdetailsid)} title="Remove Item">x</button>
                         </div>
-                    </div>
-
-                    <div className="cart-total">
-
                     </div>
                 </div>
             )
@@ -50,6 +45,7 @@ class Cart extends Component {
 
 export default withRouter(connect(
     store => ({
+        userId: store.userId,
         shoppingCart: store.shoppingCart,
         productList: store.productList,
     })

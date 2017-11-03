@@ -1,19 +1,13 @@
 import axios from "axios";
 
 const BASE_URL = "http://localhost:5000/api"
-var AXIOS_CONFIG = { headers: { 'Authorization': '' } }
 
 export function onLogin(user, dispatch) {
     dispatch({
         type: "LOGIN_STARTED"
     })
-    axios.post(BASE_URL + "/login", {
-        username: user.username,
-        password: user.password}, )
-
+    axios.post(BASE_URL + "/login", user)
         .then((response) => {
-            //Set the header to be used for future authentication --> not utilized... yet?
-            AXIOS_CONFIG.headers.Authorization = response.data.id
             dispatch({ type: "LOGIN_FINISHED", payload: response.data })
         })
         .catch((err) => {
@@ -42,21 +36,60 @@ export function viewProduct(dispatch, product) {
         type: "VIEW_PRODUCT_STARTED"
     })
 
-    console.log(product)
+    //console.log(product)
     dispatch({ type: "VIEW_PRODUCT_FINISHED", payload: product })
 }
 
 //RETRIEVE ORDERS - 
 export function getOrders(dispatch, instructions) {
+
+    //console.log(instructions)
     dispatch({
         type: "GET_ORDERS_STARTED"
     })
     axios.post(BASE_URL + "/orders", instructions)
-
-    console.log(instructions)
-    
         .then((response) => {
             dispatch({ type: "GET_ORDERS_FINISHED", payload: response.data })
+
+            //console.log("Dispatcher: " + response.data.length)            
+        })
+        .catch((err) => {
+            dispatch({ type: "CALL_FAILED", payload: err })
+        })
+}
+
+//CANCEL ORDER
+export function cancelOrder(dispatch, id, instructions) {
+
+    dispatch({
+        type: "CANCEL_ORDER_STARTED"
+    })
+    axios.post(BASE_URL + "/ordercancel/" + id)
+        .then((response) => {
+            axios.post(BASE_URL + "/orders", instructions)
+                .then((response) => {
+                    dispatch({ type: "GET_ORDERS_FINISHED", payload: response.data })
+                })
+                .catch((err) => {
+                    dispatch({ type: "CALL_FAILED", payload: err })
+                })
+        })
+        .catch((err) => {
+            dispatch({ type: "CALL_FAILED", payload: err })
+        })
+
+}
+
+//PLACE ORDER - 
+export function completeOrder(dispatch, neworder) {
+    dispatch({
+        type: "PLACE_ORDER_STARTED"
+    })
+    axios.post(BASE_URL + "/ordernew", neworder)
+        .then((response) => {
+            dispatch({type: "PLACE_ORDER_FINISHED", payload: response.data })
+
+            //console.log("Dispatcher: order" + response.data)            
         })
         .catch((err) => {
             dispatch({ type: "CALL_FAILED", payload: err })
@@ -81,12 +114,13 @@ export function updateCart(dispatch, newCart) {
     dispatch({ type: "UPDATE_CART_FINISHED", payload: newCart })
 }
 
-//Go to checkout
-export function goToCart(dispatch) {
+//CLEAR cart
+export function clearCart(dispatch) {
+    //console.log("Actions: " + newItem.productdetailsid + ", " + newItem.quantity)
     dispatch({
-        type: "CHECKOUT_VIEW_STARTED"
+        type: "CLEAR_CART_STARTED"
     })
-    dispatch({ type: "CHECKOUT_VIEW_FINISHED", payload: true })
+    dispatch({ type: "CLEAR_CART_FINISHED", payload: [] })
 }
 
 //Product count
@@ -96,6 +130,8 @@ export function getProductCount(dispatch) {
     })
     axios.get(BASE_URL + "/products")
         .then((response) => {
+
+            //console.log("Product Count:" + response.data)
             dispatch({ type: "GET_PRODUCT_COUNT_FINISHED", payload: response.data })
         })
         .catch((err) => {

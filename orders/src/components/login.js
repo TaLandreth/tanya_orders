@@ -2,35 +2,34 @@ import React, { Component } from 'react'
 import '../App.css'
 import { connect } from "react-redux"
 import { onLogin } from "../dispatcher/actions"
-import { Redirect } from 'react-router'
-import { withRouter } from 'react-router-dom'
-//import Catalog from './catalog'
-
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-        this.isAuthenticated = true
-        setTimeout(cb, 100) }
-}
 
 class Login extends Component {
     constructor() {
         super();
         this.state = {
-            userid: 0,
+            userid: null,
             username: '',
             password: '',
-            redirectToReferrer: false
+            error: false
         }
+
+        this.onLogin = this.onLogin.bind(this)
+
     }
 
-    login = () => {
+    changeInputs = e => { this.setState({ [e.target.name]: e.target.value }) }
 
-        this.setState({
-            username: this.state.username,
-            password: this.state.password
-        })
+    onLogin() {
 
+        console.log("On click:" + this.props.userId)       
+        
+        if (this.state.username === null || this.state.password === null
+        || this.state.username === '' || this.state.password === '')
+        {
+            this.setState({error: true})
+        }
+
+        else {
         let credentials = {
             username: this.state.username,
             password: this.state.password
@@ -38,53 +37,49 @@ class Login extends Component {
 
         onLogin(credentials, this.props.dispatch)
 
-        if (!this.props.loginerror) {
-            fakeAuth.authenticate(() => {
-                this.setState({ redirectToReferrer: true })
-            })
+        console.log("After sent to dispatcher:" + this.props.userId)
+        
+        if (this.props.userId !== null && this.props.APICallFailed === false) {
+            this.props.loggedIn()
         }
+
+    }
     }
 
-    changeInputs = e => { this.setState({ [e.target.name]: e.target.value }) }
+
 
     render() {
-        if (this.props.userId) {
-            return (
-                <Redirect to="/catalog" />
-            )
-        }
-        else {
-            return (
-                <div>
-                    <h1 className="login">Login</h1>
-                    <div className="form-group">
-                        <input name="username"
-                            className=""
-                            type="text"
-                            value={this.state.username}
-                            placeholder="Email" onChange={this.changeInputs.bind(this)} />
-                    </div>
-                    <div className="form-group">
-                        <input name="password"
-                            className=""
-                            type="password"
-                            vlaue={this.state.password}
-                            placeholder="Password" onChange={this.changeInputs.bind(this)} />
-                    </div>
-                    <p>
-                        <button onClick={this.login.bind(this)} className="btn btn-default">Login</button>
-                    </p>
-                    <h3>{this.props.processing ? "Logging in..." : ""}</h3>
-                    <h3>{this.props.loginerror ? "Incorrect User Name or Password!" : ""}</h3>
+
+        //console.log(this.state.username)
+
+        return (
+            <div className="login-container">
+                <h1 className="login">Login</h1>
+                <div className="form-group">
+                    <input name="username"
+                        type="text"
+                        value={this.state.username}
+                        placeholder="Email" onChange={this.changeInputs.bind(this)} />
                 </div>
-            )
-        }
+                <div className="form-group">
+                    <input name="password"
+                        type="password"
+                        value={this.state.password}
+                        placeholder="Password" onChange={this.changeInputs.bind(this)} />
+                </div>
+
+                <div className="login-btn-container">
+                    <button onClick={this.onLogin} className="btn btn-default">Login</button>
+                    <div className="error-msg">
+                    {this.state.error ? "Please provide your login credentials" : ""}</div>
+                </div>
+            </div>
+        )
     }
 }
-export default withRouter(connect(
+export default connect(
     store => ({
         userId: store.userId,
-        processing: store.APICallInProgress,
-        loginerror: store.APICallFailed
+        APICallFailed: store.APICallFailed
     })
-)(Login));
+)(Login);

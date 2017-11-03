@@ -18,14 +18,14 @@ namespace orders_library.Services
 
                     //RETRIEVE BY CUSTOMER NUMBER
                     var query = from Address a in context.Address
-                    where a.CustomerDetailsId == custnum
+                    where a.CustomerDetails.Id == custnum
                     select a;
    
                     Console.WriteLine(query.Count());
 
                     foreach(Address addr in query)
                     {
-                        Console.WriteLine($"Customer ID: {addr.CustomerDetailsId}");
+                        Console.WriteLine($"Customer ID: {addr.CustomerDetails.Id}");
                         //Console.WriteLine($"Customer ID: {addr.CustomerDetails.Id}");
                         Console.WriteLine($"Address ID #: {addr.Id}");
                         Console.WriteLine($"Address Type: {addr.Addresstype}");

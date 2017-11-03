@@ -1,0 +1,9 @@
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/obj/Debug/netcoreapp2.0/orders_library.csprojResolveAssemblyReference.cache
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/obj/Debug/netcoreapp2.0/orders_library.csproj.CoreCompileInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/obj/Debug/netcoreapp2.0/orders_library.AssemblyInfoInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/obj/Debug/netcoreapp2.0/orders_library.AssemblyInfo.cs
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/bin/Debug/netcoreapp2.0/orders_library.deps.json
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/bin/Debug/netcoreapp2.0/orders_library.dll
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/bin/Debug/netcoreapp2.0/orders_library.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/obj/Debug/netcoreapp2.0/orders_library.dll
+/Users/tanyalandreth/Desktop/tanya_orders/orders_library/obj/Debug/netcoreapp2.0/orders_library.pdb

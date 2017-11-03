@@ -1,5 +1,4 @@
-@import url('popup.css') screen;
-@import url('https://fonts.googleapis.com/css?family=Biryani:100');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
 /* GENERAL/GENERIC SETTINGS: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 body, html {
@@ -14,14 +13,48 @@ a, a:link, a:hover, a:active {
 
 /* OVERALL APP SETTINGS: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 .App {
-  font-family: 'Biryani', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
   padding: 0;
 }
 
 /* >>>>>>>>>>>> LOGIN SCREEN SETTINGS ------------------------------------- */
+
+.login-container {
+  border: 1px solid #666666;
+  border-radius: 1px;
+}
 .login {
   text-align: center;
+}
+
+.login input {
+  width: 200px;
+  height: 40px;
+  font-size: 1.5em;
+  color: #8c8c8c;
+  border: 1px solid #d9d9d9;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.login button {
+  width: 200px;
+  background-color: black;
+  color: white;
+}
+
+.error-msg {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #bf4040;
+}
+
+.login-btn-container {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 20px;
 }
 
 /* >>>>>>>>>>>> HEADER CONTENT SETTINGS ------------------------------------- */
@@ -58,7 +91,7 @@ a, a:link, a:hover, a:active {
     color: gray;
   }
 
-/* NAVIGATION .................*/
+/* HEADER ---- NAVIGATION .................*/
 .navigation {
   display: flex;
   justify-content: flex-end;
@@ -84,9 +117,10 @@ a, a:link, a:hover, a:active {
     font-weight: bold;
   }
 
-  /*CART ICON .............................*/
+  /*HEADER ---- CART ICON .............................*/
 .accticon {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   order: 2;
@@ -94,6 +128,7 @@ a, a:link, a:hover, a:active {
 
 .cart {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: .5rem;
@@ -105,22 +140,23 @@ a, a:link, a:hover, a:active {
   border: 0;
 }
 
-/*CART POP UP .............................*/
+/*HEADER ---- CART COMPONENT (CONTENTS OF POPUP).............................*/
 .cart-div, .cart-header {
   display: flex;
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
   align-items: left;
+  width: 100%;
   padding: 2px;
+  margin-left: 10px;
 }
 
-.cart-header {
-  font-weight: bold;
-  text-decoration: underline;
-  border: 1px solid black;
+button .fromcart {
+  background-color: gray;
 }
 
+/* HEADER ---- CART POP UP FEATURES, INSIDE HEADER ~~~~~~~~~~~~~~~~~~~~ */
 .modal-overlay {
     position          : fixed;
     top                        : 0;
@@ -128,10 +164,11 @@ a, a:link, a:hover, a:active {
     right                      : 0;
     bottom                     : 0;
     background-color   : rgba(255, 255, 255, 0.75);
+    
   }
 
   .modal-content {
-    width                      : 70%;
+    width                      : 60%;
     position                   : fixed;
     top                        : 10%;
     left                       : 20%;
@@ -143,16 +180,81 @@ a, a:link, a:hover, a:active {
     border-radius               : 2px;
     outline                    : none;
     padding                    : 20px;
- 
+    font-family: 'Biryani', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+    
+    
   }
 
-
-
-button .fromcart {
-  background-color: gray;
+.cart-header, .cart-total {
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+  background-color: #000000;
+padding: 5px;
+margin: 10px;
 }
 
-/* BLACK DIVIDER ............................. */
+.cart-total {
+  font-size: 18px;
+  background-color:  #c2b8a3;
+}
+
+.close-popup, .checkout, .place-order {
+  width: 100px;
+  margin: 10px;
+  background-color: black;
+  color: white;
+  border: 1px solid #666666;
+  
+}
+
+.checkout {
+  background-color: #b6b4af;
+}
+
+.place-order {
+  width: 100%;
+  background-color: #b6b4af;
+  font-size: 1.5em;
+}
+
+.cart-div-checkout {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+ justify-content: flex-start;
+ align-items: center;
+ padding: 2px;
+ margin-left: 10px;
+ width: 100%;
+ border: 1px solid magenta;
+}
+
+.cart-div-column {
+  display: flex;
+  flex-direction: column;
+ justify-content: flex-start;
+ align-items: center;
+ border: 1px solid turquoise;
+}
+
+.cart-div-checkout select {
+  align-self: flex-start;
+  width: 45%;
+  height: 40px;
+  font-size: 1.5em;
+  color: #8c8c8c;
+  border: 1px solid #d9d9d9;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.cart-div-keepshopping {
+ align-self: flex-start;
+}
+
+/* BLACK DIVIDER ................................... */
 .divider {
     width: 100%;
     height: 40px;
@@ -207,17 +309,19 @@ button .fromcart {
 } 
 
 .prod-img {
- width: 35rem;
- height: 35rem;
+ width: 25rem;
+ height: 25rem;
  background-color: white;
  position: relative;
  box-shadow: 0 0 1px 1px white;
  border: 1px solid #f2f2f2;
+ border-radius: 1px;
 }
 
 .prod-img img {
-  width: 35rem;
-  height: 35rem;
+  width: 25rem;
+  max-width: 25rem;
+  height: 25rem;
   box-shadow: 0 0 1px 1px white;
 }
 
@@ -237,8 +341,9 @@ button .fromcart {
   font-size: .75em;
   color: #666666;
   background-color: white;
-  border-radius: 4px;
+  border-radius: 2px;
   opacity: 0.7;
+  text-align: center;
 }
 
 /*PRODUCT GRID CELLS....................*/
@@ -246,15 +351,13 @@ button .fromcart {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  width: 10rem;
-  flex-basis: 10rem;
   justify-content: flex-start;  
   align-items: flex-start;
   padding: .2rem;
   font-size: 10pt;
   
 }
-/*INNER PRODUCT GRID CELLS..............*/
+/*INNER PRODUCT GRID CELLS (ON CATALOG PAGE)..............*/
 .prod-div-inner {
   display: flex;
   flex-wrap: wrap;
@@ -264,6 +367,7 @@ button .fromcart {
   padding: .2rem;
   font-size: 10pt;
   text-transform: uppercase;
+  width: 25rem;
   
 }
 
@@ -273,7 +377,7 @@ button .fromcart {
   flex-direction: column;
   justify-content: flex-start;  
   align-items: flex-start;
-  width: 35rem;
+  width: 100%;
   padding: .2rem;
   font-size: 8pt;
   text-transform: none;
@@ -342,7 +446,7 @@ button .fromcart {
   
 }
 
-/*ADD TO CART, QUANTITY OPTIONS*/
+/*........... ADD TO CART, QUANTITY OPTIONS (in individ. product view)*/
 
 .choice-holders {
   display: flex;
@@ -381,7 +485,6 @@ button .fromcart {
   box-shadow: 5px 0px 5px -5px #f2f2f2;
 }
 
-
 /* PAGINATION ------------------------------------------------------------------------ */
 .pgs-outer, .pgs-inner, .pgs-active, a {
   display: flex;
@@ -393,12 +496,13 @@ button .fromcart {
   margin: .2rem;
   font-size: 1em;
   font-weight: bolder;
-  color: gray
+  color: gray;
 }
 
 .pgs-nav {
   display: flex;
   justify-content: center;
+  
 }
 .pgs-outer {
   display: flex;
@@ -433,49 +537,109 @@ text-decoration: none;
   text-decoration: none;
   }
 
+/* >>>>>>>>>>>> ORDER HISTORY & DETAILS ------------------------------------- */
 
-
-/* ___________________________________________ */
-/* Now defunct................................ */
-.sidebar {
+.order-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;  
   align-items: flex-start;
-  background-color: #ffffff;
-  margin-right: 2rem;
-}
+  margin-top: 2.5rem;
+   /* border: 1px solid hotpink; */
+ }
 
-.sidebar ul {
-  list-style-type: none;
-}
-
-.sidebar input {
-  border: none;
-  background-color: #f2f2f2;
-  width: 200px;
-  height: 50px;
-  margin: 5px;
-  font-style: italic;
-}
-
-.sidebar button {
-  width: 200px;
-  background-color: black;
-  color: white;
-}
-
-.sidebar-container {
+.order-title {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  margin: 0;
-  width: 250px;
+  justify-content: center;
+  /*  border: 1px solid yellow; */
+   width: 100%;
 }
 
-.product-filter {
-  width: 100%;
-  height: 20rem;
-  margin-top: 20px;
-  border-bottom: 1px solid #bfbfbf;
-  box-shadow: 5px 0px 5px -5px #f2f2f2;
+.order-title h3 {
+  align-self: center;
 }
+
+.order-list {           /*div right before MAP to orderdetails component*/
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10rem;
+   /* border: 1px solid goldenrod; */
+ }
+
+/*ORDER GRID CELLS....................*/
+.order-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  
+  align-items: flex-start;
+  flex-basis: 100%;
+  flex-wrap: nowrap;
+  margin-right: 5%;
+  font-size: 10pt;
+  text-transform: uppercase;  
+  font-weight: bold;
+/*    border: 1px solid turquoise; */
+ }
+
+.order-item {
+  border: 1px solid #000000;
+  margin: 5px;
+  width: 98%;
+}
+
+.order-div-heading, .order-div-heading h4 {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+.order-div-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding-left: 5px;
+/*   border: 1px solid magenta; */
+ 
+}
+
+/*INNER ORDER GRID CELLS..............*/
+.order-div-inner, .order-div-inner-btn {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: .2rem;
+  margin-left: 5px;
+  font-size: 10pt;
+  text-transform: none;
+  font-weight: normal;
+/*   border: 1px solid red;
+ */  
+}
+
+.order-div-inner-btn {
+  align-self: flex-end;
+}
+
+ .order-grid {
+  display: flex;
+  flex-direction: row;
+ 
+} 
+
+
+.cancel-order-btn {
+  align-content: center;  
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  background-color: #f2f2f2;
+  color: #666666;
+  border: 1px solid #666666;
+}
+

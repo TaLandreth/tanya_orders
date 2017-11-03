@@ -1,31 +1,22 @@
 ﻿<Properties StartupConfiguration="{5A407D47-D871-4F7C-B664-699CE7CA44D6}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.ItemProperties.tanya__orders PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="orders_library/Data/OrderContext.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="orders_library/Models/NewLine.cs">
     <Files>
-      <File FileName="ordersAPI/Controllers/OrdersController.cs" Line="45" Column="48" />
-      <File FileName="orders_library/Services/OrderManager.cs" Line="88" Column="10" />
-      <File FileName="orders_library/Services/ProductManager.cs" Line="25" Column="75" />
-      <File FileName="../sds-react-project/project/backend/backend/Controllers/PageController.cs" Line="18" Column="72" />
-      <File FileName="../sds-react-project/project/backend/backend/Controllers/MainController.cs" Line="19" Column="52" />
-      <File FileName="../sds-react-project/project/backend/backend/Store/Store.cs" Line="43" Column="1" />
-      <File FileName="orders_library/Models/Product.cs" Line="4" Column="25" />
-      <File FileName="orders_library/Models/UserModel.cs" Line="4" Column="18" />
-      <File FileName="orders_library/Models/Instructions.cs" Line="6" Column="18" />
-      <File FileName="tanya_orders/Program.cs" Line="204" Column="69" />
-      <File FileName="orders_library/Data/OrderContext.cs" Line="4" Column="41" />
+      <File FileName="orders_library/Models/Address.cs" Line="16" Column="16" />
+      <File FileName="orders_library/Services/OrderManager.cs" Line="208" Column="1" />
+      <File FileName="ordersAPI/Controllers/OrdersController.cs" Line="88" Column="1" />
+      <File FileName="orders_library/Models/newOrderDetails.cs" Line="14" Column="60" />
+      <File FileName="orders_library/Data/OrderContext.cs" Line="25" Column="1" />
+      <File FileName="orders_library/Models/NewLine.cs" Line="9" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="tanya_orders" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.ordersAPI PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/tanyalandreth/Desktop/tanya_orders/orders_library/Services/OrderManager.cs" relfile="orders_library/Services/OrderManager.cs" line="249" column="1" />
+      <Breakpoint file="/Users/tanyalandreth/Desktop/tanya_orders/orders_library/Services/OrderManager.cs" relfile="orders_library/Services/OrderManager.cs" line="208" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />

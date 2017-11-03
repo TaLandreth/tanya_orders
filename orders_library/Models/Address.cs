@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace orders_library
 {
@@ -10,8 +11,9 @@ namespace orders_library
 
         public int Id { get; set; }
 
-        public int CustomerDetailsId { get; set; }
+        //public int CustomerDetailsId { get; set; }
 
+        [JsonIgnore]
         public Customer CustomerDetails { get; set; }
         public AddressTypes Addresstype { get; set; }
         public string Street { get; set; }

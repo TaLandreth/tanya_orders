@@ -165,7 +165,7 @@ namespace tanya_orders.Services
                         Console.WriteLine("Query id matches passed value...");
 
                         query.OrderStatus = ord.OrderStatus;
-                        query.ShipmethodId = ord.ShipmethodId;
+                        query.Shipmethod.Id = ord.Shipmethod.Id;
 
                         //Then Save changes to order
                         context.Entry(query).State = EntityState.Modified;

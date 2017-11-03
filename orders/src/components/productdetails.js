@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import '../App.css'
-import LineItem from '../models/lineitem'
 import { addToCart } from "../dispatcher/actions"
-import Popup from 'react-popup'
 import { withRouter } from 'react-router-dom'
 
 class ProductDetails extends Component {
@@ -23,7 +21,8 @@ class ProductDetails extends Component {
         })
     }
     addToCart(productid, productname, price) {
-        let newItem = new LineItem(productid, productname, price, Number(this.state.qty))
+
+        let newItem = {id: null, productdetailsid: productid, productname: productname, productprice: price, quantity: Number(this.state.qty)}
         //console.log(newItem)
         addToCart(this.props.dispatch, newItem)
     }
@@ -31,7 +30,7 @@ class ProductDetails extends Component {
     render() {
             return (
         <div className="product-details-rows">
-                    <div className="prod-img-view"><img src={this.props.prod.image} /></div>
+                    <div className="prod-img-view"><img src={this.props.prod.image} alt="Product" /></div>
             <div className="prod-display-individual" key={this.props.prod.id}>
 
                     <div className="return-to-catalog" onClick={this.props.returnToCatalog}>

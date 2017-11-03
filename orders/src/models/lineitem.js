@@ -1,8 +1,5 @@
 export default class LineItem {
-    constructor(productid, name, price, quantity) {
-        this.productdetailsid = productid || 0
-        this.productname = name || ''
-        this.productprice = price || 0
-        this.quantity = quantity || 0
-    }
+    constructor(product, quantity) {
+        this.ProductId = product || 0
+        this.Quantity = quantity || 0    }
 }

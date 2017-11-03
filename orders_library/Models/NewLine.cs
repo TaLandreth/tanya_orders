@@ -1,10 +1,13 @@
 ﻿using System;
-namespace orders_library.Models
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace orders_library
 {
     public class NewLine
     {
-        public NewLine()
-        {
-        }
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
+
     }
 }

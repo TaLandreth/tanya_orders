@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import '../App.css'
 import LineItem from '../models/lineitem'
 import { addToCart } from "../dispatcher/actions"
-import Popup from 'react-popup'
 import { withRouter } from 'react-router-dom'
 
 class Product extends Component {
@@ -35,7 +34,7 @@ class Product extends Component {
 
             return (
                 <div className="prod-display-alt1" key={this.props.prod.id}>
-                    <div className="prod-img" onClick={this.props.seeProduct.bind(this, this.props.prod)}><img src={this.props.prod.image} />
+                    <div className="prod-img" onClick={this.props.seeProduct.bind(this, this.props.prod)}><img src={this.props.prod.image} alt="Product"/>
                         <div className="prod-price">{"$" + this.props.prod.price.toFixed(2)}</div>
                     </div>
                     <div className="prod-div-inner">{this.props.prod.name}

@@ -116,7 +116,7 @@ namespace LineOrderUnitTests
             {
                 OrderDate = DateTime.Now.ToString("yyyy-MM-dd"),
                 CustomerDetailsId = 2,
-                ShipmethodId = 1,
+                Shipmethod = { Id = 1 },
                 Lineitems = new LineItem[]
     {
                     new LineItem { ProductDetailsId = 6, Quantity = 22,
