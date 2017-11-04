@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
+@media only screen and (max-width: 500px) {
+ 
+    .logo-title {
+      display: flex;
+      justify-content: center;
+      font-size: 1em;
+      font-weight: bolder;
+      color: black;  }
+}
+
+
+
 /* GENERAL/GENERIC SETTINGS: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 body, html {
   margin: 0;
@@ -44,12 +56,21 @@ a, a:link, a:hover, a:active {
   color: white;
 }
 
-.error-msg {
+.msg {
   padding: 10px;
   font-size: 20px;
   font-weight: bold;
   color: #bf4040;
 }
+
+.msg h3{
+  color: #bf4040;
+}
+
+.msg h2{
+  color: goldenrod;
+}
+
 
 .login-btn-container {
   width: 100%;
@@ -71,7 +92,6 @@ a, a:link, a:hover, a:active {
 
 .logo-title {
   display: flex;
-  margin-right: auto;
   order: 0;
   font-size: 1em;
   font-weight: bolder;
@@ -82,42 +102,92 @@ a, a:link, a:hover, a:active {
 .header-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: baseline;
   padding: .8rem;
   width: 100%;
   margin-bottom: 10px;
     background-color: #ffffff;
     color: gray;
+    
   }
 
 /* HEADER ---- NAVIGATION .................*/
 .navigation {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 50%;
+  justify-content: center;
   margin: 0;
   padding: 0;
+  
 }
 
-  ul.navs {
+  ul.navs, ul.navs-narrow {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
     list-style: none;
     order: 1;
-    width: 100%;
+    width: 30rem;
     padding: 0;
   }
-  
   ul.navs li {
-    flex-basis: 10rem;
-    font-size: 10px;
+    text-align: center;
+    font-size: 12px;
     font-weight: bold;
+    width: 100%;
   }
 
-  /*HEADER ---- CART ICON .............................*/
+
+
+  /* FOR SMALL SCREEN ________________________ */
+  .nav-narrow-container {
+    position: relative;
+    width: 10rem;
+    text-align: center;
+  }
+
+  .nav-narrow-container span {
+font-size: 20px;
+color: #000000;
+  }
+  .navs-narrow {
+    display: none;
+    vertical-align: center;
+    position: absolute;
+    left: 0px;
+    top: 25px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+  }
+
+  .nav-narrow-container i {
+    float: center;
+    cursor: pointer;
+    color: #FFF;
+  }
+
+  .navs-narrow ul {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      width: 100%; 
+  }
+
+  ul.navs-narrow {
+    display: block;
+  }
+
+  ul.navs-narrow li {
+    font-size: 10px;
+    margin: 1px;
+    font-weight: bold;
+    width: 100%;
+  }
+
+
+  /*HEADER ---- CART & USER ICONS .............................*/
 .accticon {
   display: flex;
   flex-direction: row;
@@ -140,6 +210,43 @@ a, a:link, a:hover, a:active {
   border: 0;
 }
 
+.account-icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.logged-in-menu {
+  display: flex;
+flex-direction: column;  }
+
+.logout {
+  flex-direction: column;
+}
+
+.user-menu {
+  position: relative;
+  width: 10rem;
+  text-align: center;
+}
+
+.user-menu-sub {
+  display: none;
+  vertical-align: center;
+  position: absolute;
+  left: 0px;
+  top: 22px;
+  margin: 0;
+  padding: 0;
+  width: 10rem;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  text-align: center;
+  font-style: italic;
+  color: #666666;
+}
+
 /*HEADER ---- CART COMPONENT (CONTENTS OF POPUP).............................*/
 .cart-div, .cart-header {
   display: flex;
@@ -156,7 +263,7 @@ button .fromcart {
   background-color: gray;
 }
 
-/* HEADER ---- CART POP UP FEATURES, INSIDE HEADER ~~~~~~~~~~~~~~~~~~~~ */
+/* HEADER ---- CART POP UP FEATURES, INSIDE HEADER, CHECKOUT  ~~~~~~~~~~~~~~~~~~~~ */
 .modal-overlay {
     position          : fixed;
     top                        : 0;
@@ -179,11 +286,8 @@ button .fromcart {
     overflow                   : auto;
     border-radius               : 2px;
     outline                    : none;
-    padding                    : 20px;
-    font-family: 'Biryani', sans-serif;
+    padding                    : 1%;
     font-family: 'Roboto Condensed', sans-serif;
-    
-    
   }
 
 .cart-header, .cart-total {
@@ -219,39 +323,65 @@ margin: 10px;
   font-size: 1.5em;
 }
 
+.checkout-container {
+  display: flex;
+  justify-content: center;
+}
+
 .cart-div-checkout {
   display: flex;
   flex: 1;
   flex-direction: row;
- justify-content: flex-start;
+ justify-content: center;
  align-items: center;
  padding: 2px;
- margin-left: 10px;
  width: 100%;
- border: 1px solid magenta;
 }
 
-.cart-div-column {
+.cart-div-column, .cart-div-column-final {
   display: flex;
   flex-direction: column;
- justify-content: flex-start;
+  width: 100%;
+ justify-content: center;
+ text-align: center;
  align-items: center;
- border: 1px solid turquoise;
+}
+
+.cart-div-column-final {
+  padding: 1%;
+  margin-bottom: 4%;
+  border: 1px solid #000000;
+  background-color: #f2f2f2;
+}
+
+.cart-div-column-final h4 {
+  text-align: center;
 }
 
 .cart-div-checkout select {
-  align-self: flex-start;
   width: 45%;
   height: 40px;
-  font-size: 1.5em;
+  font-size: 1em;
   color: #8c8c8c;
   border: 1px solid #d9d9d9;
-  background-color: #f2f2f2;
+  background-color: #fff;
   text-align: center;
 }
 
 .cart-div-keepshopping {
  align-self: flex-start;
+}
+
+/* ______________ CHECKOUT CONFIRMATION _______________ */
+.order-confirmation {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  text-align: center;
+}
+
+.order-confirmation button {
+  align-self: center;
 }
 
 /* BLACK DIVIDER ................................... */
@@ -386,19 +516,24 @@ margin: 10px;
 
 /* >>>>>>>>>>>> PRODUCT INDIVIDUAL VIEW SETTINGS ------~~~~~~~~~~~~----- */
 
-.prod-display-individual {
+.prod-display-individual, .prod-display-individual-narrow  {
   display: flex;
   flex-direction: column;  
+  flex: 1;
   justify-content: flex-start;
   width: 50%;
   padding: 1rem;
   background-color: #f2f2f2;
   
 } 
+/* SMALL SCREEN */
+.prod-display-individual-narrow {
+  width: 100%;
+} 
 
 .prod-display-individual h2 {
-
  font-weight: bold;
+
 } 
 
 .prod-price-gold {
@@ -407,27 +542,44 @@ margin: 10px;
   color: goldenrod;
 }
 
-.product-details-rows {
+.product-details-rows, .product-details-cols {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   text-align: left;
 }
 
-.prod-img-view{
+.product-details-cols {
+  flex-direction: column;
+}
+
+.prod-img-view, .prod-img-view-narrow{
   width: 50%;
   background-color: white;
   position: relative;
   box-shadow: 0 0 1px 1px white;
 }
 
-.prod-img-view img{
+.prod-img-view img, .prod-img-view-narrow img{
   max-width: 90%;
   background-color: white;
   position: relative;
   box-shadow: 0 0 1px 1px white;
   margin: 2rem;
   padding: 2rem;
+}
+
+/* SMALL SCREEN _________________________ */
+.prod-img-view-narrow {
+  width: 100%;
+  box-shadow: 0 0 0 0;
+}
+
+.prod-img-view-narrow img{
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 0 0 0;
 }
 
 .prod-div-holds-cartbtn {
@@ -446,13 +598,20 @@ margin: 10px;
   
 }
 
-/*........... ADD TO CART, QUANTITY OPTIONS (in individ. product view)*/
+          /*........... ADD TO CART, QUANTITY OPTIONS (in individ. product view)*/
 
-.choice-holders {
+.choice-holders, .choice-holders-NARROW {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
+}
+
+.choice-holders-NARROW {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+
 }
 
 .prod-div h6 {
@@ -541,18 +700,18 @@ text-decoration: none;
 
 .order-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;  
   align-items: flex-start;
   margin-top: 2.5rem;
-   /* border: 1px solid hotpink; */
+    border: 1px solid hotpink; 
  }
 
 .order-title {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /*  border: 1px solid yellow; */
+    border: 1px solid yellow; 
    width: 100%;
 }
 
@@ -567,44 +726,40 @@ text-decoration: none;
   justify-content: center;
   width: 100%;
   margin-bottom: 10rem;
-   /* border: 1px solid goldenrod; */
+    border: 1px solid goldenrod; 
  }
 
-/*ORDER GRID CELLS....................*/
-.order-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;  
-  align-items: flex-start;
-  flex-basis: 100%;
-  flex-wrap: nowrap;
-  margin-right: 5%;
-  font-size: 10pt;
-  text-transform: uppercase;  
-  font-weight: bold;
-/*    border: 1px solid turquoise; */
- }
+/*ORDER GRID CELLS (ORDER DETAILS)....................*/
 
 .order-item {
   border: 1px solid #000000;
   margin: 5px;
-  width: 98%;
-}
-
-.order-div-heading, .order-div-heading h4 {
-  font-weight: bold;
-  background-color: #f2f2f2;
 }
 
 .order-div-heading {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
   padding-left: 5px;
-/*   border: 1px solid magenta; */
- 
+   border: 1px solid magenta; 
 }
+
+.order-div-heading, .order-div-heading h4 {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+.order-div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-basis: 100%;
+  margin-right: 5%;
+  font-size: 10pt;
+  text-transform: uppercase;  
+  font-weight: bold;
+    border: 1px solid turquoise; 
+ }
+
 
 /*INNER ORDER GRID CELLS..............*/
 .order-div-inner, .order-div-inner-btn {
@@ -618,20 +773,8 @@ text-decoration: none;
   font-size: 10pt;
   text-transform: none;
   font-weight: normal;
-/*   border: 1px solid red;
- */  
+   border: 1px solid red;
 }
-
-.order-div-inner-btn {
-  align-self: flex-end;
-}
-
- .order-grid {
-  display: flex;
-  flex-direction: row;
- 
-} 
-
 
 .cancel-order-btn {
   align-content: center;  

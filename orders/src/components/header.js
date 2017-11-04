@@ -5,9 +5,10 @@ import ReactModal from 'react-modal'
 import Cart from './cart'
 import LineItem from '../models/lineitem'
 import OrderModel from '../models/ordermodel'
-import OrderDetails from './orderdetails'
+//import OrderDetails from './orderdetails'
 import Login from './login'
 import { completeOrder, clearCart } from "../dispatcher/actions"
+import MediaQuery from 'react-responsive'
 
 class Header extends Component {
     constructor() {
@@ -18,7 +19,8 @@ class Header extends Component {
             shipping: 3,
             modalIsOpen: false,
             checkingout: false,
-            confirmation: false
+            confirmation: false,
+            open: false
         }
 
         this.readyToCheckout = this.readyToCheckout.bind(this)
@@ -58,6 +60,28 @@ class Header extends Component {
             confirmation: false,
             checkingout: false
         });
+    }
+
+    burgerToggle() {
+        let linksEl = document.querySelector('.navs-narrow')
+        if (linksEl.style.display === 'block') {
+            linksEl.style.display = 'none';
+        } else {
+            linksEl.style.display = 'block';
+        }
+
+        console.log(linksEl)
+    }
+
+    accountToggle() {
+        let linkz = document.querySelector('.user-menu-sub')
+        if (linkz.style.display === 'block') {
+            linkz.style.display = 'none';
+        } else {
+            linkz.style.display = 'block';
+        }
+
+        console.log(linkz)
     }
 
     handleCheckoutClose() {
@@ -118,33 +142,85 @@ class Header extends Component {
         for (var i = 0; i < this.props.shoppingCart.length; i++) {
             total += (this.props.shoppingCart[i].productprice * this.props.shoppingCart[i].quantity)
         }
-
-        console.log(this.props.lastOrder)
-
-        //TITLE + LINKS - LOGIN & CART
+        //TITLE + LINKS - LOGIN - CART
 
 
         return (
             <header className="header-container">
                 <div className="logo-title">BEST METAL LLC</div>
+
                 <div className="navigation">
                     {this.state.username !== '' ?
-                        <ul className="navs">
-                            <li onClick={this.props.displayCatalog}>PRODUCT CATALOG</li>
-                            <li onClick={this.props.displayOrders}>ORDERS</li>
-                            <li className="logout" onClick={this.onLogout.bind(this)}>LOGOUT</li>
-                        </ul> :
-                        <ul className="navs">
-                            <li onClick={this.props.displayCatalog}>PRODUCT CATALOG</li>
-                        </ul>}
+
+                        <nav>
+                            <MediaQuery query="(max-device-width: 600px)">
+                                <div className="nav-narrow-container" onClick={this.burgerToggle}>
+                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                    <div className="navs-narrow">
+                                        <ul className="navs">
+                                            <li onClick={this.props.displayCatalog}>CATALOG</li>
+                                            <li onClick={this.props.displayOrders}>ORDERS</li>
+                                            <li onClick={this.onLogout.bind(this)}>LOGOUT</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </MediaQuery>
+                            <MediaQuery query="(min-device-width: 600px)">
+                                <ul className="navs">
+                                    <li onClick={this.props.displayCatalog}>PRODUCT CATALOG</li>
+                                    <li onClick={this.props.displayOrders}>ORDERS</li>
+                                </ul>
+                            </MediaQuery>
+                        </nav>
+
+                        :
+                        <nav>
+                            <MediaQuery query="(max-device-width: 600px)">
+                                <div className="nav-narrow-container" onClick={this.burgerToggle}>
+                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                    <div className="navs-narrow">
+                                        <ul className="navs">
+                                            <li onClick={this.props.displayCatalog}>CATALOG</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </MediaQuery>
+                            <MediaQuery query="(min-device-width: 600px)">
+                                <div className="nav-wide-container">
+                                    <div className="navs-wide">
+                                        <ul className="navs">
+                                            <li onClick={this.props.displayCatalog}>PRODUCT CATALOG</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </MediaQuery>
+                        </nav>
+                    }
 
                 </div>
                 <div className="accticon">
 
                     {this.state.username !== '' ?
-                        <button className="cart" onClick={this.handleOpenModal}>Hi, {this.props.userId.username}!&nbsp;
-                            <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button> :
 
+                        <div className="account-icon-container">
+                            <MediaQuery query="(min-device-width: 600px)">
+                                <div className="logged-in-menu" onClick={this.accountToggle}>
+                                    <div className="user-menu">
+                                        <span className="glyphicon glyphicon-user"></span>&nbsp;Hi, {this.props.userId.username}!&nbsp;&nbsp;
+
+                                    <div className="user-menu-sub">
+                                            <div className="logout" onClick={this.onLogout.bind(this)}>Logout</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </MediaQuery>
+
+                            <button className="cart" onClick={this.handleOpenModal}>
+                                <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;
+                            {this.props.shoppingCart.length}</button>
+                        </div>
+                        :
                         <div>
                             <button className="cart" onClick={this.handleOpenModal}>
                                 <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;
@@ -164,45 +240,56 @@ class Header extends Component {
                     {this.state.username !== '' ?
                         <div>
                             <div className="cart-header">Your Cart:</div>
-
                             {this.props.shoppingCart ? this.props.shoppingCart.map((b) => <Cart line={b} />)
-
                                 :
                                 <div className="cart">No Items</div>}
-
-
-
                             <div className="cart-total">Total: ${total.toFixed(2)}</div>
 
 
                             {this.state.confirmation ?
-                                <div>
+                                <div className="order-confirmation">
                                     Your order has been placed! Check your Orders for status.
                                     <button className="close-popup" onClick={this.handleCheckoutClose}>Ok</button>
                                 </div>
 
                                 :
 
-                                <div>
+                                <div className="checkout-container">
                                     {!this.state.checkingout ?
                                         <div>
-                                            <button className="close-popup" onClick={this.handleCloseModal}>Close</button>
+                                            <button className="close-popup" onClick={this.handleCloseModal}>Keep Shopping</button>
                                             {total > 0 ? <button className="checkout" onClick={this.readyToCheckout}>CHECKOUT</button> : ""}
                                         </div>
                                         :
-                                        <div className="cart-div-column">
-                                            <div className="cart-div-keepshopping">You can&nbsp;<button className="close-popup" onClick={this.handleCloseModal}>Keep Shopping</button> or
-                                            <h3>Continue checkout:</h3></div>
-                                            <div className="cart-div-checkout">
-                                                Select:&nbsp;
-                                                <select><option>Shipping Method: --</option>
-                                                    <option name="shipping" value="1">UPS Overnight</option>
-                                                    <option name="shipping" value="2">FedEx 2nd Day</option>
-                                                    <option name="shipping" value="3">USPS Ground</option></select>
-                                            </div>
-                                            {total > 0 ? <div className="cart-div-checkout"><button className="place-order" onClick={this.placeOrder}>PLACE ORDER</button></div>
 
-                                                : ""}
+
+                                        <div>
+
+                                            {total > 0 ?
+                                                <div className="cart-div-column">
+                                                    <div className="cart-div-keepshopping">
+                                                        You can&nbsp;<button className="close-popup" onClick={this.handleCloseModal}>Keep Shopping</button> or
+                                            </div>
+                                                    <div className="cart-div-column-final">
+                                                        <h4>Continue checkout:</h4>
+                                                        <div className="cart-div-checkout">
+                                                            Select:&nbsp;
+                                                        <select><option>Shipping:</option>
+                                                                <option name="shipping" value="1">UPS Overnight</option>
+                                                                <option name="shipping" value="2">FedEx 2nd Day</option>
+                                                                <option name="shipping" value="3">USPS Ground</option></select>
+                                                        </div>
+                                                        <div className="cart-div-checkout">
+                                                            <button className="place-order" onClick={this.placeOrder}>PLACE ORDER</button></div>
+
+
+                                                    </div>
+                                                </div>
+                                                : 
+                                                <button className="close-popup" onClick={this.handleCloseModal}>Keep Shopping</button>
+                                                
+                                                }
+
                                         </div>
                                     }
                                 </div>
@@ -215,7 +302,6 @@ class Header extends Component {
                         :
                         <div className="login">
                             <Login loggedIn={this.onLogin} />
-                            <h3>{this.props.loginFailed ? "Login failed!" : ""}</h3>
                         </div>
                     }
 
@@ -231,6 +317,5 @@ export default connect(
         shoppingCart: store.shoppingCart,
         userId: store.userId,
         loginFailed: store.APICallFailed,
-        lastOrder: store.lastOrder
     })
 )(Header);

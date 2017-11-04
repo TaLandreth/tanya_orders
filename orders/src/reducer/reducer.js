@@ -10,7 +10,8 @@ let initialState = {
     processing: '',
     APICallInProgress: false,
     APICallFailed: null,
-    cartView: false
+    cartView: false,
+    loginError: false
 
 }
 export default function reducer(store = initialState, action) {
@@ -37,8 +38,9 @@ export default function reducer(store = initialState, action) {
 
         case "LOGIN_FAILED": {
             console.log('### Login Failed! Reason: ' + action.payload)
-            return { ...store, APICallFailed: action.payload, APICallInProgress: false, APICallFailed: true  }
+            return { ...store, APICallFailed: true, APICallInProgress: false  }
         }
+
 
         //GET ORDERS_______________________________________________________________________:
         case "GET_ORDERS_STARTED": {

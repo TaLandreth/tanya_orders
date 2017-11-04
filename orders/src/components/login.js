@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../App.css'
 import { connect } from "react-redux"
-import { onLogin } from "../dispatcher/actions"
+import { onLogin, clearLoginError } from "../dispatcher/actions"
 
 class Login extends Component {
     constructor() {
@@ -10,47 +10,53 @@ class Login extends Component {
             userid: null,
             username: '',
             password: '',
-            error: false
+            error: false,
+            loggingin: false
         }
 
         this.onLogin = this.onLogin.bind(this)
 
     }
 
-    changeInputs = e => { this.setState({ [e.target.name]: e.target.value }) }
+    changeInputs = e => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
+
+    }
 
     onLogin() {
 
-        console.log("On click:" + this.props.userId)       
-        
-        if (this.state.username === null || this.state.password === null
-        || this.state.username === '' || this.state.password === '')
-        {
-            this.setState({error: true})
+        if (this.state.username === '' || this.state.password === '') {
+            this.setState({ error: true })
         }
 
         else {
-        let credentials = {
-            username: this.state.username,
-            password: this.state.password
+
+            this.setState({ error: false })
+
+            let credentials = {
+                username: this.state.username,
+                password: this.state.password
+            }
+
+            onLogin(credentials, this.props.dispatch)
+
+            console.log(this.props.userId.id)
+            console.log(this.props.userId.username)
+
+            this.setState({loggingin: true})
+
+                setTimeout(() => {
+                    if (this.props.userId.id && this.props.userId.username) {
+                    this.props.loggedIn()}
+                  }, 800)
         }
-
-        onLogin(credentials, this.props.dispatch)
-
-        console.log("After sent to dispatcher:" + this.props.userId)
-        
-        if (this.props.userId !== null && this.props.APICallFailed === false) {
-            this.props.loggedIn()
-        }
-
-    }
     }
 
 
 
     render() {
-
-        //console.log(this.state.username)
 
         return (
             <div className="login-container">
@@ -70,8 +76,13 @@ class Login extends Component {
 
                 <div className="login-btn-container">
                     <button onClick={this.onLogin} className="btn btn-default">Login</button>
-                    <div className="error-msg">
-                    {this.state.error ? "Please provide your login credentials" : ""}</div>
+                    <div className="msg">
+                        <h3>
+                            {this.state.error ? "Please provide your login credentials" : ""}
+                            {this.props.APICallFailed ? "Login failed!" : ""}</h3>
+                        <h2> {this.state.loggingin ? "Logging In...." : ""}</h2>
+                            
+                            </div>
                 </div>
             </div>
         )
@@ -80,6 +91,6 @@ class Login extends Component {
 export default connect(
     store => ({
         userId: store.userId,
-        APICallFailed: store.APICallFailed
+        APICallFailed: store.APICallFailed,
     })
 )(Login);

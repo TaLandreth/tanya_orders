@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import './css/bootstrap.min'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
@@ -16,3 +16,5 @@ ReactDOM.render(
     </Provider>
 , document.getElementById('root'));
 registerServiceWorker();
+
+

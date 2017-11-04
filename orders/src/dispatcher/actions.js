@@ -15,6 +15,17 @@ export function onLogin(user, dispatch) {
         })
 }
 
+export function clearLoginError(dispatch, status) {
+    dispatch({
+        type: "LOGIN_ERROR_CLEARING"
+    })
+
+console.log("In dispatcher: " + status)
+
+     dispatch({ type: "LOGIN_ERROR_CLEARED", payload: status })
+
+}
+
 //RETRIEVE PRODUCTS
 export function getProducts(dispatch, instructions) {
     dispatch({

@@ -4,7 +4,6 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import '../App.css'
 import OrderDetails from './orderdetails'
 import { getOrderCount, getOrders, cancelOrder } from "../dispatcher/actions"
-import { withRouter } from 'react-router-dom'
 
 class OrderHistory extends Component {
   constructor() {
@@ -86,10 +85,9 @@ class OrderHistory extends Component {
 
     return (
       <div className="order-container">
-        <div className="order-title"><h3>Order History</h3>
+        <div className="order-title"><h3>Order History</h3>        </div>
           <div className="order-list">
             <InfiniteScroll
-              refreshFunction={this.refresh}
               next={this.getMoreOrders.bind(this)}
               hasMore={this.state.moreOrds}
               key={Math.random()}>
@@ -98,16 +96,15 @@ class OrderHistory extends Component {
                   cancelOrder={this.cancelOrder.bind(this)} />)}
             </InfiniteScroll>
           </div>
-        </div>
       </div>
     )
   }// end render
 }//end component
 
-export default withRouter(connect(
+export default connect(
   store => ({
     userId: store.userId,
     orderList: store.orderList,
     orderCount: store.orderCount
   })
-)(OrderHistory));
+)(OrderHistory);
