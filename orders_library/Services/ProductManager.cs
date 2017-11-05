@@ -9,7 +9,7 @@ namespace orders_library.Services
     {
 
         //GET COUNT
-        public int GetCount()
+        public int GetProductCount()
         {
             using (var context = DbContextFactory.Create())
             {
@@ -29,7 +29,7 @@ namespace orders_library.Services
             //user id
 
             using (var context = DbContextFactory.Create())  {
-                var query = context.Product.Skip(instructions.startVal).Take(instructions.viewAmt).ToList();
+                var query = context.Product.OrderBy(n => n.Id).Skip(instructions.startVal).Take(instructions.viewAmt).ToList();
 
                 return query;
             }

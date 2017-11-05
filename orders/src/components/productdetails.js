@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import '../App.css'
-import { addToCart } from "../dispatcher/actions"
+import { addToCart, updateCart } from "../dispatcher/actions"
 import MediaQuery from 'react-responsive'
+import ReactModal from 'react-modal'
+
 
 class ProductDetails extends Component {
     constructor(props) {
@@ -10,7 +12,8 @@ class ProductDetails extends Component {
         this.state = {
             qty: 1,
             shoppingCart: this.props.shoppingCart,
-            index: this.props.productList.findIndex(i => i.id === this.props.prod.id)
+            index: this.props.productList.findIndex(i => i.id === this.props.prod.id),
+            modalIsOpen: false
         }
         this.addToCart = this.addToCart.bind(this)
     }
@@ -20,14 +23,74 @@ class ProductDetails extends Component {
             [e.target.name]: e.target.value
         })
     }
+
+    handleOpenModal() {
+        this.setState({ showModal: true });
+    }
+
+    handleCloseModal() {
+        this.setState({
+            showModal: false
+        });
+    }
+
     addToCart(productid, productname, price) {
 
-        let newItem = { id: null, productdetailsid: productid, productname: productname, productprice: price, quantity: Number(this.state.qty) }
-        //console.log(newItem)
-        addToCart(this.props.dispatch, newItem)
+        let qty = Number(this.state.qty)
+
+        let idx = this.props.shoppingCart.findIndex(i => i.productdetailsid === productid)
+
+        console.log("Index of product: " + idx)        
+
+        //LOCATE SAME ITEM IN SHOPPING CART, AND CHANGE QTY
+        if (idx >= 0) {
+
+            let instructions = {
+                index: idx,
+                qty: qty
+            }
+
+            //call update cart action
+            //find item in array
+            //update quantity
+            //send back to store
+
+            updateCart(this.props.dispatch, instructions)
+
+        }
+
+        else {
+
+
+            if (this.state.qty < 1) {
+                qty = 1
+
+                let newItem = { id: null, productdetailsid: productid, productname: productname, productprice: price, quantity: qty }
+                //console.log(newItem)
+                addToCart(this.props.dispatch, newItem)
+            }
+
+            else {
+
+                qty = this.state.qty
+
+                let newItem = { id: null, productdetailsid: productid, productname: productname, productprice: price, quantity: qty }
+                //console.log(newItem)
+                addToCart(this.props.dispatch, newItem)
+            }
+
+            this.handleOpenModal()
+
+            setTimeout(() => {
+                this.handleCloseModal()
+            }, 2000)
+        }
     }
 
     render() {
+
+        console.log(this.state.qty)
+
         return (
             <div>
 
@@ -48,7 +111,7 @@ class ProductDetails extends Component {
                             <MediaQuery query="(max-device-width: 600px)">
                                 <div className="choice-holders-NARROW">
                                     <div className="prod-div"><h6>Quantity:</h6>
-                                        <input type="number" min="1" name="qty" placeholder="0" onChange={this.inputUpdate.bind(this)} /></div>
+                                        <input type="number" min="1" max="4000" value={this.state.qty} name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
 
                                     <div className="prod-div">
                                         <button className="add-to-cart" onClick={this.addToCart.bind(this, this.props.prod.id, this.props.prod.name, this.props.prod.price)}>
@@ -59,7 +122,7 @@ class ProductDetails extends Component {
                             <MediaQuery query="(min-device-width: 600px)">
                                 <div className="choice-holders">
                                     <div className="prod-div"><h6>Quantity:</h6>
-                                        <input type="number" min="1" name="qty" placeholder="0" onChange={this.inputUpdate.bind(this)} /></div>
+                                        <input type="number" min="1" max="4000" value={this.state.qty} name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
 
                                     <div className="prod-div">
                                         <button className="add-to-cart" onClick={this.addToCart.bind(this, this.props.prod.id, this.props.prod.name, this.props.prod.price)}>
@@ -90,7 +153,7 @@ class ProductDetails extends Component {
                             <MediaQuery query="(max-device-width: 600px)">
                                 <div className="choice-holders-NARROW">
                                     <div className="prod-div"><h6>Quantity:</h6>
-                                        <input type="number" min="1" name="qty" placeholder="0" onChange={this.inputUpdate.bind(this)} /></div>
+                                        <input type="number" min="1" max="4000" value={this.state.qty} name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
 
                                     <div className="prod-div">
                                         <button className="add-to-cart" onClick={this.addToCart.bind(this, this.props.prod.id, this.props.prod.name, this.props.prod.price)}>
@@ -101,7 +164,7 @@ class ProductDetails extends Component {
                             <MediaQuery query="(min-device-width: 600px)">
                                 <div className="choice-holders">
                                     <div className="prod-div"><h6>Quantity:</h6>
-                                        <input type="number" min="1" name="qty" placeholder="0" onChange={this.inputUpdate.bind(this)} /></div>
+                                        <input type="number" min="1" max="4000" value={this.state.qty} name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
 
                                     <div className="prod-div">
                                         <button className="add-to-cart" onClick={this.addToCart.bind(this, this.props.prod.id, this.props.prod.name, this.props.prod.price)}>
@@ -115,6 +178,19 @@ class ProductDetails extends Component {
 
 
                 </MediaQuery>
+
+                <ReactModal
+                    isOpen={this.state.showModal}
+                    contentLabel="Added to Cart"
+                    className="modal-content-addtocart"
+                    overlayClassName="modal-overlay">
+                    <div className="addtocart-confirm">
+                        Added to cart:<br />{this.props.prod.name} <br />
+                        Quantity: {this.state.qty}
+                    </div>
+                </ReactModal>
+
+
             </div>
 
 
@@ -128,6 +204,7 @@ class ProductDetails extends Component {
 export default connect(
     store => ({
         productList: store.productList,
-        productDetails: store.productDetails
+        productDetails: store.productDetails,
+        shoppingCart: store.shoppingCart
     })
 )(ProductDetails);

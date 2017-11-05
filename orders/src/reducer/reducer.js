@@ -33,12 +33,12 @@ export default function reducer(store = initialState, action) {
 
             var userData = { id: action.payload.id, username: action.payload.username }
 
-            return { ...store, userId: userData, APICallInProgress: false, APICallFailed: false}
+            return { ...store, userId: userData, APICallInProgress: false, APICallFailed: false }
         }
 
         case "LOGIN_FAILED": {
             console.log('### Login Failed! Reason: ' + action.payload)
-            return { ...store, APICallFailed: true, APICallInProgress: false  }
+            return { ...store, APICallFailed: true, APICallInProgress: false }
         }
 
 
@@ -76,9 +76,11 @@ export default function reducer(store = initialState, action) {
         case "UPDATE_CART_FINISHED": {
             console.log('### Update cart finished!')
 
-            console.log("In reducer: " + action.payload)
+            var updatedCart = store.shoppingCart.slice()
 
-            return { ...store, shoppingCart: action.payload, APICallInProgress: false }
+            updatedCart[action.payload.index].quantity += action.payload.qty
+
+            return { ...store, shoppingCart: updatedCart, APICallInProgress: false }
         }
 
         //CLEAR CART_____________________________________________________________:

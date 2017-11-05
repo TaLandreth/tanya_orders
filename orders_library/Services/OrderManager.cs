@@ -42,15 +42,15 @@ namespace orders_library.Services
         }
 
         //GET COUNT
-        public int GetOrderCount()
+        public int GetOrderCount(int id)
         {
             using (var context = DbContextFactory.Create())
             {
-                var query = context.OrderDetails;
+                var query = context.OrderDetails.Where(i => i.Id == id);
 
                 var recordcount = query.Count();
 
-                Console.Write(recordcount);
+                Console.WriteLine($"Qty of orders retrieved: {recordcount}");
 
                 return recordcount;
             }
@@ -76,8 +76,8 @@ namespace orders_library.Services
                                          Total = x.Lineitems.Sum(item => item.Quantity * item.ProductDetails.Price)
                                      }).ToList();
 
-                    Console.WriteLine($"Orders retrieved for user {ord.First().CustomerId}");
-                    Console.WriteLine($"Orders retrieved for user {ord.Count()}");
+                    Console.WriteLine($"Orders retrieved for user: {ord.First().CustomerId}");
+                    Console.WriteLine($"Qty of orders retrieved: {ord.Count()}");
 
                     return ord;
 

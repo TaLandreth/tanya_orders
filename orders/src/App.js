@@ -12,30 +12,26 @@ export default class App extends Component {
     super();
     this.state = {
       catalog: true,
-      orders: false
+      orders: false,
+      catalogProduct: false
     }
     this.displayCatalog = this.displayCatalog.bind(this)
-    this.displayOrders = this.displayOrders.bind(this)
+    this.displayOrders = this.displayOrders.bind(this)    
   }
 
   displayCatalog(e) {
     this.setState({
-      catalog: !this.state.catalog,
-      orders: false
+      catalog: true,
+      orders: false,
+      catalogProduct: !this.state.catalogProduct
     })
-
-    //console.log("Display catalog: " + this.state.catalog)
-
   }
 
   displayOrders(e) {
     this.setState({
-      orders: !this.state.orders,
+      orders: true,
       catalog: false
     })
-
-    //console.log("Display orders: " + this.state.orders)
-
   }
 
 
@@ -49,7 +45,8 @@ export default class App extends Component {
             displayOrders={this.displayOrders.bind(this)}
           />
           <Divider />
-          <Catalog />
+          <Catalog 
+          view={this.state.catalog} />
           <Footer />
         </div>
       )
@@ -75,7 +72,7 @@ export default class App extends Component {
                 displayOrders={this.displayOrders.bind(this)}
               />
               <Divider />
-              <Catalog />
+              <Catalog view={this.state.catalog}/>
               <Footer />
             </div>
           )

@@ -117,12 +117,15 @@ export function addToCart(dispatch, newItem) {
 }
 
 //Update cart
-export function updateCart(dispatch, newCart) {
-    console.log("In dispatcher: " + newCart)
+export function updateCart(dispatch, instructions) {
+    console.log("In dispatcher: " + instructions.index)
+    console.log("In dispatcher: " + instructions.qty)
+    
     dispatch({
         type: "UPDATE_CART_STARTED"
     })
-    dispatch({ type: "UPDATE_CART_FINISHED", payload: newCart })
+
+    dispatch({ type: "UPDATE_CART_FINISHED", payload: instructions })
 }
 
 //CLEAR cart
@@ -151,11 +154,14 @@ export function getProductCount(dispatch) {
 }
 
 //Order count
-export function getOrderCount(dispatch) {
+export function getOrderCount(dispatch, instructions) {
     dispatch({
         type: "GET_ORDER_COUNT_STARTED"
     })
-    axios.get(BASE_URL + "/orders")
+
+console.log("Dispatch userID: " + instructions.userId)
+
+    axios.get(BASE_URL + "/orders/" + instructions.userId)
         .then((response) => {
             dispatch({ type: "GET_ORDER_COUNT_FINISHED", payload: response.data })
         })

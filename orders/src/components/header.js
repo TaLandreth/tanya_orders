@@ -240,6 +240,15 @@ class Header extends Component {
                     {this.state.username !== '' ?
                         <div>
                             <div className="cart-header">Your Cart:</div>
+                            <div className="cart-div-container">
+                                <div className="cart-div-header">Product:</div>
+                                <div className="cart-div-header-qty">Qty:</div>
+                                <div className="cart-div-header">Price:</div>
+                                <div className="cart-div-header">Total:</div>
+                                <div className="cart-div-header">Remove:</div>
+                            </div>
+
+
                             {this.props.shoppingCart ? this.props.shoppingCart.map((b) => <Cart line={b} />)
                                 :
                                 <div className="cart">No Items</div>}
@@ -248,8 +257,8 @@ class Header extends Component {
 
                             {this.state.confirmation ?
                                 <div className="order-confirmation">
-                                    Your order has been placed! Check your Orders for status.
-                                    <button className="close-popup" onClick={this.handleCheckoutClose}>Ok</button>
+                                    <h3>Your order has been placed! Check your Orders for status.</h3><br/>
+                                    <button className="close-popup" onClick={this.handleCheckoutClose}>OK</button>
                                 </div>
 
                                 :
@@ -263,21 +272,25 @@ class Header extends Component {
                                         :
 
 
-                                        <div>
+                                        <div className="place-order-column">
 
                                             {total > 0 ?
                                                 <div className="cart-div-column">
-                                                    <div className="cart-div-keepshopping">
-                                                        You can&nbsp;<button className="close-popup" onClick={this.handleCloseModal}>Keep Shopping</button> or
-                                            </div>
-                                                    <div className="cart-div-column-final">
-                                                        <h4>Continue checkout:</h4>
+                                                    <div>
+                                                        <button className="close-popup" onClick={this.handleCloseModal}>Keep Shopping</button>
+                                                    </div>
+                                                    <div className="cart-div-checkout">
+                                                        <h3>Continue checkout:</h3>
                                                         <div className="cart-div-checkout">
-                                                            Select:&nbsp;
-                                                        <select><option>Shipping:</option>
+
+                                                            <select><option>Select Shipping:</option>
                                                                 <option name="shipping" value="1">UPS Overnight</option>
                                                                 <option name="shipping" value="2">FedEx 2nd Day</option>
                                                                 <option name="shipping" value="3">USPS Ground</option></select>
+
+
+
+
                                                         </div>
                                                         <div className="cart-div-checkout">
                                                             <button className="place-order" onClick={this.placeOrder}>PLACE ORDER</button></div>
@@ -285,10 +298,10 @@ class Header extends Component {
 
                                                     </div>
                                                 </div>
-                                                : 
+                                                :
                                                 <button className="close-popup" onClick={this.handleCloseModal}>Keep Shopping</button>
-                                                
-                                                }
+
+                                            }
 
                                         </div>
                                     }

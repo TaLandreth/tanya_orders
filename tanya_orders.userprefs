@@ -1,22 +1,15 @@
 ﻿<Properties StartupConfiguration="{5A407D47-D871-4F7C-B664-699CE7CA44D6}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.ItemProperties.tanya__orders PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="orders_library/Models/NewLine.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="orders_library/Services/ProductManager.cs">
     <Files>
-      <File FileName="orders_library/Models/Address.cs" Line="16" Column="16" />
-      <File FileName="orders_library/Services/OrderManager.cs" Line="208" Column="1" />
-      <File FileName="ordersAPI/Controllers/OrdersController.cs" Line="88" Column="1" />
-      <File FileName="orders_library/Models/newOrderDetails.cs" Line="14" Column="60" />
-      <File FileName="orders_library/Data/OrderContext.cs" Line="25" Column="1" />
-      <File FileName="orders_library/Models/NewLine.cs" Line="9" Column="1" />
+      <File FileName="ordersAPI/Controllers/OrdersController.cs" Line="167" Column="31" />
+      <File FileName="orders_library/Services/ProductManager.cs" Line="38" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.ordersAPI PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/tanyalandreth/Desktop/tanya_orders/orders_library/Services/OrderManager.cs" relfile="orders_library/Services/OrderManager.cs" line="249" column="1" />
-      <Breakpoint file="/Users/tanyalandreth/Desktop/tanya_orders/orders_library/Services/OrderManager.cs" relfile="orders_library/Services/OrderManager.cs" line="208" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />

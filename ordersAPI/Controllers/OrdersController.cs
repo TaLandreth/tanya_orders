@@ -38,21 +38,38 @@ namespace ordersAPI.Controllers
     public class OrdersController : Controller
     {
 
-        // GET api/values
+        // GET DETAILS ABOUT ORDERS
         [HttpPost]
         public IActionResult RetrieveOrders([FromBody] Instructions instructions)
         {
+
+            if (instructions.userid == 0)
+            {
+                return BadRequest();
+            }
+
+
             var retrieval = new OrderManager().GetCustomerOrders(instructions);
 
-            return new ObjectResult(retrieval);
+            if(retrieval != null){ return new ObjectResult(retrieval);}
+            else{
+                Console.WriteLine("Failed to get orders...");
+                return BadRequest();
+            }
+
+
         }
 
-        [HttpGet]
-        public int GetCount()
+        [HttpGet("{id}")]
+        public int GetCount(int id)
         {
-            var retrieval = new OrderManager().GetOrderCount();
+            var retrieval = new OrderManager().GetOrderCount(id);
 
-            return retrieval;
+            if (retrieval > 0) { return retrieval; }
+
+            else { return 0; }
+
+            
         }
 
     }
@@ -66,9 +83,20 @@ namespace ordersAPI.Controllers
         [HttpPost("{id}")]
         public IActionResult CancelOrder(int id)
         {
+
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
             var retrieval = new OrderManager().CancelOrder(id);
 
-            return new ObjectResult(retrieval);
+            if (retrieval != null) { return new ObjectResult(retrieval); }
+
+            else{
+                Console.WriteLine("Failed cancel order...");
+                return BadRequest();
+            }
         }
 
 
@@ -85,9 +113,20 @@ namespace ordersAPI.Controllers
         public IActionResult CreateOrder([FromBody] NewOrderDetails orderdetails)
         {
             //CHECK IF NULL - RETURN BAD REQUEST
+            if (orderdetails == null)
+            {
+                return BadRequest();
+            }
+
             var retrieval = new OrderManager().CreateOrder(orderdetails);
 
-            return new ObjectResult(retrieval);
+            if (retrieval != null) { return new ObjectResult(retrieval); }
+
+            else
+            {
+                Console.WriteLine("Unable to create order...");
+                return BadRequest();
+            }
 
         }
 
@@ -106,19 +145,21 @@ namespace ordersAPI.Controllers
 
             if (retrieval != null)
             {
-
                 return new ObjectResult(retrieval);
 
             }
 
-            Console.WriteLine("Failed to retrieve products...");
-            return BadRequest();
+            else
+            {
+                Console.WriteLine("Failed to retrieve products...");
+                return BadRequest();
+            }
         }
 
         [HttpGet]
-        public int GetCount()
+        public int GetProductCount()
         {
-            var retrieval = new ProductManager().GetCount();
+            var retrieval = new ProductManager().GetProductCount();
 
             return retrieval;
 

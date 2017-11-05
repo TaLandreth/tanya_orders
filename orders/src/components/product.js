@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import '../App.css'
 import LineItem from '../models/lineitem'
 import { addToCart } from "../dispatcher/actions"
-import { withRouter } from 'react-router-dom'
 
 class Product extends Component {
     constructor(props) {
@@ -28,8 +27,6 @@ class Product extends Component {
         addToCart(this.props.dispatch, newItem)
     }
 
-
-
     render() {
 
             return (
@@ -43,13 +40,13 @@ class Product extends Component {
                </div>
             )
     }// end render
-}//end BookShelf component
+}//end component
 
-export default withRouter(connect(
+export default connect(
     store => ({
         shoppingCart: store.shoppingCart,
         productList: store.productList,
     })
-)(Product));
+)(Product);
 ////// LONGER TERM GOALS:
 // - consolidate products when added (versus new line each time clicked)

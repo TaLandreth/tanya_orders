@@ -6,6 +6,8 @@ import Product from './product'
 import ProductDetails from './productdetails'
 import { withRouter } from 'react-router-dom'
 import Pagination from 'react-js-pagination'
+import MediaQuery from 'react-responsive'
+
 
 class Catalog extends Component {
   constructor() {
@@ -16,22 +18,67 @@ class Catalog extends Component {
       startVal: 0,
       viewAmt: 6,
       activePage: 1,
-      productView: false      
+      productView: false,
+      width: window.innerWidth,
+      height: window.innerHeight
     };
     this.getMoreProducts = this.getMoreProducts.bind(this);
     this.seeProduct = this.seeProduct.bind(this);
     this.returnToCatalog = this.returnToCatalog.bind(this);
-    
+
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+
   }
 
   componentDidMount() {
-    let instructions = {
-      viewAmt: this.state.viewAmt,
-      startVal: this.state.startVal,
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+
+    if (this.state.width > 800) {
+      console.log("Larger than 800")
+
+      let instructions = {
+        viewAmt: 8,
+        startVal: this.state.startVal,
+      }
+
+      this.setState(instructions)
+
+      console.log(instructions)
+      getProducts(this.props.dispatch, instructions)
+      getProductCount(this.props.dispatch, instructions)
+
+      console.log("Width: " + this.state.width)
+      console.log("Height: " + this.state.height)
     }
-    //console.log(instructions)
-    getProducts(this.props.dispatch, instructions)
-    getProductCount(this.props.dispatch, instructions)
+
+    if (this.state.width < 800) {
+      console.log("Smaller than 800")
+
+      let instructions = {
+        viewAmt: 6,
+        startVal: this.state.startVal,
+      }
+
+      this.setState(instructions)
+
+      console.log(instructions)
+      getProducts(this.props.dispatch, instructions)
+      getProductCount(this.props.dispatch, instructions)
+
+      console.log("Width: " + this.state.width)
+      console.log("Height: " + this.state.height)
+    }
+
+
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
   changeInputs = e => { this.setState({ [e.target.name]: e.target.value }) }
@@ -40,134 +87,95 @@ class Catalog extends Component {
 
   getMoreProducts(pageNumber) {
 
-    console.log("how many products?" + this.props.productCount.count)
-    console.log("Page Number:" + pageNumber)
-  
-    //Establish records to pull
     var start = this.state.startVal
     var view = this.state.viewAmt
 
-    console.log("Start/View Amt on click" + start + ", " + view)    
-
-    if (pageNumber === 1){
-      start = 0
-
-      let instructions = {
-        viewAmt: this.state.viewAmt,
-        startVal: start + view,
-      }
-
-      this.setState(instructions)
-      this.setState({ activePage: pageNumber })
-      
-
-      getProducts(this.props.dispatch, instructions)
-      
-      console.log("Start/View AFTER PG" + start + ", " + view)    
-      
-      
-    }
-
-    if (pageNumber > this.state.activePage)
-    {
-      console.log("Page Number:" + pageNumber)
-
-      console.log("Start/View Amt on click" + start + ", " + view)    
-      
-      start = pageNumber * view
+      start = (pageNumber - 1) * (view)
 
       let instructions = {
         viewAmt: this.state.viewAmt,
         startVal: start,
       }
 
-      this.setState(instructions)
-      this.setState({ activePage: pageNumber })
-      
-      
-      getProducts(this.props.dispatch, instructions)
+      if (this.state.width > 800) {
+        console.log("Larger than 800")
 
-      console.log("Start/View AFTER PG" + start + ", " + view)    
-      
-    
-    }
-
-    if (pageNumber < this.state.activePage)
-    {
-
-      console.log("Page Number:" + pageNumber)
-      
-      console.log("Start/View Amt on click" + start + ", " + view)  
-
-      start = (start + view) - (pageNumber * view)
-
-      let instructions = {
-        viewAmt: this.state.viewAmt,
-        startVal: start,
+        instructions.viewAmt = 8
       }
 
-      this.setState(instructions)   
-      this.setState({ activePage: pageNumber })      
-      
+      else {
+        instructions.viewAmt = 6
+      }
+
+      this.setState(instructions)
+
+      console.log(instructions)
+
+      this.setState({ activePage: pageNumber })
       getProducts(this.props.dispatch, instructions)
 
-      console.log("Start/View AFTER PG" + start + ", " + view)     
-    
-    }
+      console.log("Start/View AFTER PG" + start + ", " + view)
 
   }
 
   seeProduct(product) {
     this.setState({
-        productView: true,
-        product: product
+      productView: true,
     })
 
     viewProduct(this.props.dispatch, product)
-}
+  }
 
-returnToCatalog(e){
-  this.setState({
-    productView: false,
-})}
+  returnToCatalog(e) {
+    this.setState({
+      productView: false,
+    })
+
+  }
 
   render() {
 
-    let pager = Math.ceil(this.props.productCount)
-
-    if(this.state.productView)
-    {
+    if (this.state.productView) {
       return (
         <ProductDetails
-        prod={this.props.productDetails}
-        returnToCatalog={this.returnToCatalog}/>
+          prod={this.props.productDetails}
+          returnToCatalog={this.returnToCatalog} />
       )
     }
-      else
-      {
-        return (
-      <div className="catalog-container">
-      <div className="catalog-title">
-        <div className="product-list">
-          {this.props.productList.map((b) =>
-            <Product key={b.id} prod={b} seeProduct={this.seeProduct}/>)}
-         </div>
-              <nav className="pgs-nav">
+    else {
+      return (
+        <div className="catalog-container">
+          <div className="catalog-title">
+
+            <MediaQuery query="(max-device-width: 600px)">
+              <div className="product-list-narrow">
+                {this.props.productList.map((b) =>
+                  <Product key={b.id} prod={b} seeProduct={this.seeProduct} />)}
+              </div>
+            </MediaQuery>
+
+            <MediaQuery query="(min-device-width: 600px)">
+              <div className="product-list">
+                {this.props.productList.map((b) =>
+                  <Product key={b.id} prod={b} seeProduct={this.seeProduct} />)}
+              </div>
+            </MediaQuery>
+            <nav className="pgs-nav">
               <Pagination
-              innerClass="pgs-outer"
-              itemClass="pgs-inner"
-              activeClass="pgs-active"
-              activePage={this.state.activePage}
-              itemsCountPerPage={6}
-              hideNavigation={true}
-              pageRangeDisplayed={10}
-              totalItemsCount={pager}
-              onChange={this.getMoreProducts.bind(this)}
-               />
+                innerClass="pgs-outer"
+                itemClass="pgs-inner"
+                activeClass="pgs-active"
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.state.viewAmt}
+                hideNavigation={true}
+                totalItemsCount={this.props.productCount}
+                onChange={this.getMoreProducts.bind(this)}
+              />
             </nav>
-      </div>
-      </div>
-    )}
+          </div>
+        </div>
+      )
+    }
   }// end render
 }//end component
 

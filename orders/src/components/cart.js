@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import '../App.css'
 import { updateCart } from "../dispatcher/actions"
 import { withRouter } from 'react-router-dom'
+import MediaQuery from 'react-responsive'
 
 class Cart extends Component {
 
@@ -24,19 +25,43 @@ class Cart extends Component {
         }
         else {
             var i, total = 0
-            for (i ; i < this.props.line.count; i++)
-            { total += this.props.line.productprice * this.props.line.quantity }
+            for (i; i < this.props.line.count; i++) { total += this.props.line.productprice * this.props.line.quantity }
 
             return (
+
                 <div>
-                    <div className="cart-div">
+                
+                    <MediaQuery query="(max-device-width: 600px)">
+                    <div className="cart-div-container-narrow">
                         <div className="cart-div" key={this.props.line.productname}>{this.props.line.productname}</div>
-                        <div className="cart-div" key={this.props.line.quantity}>Qty: {this.props.line.quantity}</div>
+                        <div className="cart-div-qty" key={this.props.line.quantity}>{this.props.line.quantity}</div>
                         <div className="cart-div" key={this.props.line.productprice}>${this.props.line.productprice.toFixed(2)}</div>
-                        <div className="cart-div" key={i++}>
-                            <button className="fromcart" onClick={this.removeItem.bind(this, this.props.line.productdetailsid)} title="Remove Item">x</button>
+                        <div className="cart-div" key={i++}>${(this.props.line.productprice * this.props.line.quantity).toFixed(2)}
                         </div>
+                        <div className="fromcart" key={i++} onClick={this.removeItem.bind(this, this.props.line.productdetailsid)}>Remove
+                        </div>
+
                     </div>
+                    </MediaQuery>
+
+
+                    <MediaQuery query="(min-device-width: 600px)">
+                    <div className="cart-div-container">
+                        <div className="cart-div" key={this.props.line.productname}>{this.props.line.productname}</div>
+                        <div className="cart-div-qty" key={this.props.line.quantity}>{this.props.line.quantity}</div>
+                        <div className="cart-div" key={this.props.line.productprice}>${this.props.line.productprice.toFixed(2)}</div>
+                        <div className="cart-div" key={i++}>${(this.props.line.productprice * this.props.line.quantity).toFixed(2)}
+                        </div>
+                        <div className="fromcart" key={i++} onClick={this.removeItem.bind(this, this.props.line.productdetailsid)}>Remove
+                        </div>
+
+                    </div>
+                    </MediaQuery>
+
+
+
+
+
                 </div>
             )
         }
