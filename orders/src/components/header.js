@@ -16,29 +16,43 @@ class Header extends Component {
             userid: null,
             username: '',
             shipping: 3,
-            modalIsOpen: false,
+            showModal: false,
             checkingout: false,
             confirmation: false,
             open: false,
-            showModalResponsive: false
+            showModalResponsive: false,
+            showModalLogin: false,
+            showModalLoginResponsive: false
         }
-
         this.readyToCheckout = this.readyToCheckout.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleOpenModalResponsive = this.handleOpenModalResponsive.bind(this);
+        this.handleOpenModalLogin = this.handleOpenModalLogin.bind(this);
+        this.handleOpenModalLoginResponsive = this.handleOpenModalLoginResponsive.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleCheckoutClose = this.handleCheckoutClose.bind(this);
         this.onLogin = this.onLogin.bind(this);
         this.onLogout = this.onLogout.bind(this);
-
     }
 
-    onLogin(username, password) {
+    onLogin(username) {
         this.setState({
             username: username
         })
-        this.handleCloseModal()
+
+        if (this.state.showModal && !this.state.checkingout && this.props.shoppingCart.length > 0) {
+
+        }
+        if (this.state.showModalResponsive && !this.state.checkingout && this.props.shoppingCart.length > 0) {
+        }
+
+        if (this.state.checkingout && this.props.shoppingCart.length > 0) {
+        }
+
+        else {
+            this.handleCloseModal()
+        }
     }
 
     onLogout() {
@@ -52,6 +66,14 @@ class Header extends Component {
         this.setState({ showModal: true });
     }
 
+    handleOpenModalLogin(){
+        this.setState({ showModalLogin: true });
+    }
+
+    handleOpenModalLoginResponsive(){
+        this.setState({ showModalLoginResponsive: true });
+    }
+
     handleOpenModalResponsive() {
         this.setState({ showModalResponsive: true });
     }
@@ -61,7 +83,9 @@ class Header extends Component {
             showModal: false,
             confirmation: false,
             checkingout: false,
-            showModalResponsive: false
+            showModalResponsive: false,
+            showModalLogin: false,
+            showModalLoginResponsive: false
         });
     }
 
@@ -114,7 +138,7 @@ class Header extends Component {
         }
         var newOrder =
             new OrderModel(
-                this.props.userId.id,
+                this.props.userId.customerId,
                 this.state.shipping,
                 lines,
                 0,
@@ -194,8 +218,8 @@ class Header extends Component {
                     {this.state.username !== '' ?
                         <div className="account-icon-container">
                             <MediaQuery query="(min-device-width: 600px)">
-                                <div className="logged-in-menu" onClick={this.accountToggle}>
-                                    <div className="user-menu">
+                                <div className="logged-in-menu">
+                                    <div className="user-menu" onClick={this.accountToggle}>
                                         <span className="glyphicon glyphicon-user"></span>
                                         &nbsp;Hi, {this.props.userId.username}!&nbsp;&nbsp;
                                     <div className="user-menu-sub">
@@ -221,15 +245,17 @@ class Header extends Component {
                         <div>
                             {/* LOGIN - STANDARD - NOT LOGGED IN */}
                             <MediaQuery query="(min-device-width: 600px)">
+                                <button className="cart" onClick={this.handleOpenModalLogin}>
+                                    <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;</button>
                                 <button className="cart" onClick={this.handleOpenModal}>
-                                    <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;
-                                <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button>
+                                    <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button>
 
                             </MediaQuery>
                             {/* LOGIN - RESPONSIVE - NOT LOGGED IN */}
                             <MediaQuery query="(max-device-width: 600px)">
-                                <button className="cart" onClick={this.handleOpenModalResponsive}>
-                                    <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;
+                                <button className="cart" onClick={this.handleOpenModalLoginResponsive}>
+                                    <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;</button>
+                                    <button className="cart" onClick={this.handleOpenModalResponsive}>       
                                 <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button>
 
                             </MediaQuery>
@@ -245,7 +271,7 @@ class Header extends Component {
                     className="modal-content"
                     overlayClassName="modal-overlay">
 
-                    {this.state.username !== '' ?
+                    {this.state.username !== '' || !this.state.checkingout ?
                         <div className="cart-content">
                             <div className="cart-header">Your Cart:</div>
 
@@ -319,7 +345,7 @@ class Header extends Component {
                         className="modal-content-responsive"
                         overlayClassName="modal-overlay">
 
-                        {this.state.username !== '' ?
+                        {this.state.username !== '' || !this.state.checkingout ?
                             <div className="cart-content">
                                 <div className="cart-header">Your Cart:</div>
 
@@ -386,6 +412,27 @@ class Header extends Component {
                         }
                     </ReactModal>
                 </MediaQuery>
+
+
+                <ReactModal
+                    isOpen={this.state.showModalLogin}
+                    contentLabel="Shopping Cart"
+                    className="modal-content"
+                    overlayClassName="modal-overlay">
+                    <div className="login">
+                        <Login loggedIn={this.onLogin} />
+                    </div>
+                </ReactModal>
+
+                <ReactModal
+                    isOpen={this.state.showModalLoginResponsive}
+                    contentLabel="Shopping Cart"
+                    className="modal-content-responsive"
+                    overlayClassName="modal-overlay">
+                    <div className="login">
+                        <Login loggedIn={this.onLogin} />
+                    </div>
+                </ReactModal>
 
             </header >
         )//end return

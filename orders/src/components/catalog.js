@@ -12,7 +12,6 @@ class Catalog extends Component {
     super();
     this.state = {
       //Paging
-      moreProds: true,
       startVal: 0,
       viewAmt: 6,
       activePage: 1,
@@ -154,10 +153,8 @@ class Catalog extends Component {
 
 export default connect(
   store => ({
-    userid: store.userid,
     productList: store.productList,
     productCount: store.productCount,
-    shoppingCart: store.shoppingCart,
     productDetails: store.productDetails,
   })
 )(Catalog);

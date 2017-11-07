@@ -1,6 +1,17 @@
 ﻿<Properties StartupConfiguration="{5A407D47-D871-4F7C-B664-699CE7CA44D6}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.ItemProperties.tanya__orders PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="orders_library/Models/OrderDetails.cs">
+    <Files>
+      <File FileName="orders_library/Services/OrderManager.cs" Line="59" Column="5" />
+      <File FileName="LineOrderUnitTests/LineOrderUnitTests.cs" Line="1" Column="1" />
+      <File FileName="orders_library/Models/Instructions.cs" Line="10" Column="1" />
+      <File FileName="ordersAPI/Controllers/OrdersController.cs" Line="63" Column="1" />
+      <File FileName="orders_library/Models/Address.cs" Line="16" Column="16" />
+      <File FileName="orders_library/Models/Customer.cs" Line="13" Column="9" />
+      <File FileName="orders_library/Models/LineItem.cs" Line="12" Column="1" />
+      <File FileName="orders_library/Models/OrderDetails.cs" Line="17" Column="21" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.ordersAPI PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

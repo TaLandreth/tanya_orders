@@ -29,9 +29,8 @@ export default function reducer(store = initialState, action) {
         }
 
         case "LOGIN_FINISHED": {
-            console.log('### Login Finished! Payload:' + action.payload.id)
-            var userData = { id: action.payload.id, username: action.payload.username }
-            return { ...store, userId: userData, APICallInProgress: false, APICallFailed: false }
+            console.log('### Login Finished!')
+            return { ...store, userId: action.payload, APICallInProgress: false, APICallFailed: false }
         }
 
         case "LOGIN_FAILED": {

@@ -13,16 +13,13 @@ class Login extends Component {
             error: false,
             loggingin: false
         }
-
         this.onLogin = this.onLogin.bind(this)
-
     }
 
     changeInputs = e => {
         this.setState({
             [e.target.name]: e.target.value,
         })
-
     }
 
     onLogin() {
@@ -42,19 +39,14 @@ class Login extends Component {
 
             onLogin(credentials, this.props.dispatch)
 
-            console.log(this.props.userId.id)
-            console.log(this.props.userId.username)
-
             this.setState({loggingin: true})
 
                 setTimeout(() => {
-                    if (this.props.userId.id && this.props.userId.username) {
+                    if (this.props.userId.customerId && this.props.userId.username) {
                     this.props.loggedIn()}
                   }, 800)
         }
     }
-
-
 
     render() {
 

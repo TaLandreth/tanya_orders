@@ -56,20 +56,18 @@ namespace ordersAPI.Controllers
                 Console.WriteLine("Failed to get orders...");
                 return BadRequest();
             }
-
-
         }
 
         [HttpGet("{id}")]
         public int GetOrderCount(int id)
         {
+            Console.WriteLine($"Customer ID passed: {id}");
+
             var retrieval = new OrderManager().GetOrderCount(id);
 
             if (retrieval > 0) { return retrieval; }
 
             else { return 0; }
-
-            
         }
 
     }

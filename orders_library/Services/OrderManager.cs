@@ -28,9 +28,13 @@ namespace orders_library.Services
                     userVerified.id = cust.Id;
                     userVerified.CustomerId = cust.Id;
                     userVerified.username = query.username;
-                    userVerified.password = query.password;
+                    userVerified.password = "";
 
                     Console.WriteLine("Logged in successfully!");
+
+                    Console.WriteLine($"Customer Id: {userVerified.CustomerId}");
+
+
                     return userVerified;
                 }
                 catch (Exception)
@@ -46,11 +50,11 @@ namespace orders_library.Services
         {
             using (var context = DbContextFactory.Create())
             {
-                var query = context.OrderDetails.Where(i => i.Id == id);
+                var query = context.OrderDetails.Where(i => i.CustomerDetails.Id == id);
 
                 var recordcount = query.Count();
 
-                Console.WriteLine($"Qty of orders retrieved: {recordcount}");
+                Console.WriteLine($"Order count: {recordcount}");
 
                 return recordcount;
             }

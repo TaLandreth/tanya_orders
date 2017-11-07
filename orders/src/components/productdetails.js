@@ -45,8 +45,8 @@ class ProductDetails extends Component {
         if (index >= 0) {
 
             var newCart = this.props.shoppingCart.slice()   //copy
-    
-            newCart[index].quantity += this.state.qty
+
+            newCart[index].quantity += Number(this.state.qty)
             newCart[index].subtotal = newCart[index].quantity * price
             console.log("On add click: " + newCart[index].quantity)
             //Send it off to cart store

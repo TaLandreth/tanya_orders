@@ -19,8 +19,6 @@ class Cart extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
-
-        console.log("Quantity: " + this.state.qty)
     }
 
     removeItem(lineid) {
@@ -72,7 +70,7 @@ class Cart extends Component {
                             <div className="cart-div" key={this.props.line.quantity}>
 
                                 <input type="number" min="1" max="4000" value={this.state.qty}
-                                    name="qty" placeholder={this.props.line.quantity} onChange={this.inputUpdate.bind(this)} />
+                                    name="qty" placeholder={this.props.line.quantity} onChange={this.inputUpdate.bind(this, this.props.line.productdetailsid)} />
                                  @ ${this.props.line.productprice.toFixed(2)} each</div>
                                 <div className="fromcart" key={i++} onClick={this.updateItem.bind(this, this.props.line.productdetailsid, this.props.line.productprice)}>
                                 <span className="glyphicon glyphicon-saved"></span>
