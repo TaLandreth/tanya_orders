@@ -4,10 +4,8 @@ import '../App.css'
 import { getProducts, getProductCount, viewProduct } from "../dispatcher/actions"
 import Product from './product'
 import ProductDetails from './productdetails'
-import { withRouter } from 'react-router-dom'
 import Pagination from 'react-js-pagination'
 import MediaQuery from 'react-responsive'
-
 
 class Catalog extends Component {
   constructor() {
@@ -25,7 +23,6 @@ class Catalog extends Component {
     this.getMoreProducts = this.getMoreProducts.bind(this);
     this.seeProduct = this.seeProduct.bind(this);
     this.returnToCatalog = this.returnToCatalog.bind(this);
-
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
   }
@@ -35,41 +32,24 @@ class Catalog extends Component {
     window.addEventListener('resize', this.updateWindowDimensions);
 
     if (this.state.width > 800) {
-      console.log("Larger than 800")
-
       let instructions = {
         viewAmt: 8,
         startVal: this.state.startVal,
       }
-
       this.setState(instructions)
-
-      console.log(instructions)
       getProducts(this.props.dispatch, instructions)
       getProductCount(this.props.dispatch, instructions)
-
-      console.log("Width: " + this.state.width)
-      console.log("Height: " + this.state.height)
     }
 
     if (this.state.width < 800) {
-      console.log("Smaller than 800")
-
       let instructions = {
         viewAmt: 6,
         startVal: this.state.startVal,
       }
-
       this.setState(instructions)
-
-      console.log(instructions)
       getProducts(this.props.dispatch, instructions)
       getProductCount(this.props.dispatch, instructions)
-
-      console.log("Width: " + this.state.width)
-      console.log("Height: " + this.state.height)
     }
-
 
   }
 
@@ -107,13 +87,8 @@ class Catalog extends Component {
 
       this.setState(instructions)
 
-      console.log(instructions)
-
       this.setState({ activePage: pageNumber })
       getProducts(this.props.dispatch, instructions)
-
-      console.log("Start/View AFTER PG" + start + ", " + view)
-
   }
 
   seeProduct(product) {
@@ -177,17 +152,12 @@ class Catalog extends Component {
   }// end render
 }//end component
 
-export default withRouter(connect(
+export default connect(
   store => ({
     userid: store.userid,
     productList: store.productList,
     productCount: store.productCount,
     shoppingCart: store.shoppingCart,
     productDetails: store.productDetails,
-    cartView: store.cartView
   })
-)(Catalog));
-
-//TO DO
-//-- UPDATE QUANTITY IN CART
-
+)(Catalog);

@@ -522,7 +522,7 @@ select {
     padding: 0;
     background-color: #000000;
     border-top: 1px solid #000000;
-    background-image: url('./images/brushsteel2.jpg');
+/*     background-image: url('./images/brushsteel2.jpg'); */
     box-shadow: 2px 2px 4px #000000;
     
   }
@@ -915,27 +915,26 @@ width: 100%;
    margin: 5px;
    padding: 5px;
    border-bottom: 1px solid #b6b4af;
-   
+   background-color: #f2f2f2;
+
 }
 
  .order-div-heading {
    display: flex;
    flex-direction: column;
-   justify-content: center;
-align-items: center;
-flex-grow: 1;
-max-width: 30%;
-  padding: 5px;
-  margin: 1px;
-  background-color: #f2f2f2;
+  flex-grow: 1;
+  max-width: 30%;
+  color: darkgoldenrod;  
    
 } 
 
 .order-div {
+  display: flex;
   font-size: 1em;
   text-transform: uppercase;  
   font-weight: bold;
-
+  min-height: 50%;
+  
  }
 
  .order-div-actions {
@@ -945,23 +944,37 @@ max-width: 30%;
   align-items: flex-end;
  }
 
+
+
 /*INNER ORDER GRID CELLS..............*/
-.order-div-inner, .order-div-inner-btn {
+.order-div-inner, .order-div-inner-btn, .green, .goldenrod, .red {
   display: inline-flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   min-width: 30%;
-  margin: 3px;
   font-size: 1em;
   text-transform: none;
   font-weight: bold;
+
 }
+
+.green {
+  color: #33cc33;
+   }
+  
+   .goldenrod {
+  color: goldenrod;
+   }
+  
+   .red {
+     color: #bf4040;
+   }
 
 .cancel-order-btn {
   width: 100px;
   height: 30px;
-  background-color: #f2f2f2;
+  background-color: #fff;
   color: #666666;
-  border: 1px solid #666666;
+  border: 1px solid #b6b4af;
 }
 
