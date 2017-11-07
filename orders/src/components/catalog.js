@@ -98,8 +98,6 @@ class Catalog extends Component {
       }
 
       if (this.state.width > 800) {
-        console.log("Larger than 800")
-
         instructions.viewAmt = 8
       }
 
@@ -146,7 +144,7 @@ class Catalog extends Component {
       return (
         <div className="catalog-container">
           <div className="catalog-title">
-
+          <h3>Product Catalog</h3>
             <MediaQuery query="(max-device-width: 600px)">
               <div className="product-list-narrow">
                 {this.props.productList.map((b) =>

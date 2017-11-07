@@ -37,44 +37,40 @@ class ProductDetails extends Component {
     addToCart(productid, productname, price) {
 
         let qty = Number(this.state.qty)
+        let index = this.props.shoppingCart.findIndex(i => i.productdetailsid === productid) 
+        let subtotal = price * qty  
 
-        let idx = this.props.shoppingCart.findIndex(i => i.productdetailsid === productid)
+        console.log("Index of item: " + index)
 
-        console.log("Index of product: " + idx)        
+        if (index >= 0) {
 
-        //LOCATE SAME ITEM IN SHOPPING CART, AND CHANGE QTY
-        if (idx >= 0) {
+            var newCart = this.props.shoppingCart.slice()   //copy
+    
+            newCart[index].quantity += this.state.qty
+            newCart[index].subtotal = newCart[index].quantity * price
+            console.log("On add click: " + newCart[index].quantity)
+            //Send it off to cart store
+    
+            updateCart(this.props.dispatch, newCart)
 
-            let instructions = {
-                index: idx,
-                qty: qty
-            }
-
-            //call update cart action
-            //find item in array
-            //update quantity
-            //send back to store
-
-            updateCart(this.props.dispatch, instructions)
-
+            this.handleOpenModal()
+            
+                        setTimeout(() => {
+                            this.handleCloseModal()
+                        }, 1500)
         }
 
         else {
-
-
             if (this.state.qty < 1) {
                 qty = 1
-
-                let newItem = { id: null, productdetailsid: productid, productname: productname, productprice: price, quantity: qty }
+                let newItem = { id: null, productdetailsid: productid, productname: productname, productprice: price, quantity: qty, subtotal: subtotal }
                 //console.log(newItem)
                 addToCart(this.props.dispatch, newItem)
             }
 
             else {
-
                 qty = this.state.qty
-
-                let newItem = { id: null, productdetailsid: productid, productname: productname, productprice: price, quantity: qty }
+                let newItem = { id: null, productdetailsid: productid, productname: productname, productprice: price, quantity: qty, subtotal: subtotal }
                 //console.log(newItem)
                 addToCart(this.props.dispatch, newItem)
             }
@@ -83,25 +79,21 @@ class ProductDetails extends Component {
 
             setTimeout(() => {
                 this.handleCloseModal()
-            }, 2000)
+            }, 1500)
         }
     }
 
     render() {
 
-        console.log(this.state.qty)
-
         return (
             <div>
-
                 <MediaQuery query="(min-device-width: 600px)">
-
                     <div className="product-details-rows">
                         <div className="prod-img-view"><img src={this.props.prod.image} alt="Product" /></div>
                         <div className="prod-display-individual" key={this.props.prod.id}>
 
                             <div className="return-to-catalog" onClick={this.props.returnToCatalog}>
-                                <span className="glyphicon glyphicon-hand-left"></span>&nbsp;Return to Catalog</div>
+                                <span className="glyphicon glyphicon-hand-left"></span>&nbsp;RETURN TO CATALOG</div>
 
                             <div className="prod-div-inner"><h2>{this.props.prod.name}</h2></div>
                             <div className="prod-price-gold">{"$" + this.props.prod.price.toFixed(2)}</div>
@@ -111,7 +103,8 @@ class ProductDetails extends Component {
                             <MediaQuery query="(max-device-width: 600px)">
                                 <div className="choice-holders-NARROW">
                                     <div className="prod-div"><h6>Quantity:</h6>
-                                        <input type="number" min="1" max="4000" value={this.state.qty} name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
+                                        <input type="number" min="1" max="4000" value={this.state.qty} 
+                                        name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
 
                                     <div className="prod-div">
                                         <button className="add-to-cart" onClick={this.addToCart.bind(this, this.props.prod.id, this.props.prod.name, this.props.prod.price)}>
@@ -122,7 +115,8 @@ class ProductDetails extends Component {
                             <MediaQuery query="(min-device-width: 600px)">
                                 <div className="choice-holders">
                                     <div className="prod-div"><h6>Quantity:</h6>
-                                        <input type="number" min="1" max="4000" value={this.state.qty} name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
+                                        <input type="number" min="1" max="4000" value={this.state.qty} 
+                                        name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
 
                                     <div className="prod-div">
                                         <button className="add-to-cart" onClick={this.addToCart.bind(this, this.props.prod.id, this.props.prod.name, this.props.prod.price)}>
@@ -142,17 +136,17 @@ class ProductDetails extends Component {
                         <div className="prod-img-view-narrow"><img src={this.props.prod.image} alt="Product" /></div>
                         <div className="prod-display-individual-narrow" key={this.props.prod.id}>
 
-                            <div className="return-to-catalog" onClick={this.props.returnToCatalog}>
-                                <span className="glyphicon glyphicon-hand-left"></span>&nbsp;Return to Catalog</div>
+                            <div className="return-to-catalog-narrow" onClick={this.props.returnToCatalog}>
+                                <span className="glyphicon glyphicon-hand-left"></span>&nbsp;RETURN TO CATALOG</div>
 
-                            <div className="prod-div-inner"><h2>{this.props.prod.name}</h2></div>
-                            <div className="prod-price-gold">{"$" + this.props.prod.price.toFixed(2)}</div>
+                            <div className="prod-div-inner"><h4>{this.props.prod.name}</h4>
+                            <div className="prod-price-gold-narrow">{"$" + this.props.prod.price.toFixed(2)}</div></div>
 
                             <div className="prod-div-inner-text"><h6>{this.props.prod.description}</h6></div>
 
                             <MediaQuery query="(max-device-width: 600px)">
                                 <div className="choice-holders-NARROW">
-                                    <div className="prod-div"><h6>Quantity:</h6>
+                                    <div className="prod-div">
                                         <input type="number" min="1" max="4000" value={this.state.qty} name="qty" placeholder="1" onChange={this.inputUpdate.bind(this)} /></div>
 
                                     <div className="prod-div">

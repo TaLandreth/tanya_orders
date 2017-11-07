@@ -117,15 +117,12 @@ export function addToCart(dispatch, newItem) {
 }
 
 //Update cart
-export function updateCart(dispatch, instructions) {
-    console.log("In dispatcher: " + instructions.index)
-    console.log("In dispatcher: " + instructions.qty)
-    
+export function updateCart(dispatch, newCart) {    
     dispatch({
         type: "UPDATE_CART_STARTED"
     })
 
-    dispatch({ type: "UPDATE_CART_FINISHED", payload: instructions })
+    dispatch({ type: "UPDATE_CART_FINISHED", payload: newCart })
 }
 
 //CLEAR cart

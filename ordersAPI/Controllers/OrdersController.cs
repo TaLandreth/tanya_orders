@@ -61,7 +61,7 @@ namespace ordersAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public int GetCount(int id)
+        public int GetOrderCount(int id)
         {
             var retrieval = new OrderManager().GetOrderCount(id);
 
@@ -161,7 +161,10 @@ namespace ordersAPI.Controllers
         {
             var retrieval = new ProductManager().GetProductCount();
 
-            return retrieval;
+
+            if (retrieval > 0) { return retrieval; }
+
+            else { return 0; }
 
         }
     }
