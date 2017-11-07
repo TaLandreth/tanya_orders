@@ -1,0 +1,92 @@
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ORDER HISTORY & DETAILS ------------------------------------- */
+
+.order-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center;
+  width: 100%;
+   }
+   /*div right before MAP to orderdetails component*/
+   .order-list-narrow { 
+    margin-bottom: 10rem;
+    width: 325px;
+   } 
+  
+   .order-list { 
+    margin-bottom: 10rem;
+    width: 700px;
+   } 
+  
+  
+  /*inside the order container: ORDER GRID CELLS (ORDER DETAILS)....................*/
+  
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+     margin: 5px;
+     padding: 5px;
+     border-bottom: 1px solid #b6b4af;
+     background-color: #f2f2f2;
+  
+  }
+  
+   .order-div-heading {
+     display: flex;
+     flex-direction: column;
+    flex-grow: 1;
+    max-width: 30%;
+    color: darkgoldenrod;  
+     
+  } 
+  
+  .order-div {
+    display: flex;
+    font-size: 1em;
+    text-transform: uppercase;  
+    font-weight: bold;
+    min-height: 50%;
+    
+   }
+  
+   .order-div-actions {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+    align-items: flex-end;
+   }
+  
+  
+  
+  /*INNER ORDER GRID CELLS..............*/
+  .order-div-inner, .order-div-inner-btn, .green, .goldenrod, .red {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 30%;
+    font-size: 1em;
+    text-transform: none;
+    font-weight: bold;
+  }
+  
+  .green {
+    color: #33cc33;
+     }
+    
+     .goldenrod {
+    color: goldenrod;
+     }
+    
+     .red {
+       color: #bf4040;
+     }
+  
+  .cancel-order-btn {
+    width: 100px;
+    height: 30px;
+    background-color: #fff;
+    color: #666666;
+    border: 1px solid #b6b4af;
+  }
+  
+  

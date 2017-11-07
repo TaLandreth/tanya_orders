@@ -1,0 +1,60 @@
+/* HEADER ---- CART POP UP FEATURES, INSIDE HEADER, CHECKOUT  ~~~~~~~~~~~~~~~~~~~~ */
+.modal-overlay {
+    position          : fixed;
+    top                        : 0;
+    left                       : 0;
+    right                      : 0;
+    bottom                     : 0;
+    background-color   : rgba(255, 255, 255, 0.75);
+  }
+
+  .modal-content {
+    width                      : 45%;
+    height                     : 80%;
+    position                   : fixed;
+    top                        : 10%;
+    left                       : 25%;
+    right                      : auto;
+    bottom                     : auto;
+    border                     : 1px solid #ccc;
+    background                 : #fff;
+    overflow-y                   : auto;
+    border-radius               : 1px;
+    outline                    : none;
+    padding                    : .5%;
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  .modal-content-responsive {
+    width                      : 100%;
+    position                   : fixed;
+    top                        : 0;
+    left                       : 0;
+    right                      : 0;
+    bottom                     : 0;
+    border                     : 0;
+    background                 : #fff;
+    overflow-y                   : auto;
+    outline                    : none;
+    padding                    : 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+    
+  }
+
+.modal-content-addtocart {
+  width                      : 40%;
+  position                   : fixed;
+  top                        : 30%;
+  left                       : 30%;
+  right                      : 30%;
+  bottom                     : auto;
+  border                     : 1px solid #ccc;
+  background                 : #fff;
+  overflow                   : auto;
+  border-radius               : 1px;
+  outline                    : none;
+  padding                    : .5%;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+  color: darkgoldenrod;
+}
