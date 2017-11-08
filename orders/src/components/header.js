@@ -6,7 +6,7 @@ import Cart from './cart'
 import LineItem from '../models/lineitem'
 import OrderModel from '../models/ordermodel'
 import Login from './login'
-import { completeOrder, clearCart } from "../dispatcher/actions"
+import { completeOrder, clearCart, menuChoice } from "../dispatcher/actions"
 import MediaQuery from 'react-responsive'
 
 class Header extends Component {
@@ -16,13 +16,14 @@ class Header extends Component {
             userid: null,
             username: '',
             shipping: 3,
-            showModal: false,
             checkingout: false,
             confirmation: false,
-            open: false,
+            showModal: false,
             showModalResponsive: false,
             showModalLogin: false,
-            showModalLoginResponsive: false
+            showModalLoginResponsive: false,
+
+
         }
         this.readyToCheckout = this.readyToCheckout.bind(this)
         this.placeOrder = this.placeOrder.bind(this)
@@ -34,6 +35,10 @@ class Header extends Component {
         this.handleCheckoutClose = this.handleCheckoutClose.bind(this);
         this.onLogin = this.onLogin.bind(this);
         this.onLogout = this.onLogout.bind(this);
+
+        this.goToCatalog = this.goToCatalog.bind(this)
+        this.goToOrders = this.goToOrders.bind(this)
+        
     }
 
     onLogin(username) {
@@ -153,7 +158,27 @@ class Header extends Component {
 
     }
 
+    goToCatalog(){
+        let instructions = {
+            catalogView: true,
+            productView: false,
+            ordersView: false
+        }
+        menuChoice(this.props.dispatch, instructions)
+    }
+
+    goToOrders()
+    {
+        let instructions = {
+            catalogView: false,
+            productView: false,
+            ordersView: true
+        }
+        menuChoice(this.props.dispatch, instructions)
+    } 
+
     render() {
+
         var total = 0
         for (var i = 0; i < this.props.shoppingCart.length; i++) {
             total += (this.props.shoppingCart[i].productprice * this.props.shoppingCart[i].quantity)
@@ -172,9 +197,9 @@ class Header extends Component {
                                     MENU
                                     <div className="navs-narrow">
                                         <ul className="navs">
-                                            <li onClick={this.props.displayCatalog}>CATALOG</li>
-                                            <li onClick={this.props.displayOrders}>ORDERS</li>
-                                            <li onClick={this.onLogout.bind(this)}>LOGOUT</li>
+                                        <li onClick={this.goToCatalog}>PRODUCT CATALOG</li>
+                                        <li onClick={this.goToOrders}>ORDERS</li>
+                                        <li onClick={this.onLogout.bind(this)}>LOGOUT</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -182,8 +207,8 @@ class Header extends Component {
                             {/* MENU - STANDARD - LOGGED IN */}
                             <MediaQuery query="(min-device-width: 600px)">
                                 <ul className="navs">
-                                    <li onClick={this.props.displayCatalog}>PRODUCT CATALOG</li>
-                                    <li onClick={this.props.displayOrders}>ORDERS</li>
+                                    <li onClick={this.goToCatalog}>PRODUCT CATALOG</li>
+                                    <li onClick={this.goToOrders}>ORDERS</li>
                                 </ul>
                             </MediaQuery>
                         </nav>
@@ -195,7 +220,7 @@ class Header extends Component {
                                     MENU
                                     <div className="navs-narrow">
                                         <ul className="navs">
-                                            <li onClick={this.props.displayCatalog}>CATALOG</li>
+                                        <li onClick={this.goToCatalog}>CATALOG</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -205,7 +230,7 @@ class Header extends Component {
                                 <div className="nav-wide-container">
                                     <div className="navs-wide">
                                         <ul className="navs">
-                                            <li onClick={this.props.displayCatalog}>PRODUCT CATALOG</li>
+                                        <li onClick={this.goToCatalog}>PRODUCT CATALOG</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -453,5 +478,10 @@ export default connect(
     store => ({
         shoppingCart: store.shoppingCart,
         userId: store.userId,
+
+        catalogView: store.catalogView,
+        productView: store.productView,
+        ordersView: store.ordersView
+
     })
 )(Header);

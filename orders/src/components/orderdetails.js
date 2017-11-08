@@ -1,78 +1,50 @@
 import React, { Component } from 'react'
 import '../App.css'
 import MediaQuery from 'react-responsive'
+import { connect } from "react-redux"
 
-
-export default class OrderDetails extends Component {
+class OrderDetails extends Component {
     render() {
+
+        let index = this.props.orderList.findIndex(i => i.orderId === this.props.ord.orderId)
+        let bg = ''
+
+        if(index % 2 !== 0){
+            bg = "order-list-tr"
+        }
+        else {bg = "order-list-tr-gray"}
 
         var stat, disabled, color
         if (this.props.ord.orderStat === 0) {
             stat = "Processing"
-            color = "goldenrod"
+            color = "order-cell-goldenrod"
             disabled = false
         }
         if (this.props.ord.orderStat === 1) {
             stat = "Completed"
-            color = "green"
+            color = "order-cell-green"
             disabled = true
         }
         if (this.props.ord.orderStat === 2) {
             stat = "Canceled"
-            color = "red"
+            color = "order-cell-red"
             disabled = true
         }
-
         return (
-            <div className="order-bundle">
-                <div className="order-item">
-                    <div className="order-div-heading">
-                        <div className="order-div" key={this.props.ord.orderId}><h4>Order #{this.props.ord.orderId}</h4></div>
-                        <div className="order-div" key={this.props.ord.date}>Date: {this.props.ord.date}</div>
-
-                            {/* STANDARD */}
-                        <MediaQuery query="(min-device-width: 600px)">
-
-                        <div className="order-div-inner-side">
-                            <div className="order-div">
-                                <div className={color} key={this.props.ord.orderStat}>Status: {stat}</div>
-                            </div>
-                            <div className="order-div">
-                                {disabled ? "" :
-                                    <button className="cancel-order-btn" title="Cancel Order"
-                                        onClick={this.props.cancelOrder.bind(this, this.props.ord.orderId)}>Cancel Order</button>}
-                            </div>
-                                <div className="order-item">
-                                    <div key={this.props.ord.orderId}>Total: ${this.props.ord.total.toFixed(2)}</div>
-                            </div>
-
-                            </div>
-                        </MediaQuery>
-
-                        {/* RESPONSIVE */}
-                        <MediaQuery query="(max-device-width: 600px)">
-
-                            <div className="order-div-heading-narrow">
-                                <div className={color} key={this.props.ord.orderStat}>Status: {stat}</div>
-
-                                {disabled ? "" :
-                                    <button className="cancel-order-btn" title="Cancel Order"
-                                        onClick={this.props.cancelOrder.bind(this, this.props.ord.orderId)}>Cancel Order</button>}
-                            </div>
-                            <div className="order-item">
-                                <div className="order-div-inner">
-                                    <div key={this.props.ord.orderId}>Total: ${this.props.ord.total.toFixed(2)}</div>
-                                </div>
-
-
-                            </div>
-
-
-                        </MediaQuery>
-
-                    </div>
-                </div>
-            </div>
+            <tr className={bg}>
+                <td className="order-cell"><h5>Order #:<br/>{this.props.ord.orderId}</h5></td>
+                <td className="order-cell">Date:<br/>{this.props.ord.date}</td>
+                <td className={color}>Status:<br/>{stat}</td>
+                <td className="order-cell">Total:<br/>${this.props.ord.total.toFixed(2)}</td>
+                <td className="order-cell">{disabled ? <div></div>:<button className="cancel-order-btn" title="Cancel Order"
+                        onClick={this.props.cancelOrder.bind(this, this.props.ord.orderId)}>Cancel Order</button>}</td>
+            </tr>
         )
     }// end render
 }//end component
+export default connect(
+    store => ({
+      orderList: store.orderList,
+      orderCount: store.orderCount
+    })
+  )(OrderDetails);

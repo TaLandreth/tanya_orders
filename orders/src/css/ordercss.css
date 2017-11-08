@@ -6,114 +6,65 @@
   justify-content: center;  
   align-items: center;
   width: 100%;
+  }
+
+  /*tr right before MAP to orderdetails component*/
+
+  .order-list, .order-list-narrow tr, td { 
+    font-size: 1.2em;
+  min-width: 95%;
+  } 
+
+  .order-list-narrow tr, td {
+    font-size: .95em;
+  }
+
+  .order-list-tr {
+    width: 100%;
+    background-color: #fff;
 
   }
 
-  /*div right before MAP to orderdetails component*/
-  /*responsive*/
-  .order-list-narrow { 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 325px;
-  } 
-  /*standard*/
-  .order-list { 
-  width: 600px;  
-  font-size: 1em;
+  .order-list-tr-gray {
+    width: 100%;
+    background-color: #f2f2f2;
+
+  }
+
+  .order-list-tr td, .order-list-tr-gray td {
+    padding: 2px;
+  }
+
+  .order-cell, .order-cell-red, .order-cell-green, .order-cell-goldenrod {
+    min-width: 25%;
+    text-align: left;
+  }
   
-  } 
-
-
-  /*inside the orderdetails component: ORDER GRID CELLS....................*/
-
-  .order-bundle {
-    border: 1px solid #b6b4af;
+    /*For status*/
+    .order-cell-green {
+    color: #33cc33;
+   }
+  
+    .order-cell-goldenrod {
+    color: goldenrod;
     
-  margin-bottom: 10px;
-  }
-
-  /*Outer Div*/
-  .order-item {
-  display: flex;
-  justify-content: space-between;
-  color: #000000;
-  }
-
-  /*Heading for order # & date*/
-  .order-div-heading {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-grow: 1;
-  max-width: 100%;
+    }
   
-
-  } 
-
-  .order-div-heading-narrow {
-  display: flex;
-  flex-direction: column;
-
-  }
-
-  /*Inside the heading*/
-  .order-div {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-weight: bold;
-  min-height: 100%;
-  min-width: 33%;
-  font-size: .9em;
-  }
-
-  .order-div-inner-side {
-  }
+    .order-cell-red {
+    color: #bf4040;
+    }
 
   .order-title h3, h5 {
   text-align: center;
   }
 
-  /*after header, inner divs w/ actual data*/
-  .order-div-inner, .order-div-inner-btn{
-  font-size: 1.2em;
-  text-transform: none;
-  font-weight: bold;
-  min-width: 100%;
-
-  }
-
-  .green, .goldenrod, .red {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 1.2em;
-  max-width: 100%;
-
-  }
-
-  /*For status*/
-  .green {
-  color: #33cc33;
-  }
-
-  .goldenrod {
-  color: goldenrod;
-  }
-
-  .red {
-  color: #bf4040;
-  }
-
   /*The cancel button*/
   .cancel-order-btn {
-  width: 100px;
-  height: 30px;
   background-color: #fff;
   color: #666666;
   border: 1px solid #b6b4af;
-  border-radius: 3px;
+  border-radius: 2px;
+  width: 50px;
+  font-size: .8em;
   }
 

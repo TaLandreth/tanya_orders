@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import '../App.css'
-import { getProducts, getProductCount, viewProduct } from "../dispatcher/actions"
+import { getProducts, getProductCount, viewProduct, menuChoice } from "../dispatcher/actions"
 import Product from './product'
 import ProductDetails from './productdetails'
 import Pagination from 'react-js-pagination'
@@ -21,7 +21,9 @@ class Catalog extends Component {
     };
     this.getMoreProducts = this.getMoreProducts.bind(this);
     this.seeProduct = this.seeProduct.bind(this);
+
     this.returnToCatalog = this.returnToCatalog.bind(this);
+
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
   }
@@ -69,49 +71,56 @@ class Catalog extends Component {
     var start = this.state.startVal
     var view = this.state.viewAmt
 
-      start = (pageNumber - 1) * (view)
+    start = (pageNumber - 1) * (view)
 
-      let instructions = {
-        viewAmt: this.state.viewAmt,
-        startVal: start,
-      }
+    let instructions = {
+      viewAmt: this.state.viewAmt,
+      startVal: start,
+    }
 
-      if (this.state.width > 800) {
-        instructions.viewAmt = 10
-      }
+    if (this.state.width > 800) {
+      instructions.viewAmt = 10
+    }
 
-      else {
-        instructions.viewAmt = 6
-      }
+    else {
+      instructions.viewAmt = 6
+    }
 
-      this.setState(instructions)
+    this.setState(instructions)
 
-      this.setState({ activePage: pageNumber })
-      getProducts(this.props.dispatch, instructions)
+    this.setState({ activePage: pageNumber })
+    getProducts(this.props.dispatch, instructions)
 
-      //On page change, scroll to top
-      document.body.scrollTop = 0; // For Chrome, Safari and Opera 
-      document.documentElement.scrollTop = 0; // For IE and Firefox
+    //On page change, scroll to top
+    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+    document.documentElement.scrollTop = 0; // For IE and Firefox
   }
 
   seeProduct(product) {
-    this.setState({
-      productView: true,
-    })
 
-    viewProduct(this.props.dispatch, product)
+    let instructions = {
+      catalogView: false,
+      productView: true,
+      ordersView: false,
+      product: product
+    }
+
+    viewProduct(this.props.dispatch, instructions)
   }
 
   returnToCatalog(e) {
-    this.setState({
+    let instructions = {
+      catalogView: true,
       productView: false,
-    })
+      ordersView: false
+    }
+    menuChoice(this.props.dispatch, instructions)
 
   }
 
   render() {
 
-    if (this.state.productView) {
+    if (this.props.productView) {
       return (
         <ProductDetails
           prod={this.props.productDetails}
@@ -122,7 +131,7 @@ class Catalog extends Component {
       return (
         <div className="catalog-container">
           <div className="catalog-title">
-          <h3>Product Catalog</h3>
+            <h3>Product Catalog</h3>
             <MediaQuery query="(max-device-width: 600px)">
               <div className="product-list-narrow">
                 {this.props.productList.map((b) =>
@@ -160,5 +169,6 @@ export default connect(
     productList: store.productList,
     productCount: store.productCount,
     productDetails: store.productDetails,
+    productView: store.productView
   })
 )(Catalog);

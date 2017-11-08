@@ -45,73 +45,66 @@ class OrderHistory extends Component {
 
 
   getMoreOrders(pageNumber) {
-    
-        var start = this.state.startVal
-        var view = this.state.viewAmt
-        var customer = this.props.userId.customerId
-    
-          start = (pageNumber - 1) * (view)
-    
-          let instructions = {
-            viewAmt: this.state.viewAmt,
-            startVal: start,
-            userId: customer
-          }
-    
-          this.setState(instructions)
-    
-          this.setState({ activePage: pageNumber })
 
-          getOrders(this.props.dispatch, instructions)
-      }
+    var start = this.state.startVal
+    var view = this.state.viewAmt
+    var customer = this.props.userId.customerId
+
+    start = (pageNumber - 1) * (view)
+
+    let instructions = {
+      viewAmt: this.state.viewAmt,
+      startVal: start,
+      userId: customer
+    }
+
+    this.setState(instructions)
+
+    this.setState({ activePage: pageNumber })
+
+    getOrders(this.props.dispatch, instructions)
+  }
 
   render() {
+    
+
+
     return (
       <div className="order-container">
         <div className="order-title"><h3>Order History</h3>
-        <h5>Customer #{this.props.userId.customerId}</h5></div>
-
-        {/* RESPONSIVE */}
-        <MediaQuery query="(max-device-width: 600px)">
-          <div className="order-list-narrow">
-            {this.props.orderList.map((b) =>
-              <OrderDetails key={b.id} ord={b}
-                cancelOrder={this.cancelOrder.bind(this)} />)}
-          </div>
-
-        </MediaQuery>
+          <h5>Customer #{this.props.userId.customerId}</h5></div>
 
         {/* STANDARD */}
         <MediaQuery query="(min-device-width: 600px)">
-          <div className="order-list">
-            
+          <table className="order-list">
             {this.props.orderList.map((b) =>
               <OrderDetails key={b.id} ord={b}
                 cancelOrder={this.cancelOrder.bind(this)} />)}
-          </div>
+          </table>
         </MediaQuery>
+
+        {/* RESPONSIVE */}
+        <MediaQuery query="(max-device-width: 600px)">
+          <table className="order-list-narrow">
+            {this.props.orderList.map((b) =>
+              <OrderDetails key={b.id} ord={b}
+                cancelOrder={this.cancelOrder.bind(this)} />)}
+          </table>
+        </MediaQuery>
+
         <Pagination
-                innerClass="pgs-outer"
-                itemClass="pgs-inner"
-                activeClass="pgs-active"
-                activePage={this.state.page}
-                itemsCountPerPage={this.state.viewAmt}
-                pageRangeDisplayed={this.state.viewAmt}
-                hideNavigation={true}
-                totalItemsCount={this.props.orderCount}
-                onChange={this.getMoreOrders.bind(this)}
-              />
+          innerClass="pgs-outer"
+          itemClass="pgs-inner"
+          activeClass="pgs-active"
+          activePage={this.state.page}
+          itemsCountPerPage={this.state.viewAmt}
+          pageRangeDisplayed={this.state.viewAmt}
+          hideNavigation={true}
+          totalItemsCount={this.props.orderCount}
+          onChange={this.getMoreOrders.bind(this)}
+        />
 
       </div>
-
-
-
-
-
-
-
-
-
 
     )
   }// end render

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux"
 import Header from './components/header';
 import Divider from './components/divider';
 import Footer from './components/footer';
@@ -7,7 +8,7 @@ import OrderHistory from './components/orderhistory'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
 
-export default class App extends Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -37,27 +38,20 @@ export default class App extends Component {
 
   render() {
 
-    if (this.state.catalog) {
+    if (this.props.catalogView) {
       return (
         <div className="App">
-          <Header
-            displayCatalog={this.displayCatalog.bind(this)}
-            displayOrders={this.displayOrders.bind(this)}
-          />
+          <Header />
           <Divider />
-          <Catalog 
-          view={this.state.catalog} />
+          <Catalog />
           <Footer />
         </div>
       )
     }
-    if (this.state.orders) {
+    if (this.props.ordersView) {
       return (
         <div className="App">
-          <Header
-            displayCatalog={this.displayCatalog.bind(this)}
-            displayOrders={this.displayOrders.bind(this)}
-          />
+          <Header />
           <Divider />
           <OrderHistory />
           <Footer />
@@ -67,15 +61,19 @@ export default class App extends Component {
         else {
           return (
             <div className="App">
-              <Header
-                displayCatalog={this.displayCatalog.bind(this)}
-                displayOrders={this.displayOrders.bind(this)}
-              />
+              <Header />
               <Divider />
-              <Catalog view={this.state.catalog}/>
+              <Catalog />
               <Footer />
             </div>
           )
         }
   }
 }
+
+export default connect(
+  store => ({
+      catalogView: store.catalogView,
+      ordersView: store.ordersView
+  })
+)(App);

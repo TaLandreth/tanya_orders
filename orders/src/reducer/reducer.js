@@ -11,8 +11,11 @@ let initialState = {
     APICallInProgress: false,
     APICallFailed: null,
     cartView: false,
-    loginError: false
+    loginError: false,
 
+    catalogView: true,
+    ordersView: false,
+    productView: false
 }
 export default function reducer(store = initialState, action) {
 
@@ -110,7 +113,12 @@ export default function reducer(store = initialState, action) {
         }
         case "VIEW_PRODUCT_FINISHED": {
             console.log("### View product finished.....")
-            return { ...store, productDetails: action.payload, APICallInProgress: false }
+            return { ...store, 
+                productDetails: action.payload.product,
+                catalogView: action.payload.catalogView, 
+                productView: action.payload.productView, 
+                ordersView: action.payload.ordersView,
+                APICallInProgress: false }
         }
 
         //GET PRODUCT COUNT -----------------------------------------------------------
@@ -131,6 +139,22 @@ export default function reducer(store = initialState, action) {
         case "GET_ORDER_COUNT_FINISHED": {
             console.log('### Counting finished!')
             return { ...store, orderCount: action.payload, APICallInProgress: false }
+        }
+
+        //GO TO CATALOG_____________________________________________________________:
+        case "VIEW_CATALOG_STARTED": {
+            console.log("### Catalog view.......")
+            return { ...store, APICallInProgress: true, APICallFailed: null }
+        }
+        case "VIEW_CATALOG_FINISHED": {
+            console.log('### In Catalog View!')
+
+            console.log(action.payload)
+
+            return { ...store, 
+                catalogView: action.payload.catalogView, 
+                productView: action.payload.productView, 
+                ordersView: action.payload.ordersView, APICallInProgress: false }
         }
 
         default: {

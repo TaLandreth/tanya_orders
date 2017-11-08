@@ -31,12 +31,17 @@ export function getProducts(dispatch, instructions) {
 }
 
 //VIEW A PRODUCT
-export function viewProduct(dispatch, product) {
+export function viewProduct(dispatch, instructions) {
     dispatch({
         type: "VIEW_PRODUCT_STARTED"
     })
-    dispatch({ type: "VIEW_PRODUCT_FINISHED", payload: product })
+
+console.log(instructions.product)
+
+    dispatch({ type: "VIEW_PRODUCT_FINISHED", payload: instructions })
 }
+
+
 
 //RETRIEVE ORDERS - 
 export function getOrders(dispatch, instructions) {
@@ -139,4 +144,15 @@ export function getOrderCount(dispatch, id) {
         .catch((err) => {
             dispatch({ type: "CALL_FAILED", payload: err })
         })
+}
+
+//CLEAR cart
+export function menuChoice(dispatch, instructions) {
+    dispatch({
+        type: "VIEW_CATALOG_STARTED"
+    })
+
+    console.log(instructions)
+
+    dispatch({ type: "VIEW_CATALOG_FINISHED", payload: instructions })
 }
