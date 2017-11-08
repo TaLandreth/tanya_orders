@@ -1,0 +1,166 @@
+/*CATALOG DISPLAY -- IN CATALOG & PRODUCT COMPONENT ------------------------ */
+.catalog-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;  
+    align-items: flex-start;
+
+    
+  }
+  
+  .catalog-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    
+  }
+  
+  .catalog-title h3 {
+  text-align: center;
+  }
+  
+  /* staggered display */
+  .product-list, .product-list-narrow {
+      column-width: 320px;
+      column-gap: 15px;
+    width: 90%;
+      max-width: 1100px;
+  }
+  
+  div .product-list figure {
+      border: 2px solid #fcfcfc;
+      box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+      margin: 0 2px 15px;
+      padding: 15px;
+      padding-bottom: 10px;
+      transition: opacity .4s ease-in-out;
+    display: inline-block;
+    background-color: #fff;
+    
+
+  }
+
+  div .product-list-narrow figure {
+      /*       background: #fefefe;
+ */      border: 2px solid #fcfcfc;
+ box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+ margin: 0 2px 15px;
+ padding: 15px;
+ padding-bottom: 10px;
+ transition: opacity .4s ease-in-out;
+display: inline-block;
+background-color: #fff;
+
+  }
+  
+  div .product-list figure img {
+      width: 100%; 
+      height: auto;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 15px;
+      margin-bottom: 5px;
+      background-color: #fff;
+  }
+
+  div .product-list-narrow figure img{
+    width: 100%; 
+    height: auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+  
+  div .product-list img:hover {
+      opacity: 0.4;
+    }
+
+  div .product-list-narrow img:hover {
+    opacity: 0.4;
+    
+  }
+
+  
+  /* PRODUCT COMPONENT ..................--------------------------------------------------- */
+  
+  .prod-display-alt1 {
+    display: flex;
+    flex-direction: column;  
+    flex-wrap: wrap;  
+    justify-content: flex-start;
+    margin: 1rem;
+    background-color: white;
+    min-height: 20rem;
+  
+    box-shadow: 1px 1px 2px #b6b4af;
+  } 
+  
+  .prod-img {
+   background-color: white;
+   border-radius: 1px;
+  
+  }
+  
+  .prod-img img {
+    display: block;
+    max-width:25rem;
+    width: auto;
+    height: auto;
+  }
+  
+  .prod-img img:hover {
+    opacity: 0.7;
+  }
+  
+  
+  /*PRODUCT GRID CELLS....................*/
+  .prod-div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;  
+    align-items: flex-start;
+    padding: .2rem;
+    font-size: 10pt;
+    
+  }
+  /*INNER PRODUCT GRID CELLS (ON CATALOG PAGE)..............*/
+  .prod-div-inner {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;  
+    align-items: flex-start;
+    padding: .2rem;
+    font-size: 10pt;
+    text-transform: uppercase;
+    max-width: 25rem;
+    margin-top: 5px;
+    
+  }
+  
+  .prod-div-inner-duo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;  
+    background-color: #f2f2f2;
+    margin-top: 5px;
+  }
+
+  .prod-pad {
+      margin-left: 4px;
+      margin-right: 4px;
+  }
+  
+  .prod-div-shortdesc {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;  
+    width: 100%;
+    padding: .2rem;
+    font-size: 8pt;
+    text-transform: none;
+    color: #8c8c8c;
+  }
+  

@@ -66,11 +66,11 @@ class Header extends Component {
         this.setState({ showModal: true });
     }
 
-    handleOpenModalLogin(){
+    handleOpenModalLogin() {
         this.setState({ showModalLogin: true });
     }
 
-    handleOpenModalLoginResponsive(){
+    handleOpenModalLoginResponsive() {
         this.setState({ showModalLoginResponsive: true });
     }
 
@@ -111,7 +111,8 @@ class Header extends Component {
         this.setState({
             showModal: false,
             confirmation: false,
-            checkingout: false
+            checkingout: false,
+            showModalResponsive: false
         });
 
         //CLEAR CART
@@ -213,7 +214,7 @@ class Header extends Component {
                     }
 
                 </div>
-                <div className="accticon">
+                <div>
                     {/* USER MENU & CART ICON - STANDARD - LOGGED IN */}
                     {this.state.username !== '' ?
                         <div className="account-icon-container">
@@ -245,19 +246,21 @@ class Header extends Component {
                         <div>
                             {/* LOGIN - STANDARD - NOT LOGGED IN */}
                             <MediaQuery query="(min-device-width: 600px)">
-                                <button className="cart" onClick={this.handleOpenModalLogin}>
-                                    <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;</button>
-                                <button className="cart" onClick={this.handleOpenModal}>
-                                    <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button>
-
+                                <div className="account-icons">
+                                    <button className="cart" onClick={this.handleOpenModalLogin}>
+                                        <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;</button>
+                                    <button className="cart" onClick={this.handleOpenModal}>
+                                        <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button>
+                                </div>
                             </MediaQuery>
                             {/* LOGIN - RESPONSIVE - NOT LOGGED IN */}
                             <MediaQuery query="(max-device-width: 600px)">
-                                <button className="cart" onClick={this.handleOpenModalLoginResponsive}>
-                                    <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;</button>
-                                    <button className="cart" onClick={this.handleOpenModalResponsive}>       
-                                <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button>
-
+                                <div className="account-icons">
+                                    <button className="cart" onClick={this.handleOpenModalLoginResponsive}>
+                                        <span className="glyphicon glyphicon-user"></span>&nbsp;Login&nbsp;&nbsp;</button>
+                                    <button className="cart" onClick={this.handleOpenModalResponsive}>
+                                        <span className="glyphicon glyphicon-shopping-cart"></span>&nbsp;{this.props.shoppingCart.length}</button>
+                                </div>
                             </MediaQuery>
                         </div>
                     }
@@ -269,6 +272,7 @@ class Header extends Component {
                     isOpen={this.state.showModal}
                     contentLabel="Shopping Cart"
                     className="modal-content"
+                    shouldCloseOnOverlayClick={true}
                     overlayClassName="modal-overlay">
 
                     {this.state.username !== '' || !this.state.checkingout ?
@@ -331,7 +335,8 @@ class Header extends Component {
                         </div>
                         :
                         <div className="login">
-                            <Login loggedIn={this.onLogin} />
+                            <Login loggedIn={this.onLogin}
+                                nevermind={this.handleCloseModal} />
                         </div>
                     }
 
@@ -343,6 +348,7 @@ class Header extends Component {
                         isOpen={this.state.showModalResponsive}
                         contentLabel="Shopping Cart"
                         className="modal-content-responsive"
+                        shouldCloseOnOverlayClick={true}
                         overlayClassName="modal-overlay">
 
                         {this.state.username !== '' || !this.state.checkingout ?
@@ -407,7 +413,8 @@ class Header extends Component {
                             </div>
                             :
                             <div className="login">
-                                <Login loggedIn={this.onLogin} />
+                                <Login loggedIn={this.onLogin}
+                                    nevermind={this.handleCloseModal} />
                             </div>
                         }
                     </ReactModal>
@@ -418,9 +425,11 @@ class Header extends Component {
                     isOpen={this.state.showModalLogin}
                     contentLabel="Shopping Cart"
                     className="modal-content"
+                    shouldCloseOnOverlayClick={true}
                     overlayClassName="modal-overlay">
                     <div className="login">
-                        <Login loggedIn={this.onLogin} />
+                        <Login loggedIn={this.onLogin}
+                            nevermind={this.handleCloseModal} />
                     </div>
                 </ReactModal>
 
@@ -428,9 +437,11 @@ class Header extends Component {
                     isOpen={this.state.showModalLoginResponsive}
                     contentLabel="Shopping Cart"
                     className="modal-content-responsive"
+                    shouldCloseOnOverlayClick={true}
                     overlayClassName="modal-overlay">
                     <div className="login">
-                        <Login loggedIn={this.onLogin} />
+                        <Login loggedIn={this.onLogin}
+                            nevermind={this.handleCloseModal} />
                     </div>
                 </ReactModal>
 

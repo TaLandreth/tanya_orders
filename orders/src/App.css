@@ -3,6 +3,8 @@
 @import url('css/cartcss.css');
 @import url('css/modalcss.css');
 @import url('css/ordercss.css');
+@import url('css/catalogcss.css');
+@import url('css/productcss.css');
 
 @media only screen and (max-width: 500px) {
  
@@ -38,25 +40,61 @@ a, a:link, a:hover, a:active {
 
 /* >>>>>>>>>>>> LOGIN SCREEN SETTINGS ------------------------------------- */
 
-.login {
-  text-align: center;
+.login-container {
+display: flex;
+flex-direction: column;
+text-align: center;
+
 }
 
-.login input {
-  width: 200px;
+.login-tabs-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-tab, .login-tab-register, .login-tab-right {
+  color: #fff;
+  background-color: #000000;
+  width: 50%;
+}
+
+.login-tab-register {
+  background-color: #595959;
+}
+
+.login-tab-right {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.login-tab-divider {
+  color: #000000;
+  background-color: #d9d9d9;
+  width: 100%;
+  padding: 2%;
+  margin-bottom: 8%;
+  
+}
+
+.form {
+  text-align: center;
+  margin: 2%;
+}
+
+.form input {
+  width: 80%;
   height: 40px;
+  margin-bottom: 5%;
   font-size: 1.5em;
-  color: #8c8c8c;
-  border: 1px solid #d9d9d9;
+  color: #ccc;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 0;
+  border:0 ;
   background-color: #f2f2f2;
-  text-align: center;
+  border-radius: 2px;
 }
 
-.login button {
-  width: 200px;
-  background-color: black;
-  color: white;
-}
 
 .msg {
   padding: 10px;
@@ -78,6 +116,21 @@ a, a:link, a:hover, a:active {
   width: 100%;
   padding: 5px;
   margin-bottom: 20px;
+  text-align: center;
+  
+}
+
+.login-btn {
+  width: 40%;
+  background-color: #000000;
+  color: #fff;
+  border: 0;
+  border-radius: 2px;
+}
+
+.login-btn:hover {
+  background-color: darkgoldenrod;
+  color: #fff;
 }
 
 /* >>>>>>>>>>>> HEADER CONTENT SETTINGS ------------------------------------- */
@@ -198,10 +251,10 @@ color: #000000;
 
 
   /*HEADER ---- CART & USER ICONS .............................*/
-.accticon {
-   display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
+
+.account-icons {
+  display: flex;
+  align-items: center;
 }
 
 .cart {
@@ -210,6 +263,7 @@ color: #000000;
   justify-content: center;
   align-items: flex-start;
   vertical-align: top;
+  max-width: 100%;
   background-color: #ffffff;  
   color: #000000;
   font-size: 1em;
@@ -245,6 +299,7 @@ width: 100%;
   cursor: pointer;
   font-size: 10pt;
   margin-right: 5px;
+  order: 0;
 }
 
 .user-menu-sub {
@@ -262,7 +317,8 @@ width: 100%;
   text-align: center;
   font-style: italic;
   color: #666666;
-  cursor: pointer;  
+  cursor: pointer;
+  order: 0;
 }
 
 .user-menu:hover, .user-menu-sub:hover {
@@ -294,281 +350,6 @@ width: 100%;
   background-color: #000000;
 }
 
-/*CATALOG DISPLAY -- IN CATALOG & IN PRODUCT VIEW DETAILS ------------------------ */
-.catalog-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;  
-  align-items: flex-start;
-  
-}
-
-.catalog-title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.catalog-title h3 {
-text-align: center;
-}
-
-.product-list, .product-list-narrow {           /*div right before MAP to product component*/
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* PRODUCT COMPONENT ..................--------------------------------------------------- */
-
-.prod-display-alt1 {
-  display: flex;
-  flex-direction: column;  
-  flex-wrap: wrap;  
-  justify-content: flex-start;
-  margin: 1rem;
-  background-color: white;
-  min-height: 20rem;
-
-  box-shadow: 1px 1px 2px #b6b4af;
-} 
-
-.prod-img {
- background-color: white;
- border-radius: 1px;
-
-}
-
-.prod-img img {
-  display: block;
-  max-width:25rem;
-  width: auto;
-  height: auto;
-}
-
-.prod-img img:hover {
-  opacity: 0.7;
-}
-
-
-/*PRODUCT GRID CELLS....................*/
-.prod-div {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start;  
-  align-items: flex-start;
-  padding: .2rem;
-  font-size: 10pt;
-  
-}
-/*INNER PRODUCT GRID CELLS (ON CATALOG PAGE)..............*/
-.prod-div-inner {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start;  
-  align-items: flex-start;
-  padding: .2rem;
-  font-size: 10pt;
-  text-transform: uppercase;
-  max-width: 25rem;
-  margin-top: 5px;
-  
-}
-
-.prod-div-inner-duo {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;  
-  background-color: #f2f2f2;
-  margin-top: 5px;
-}
-
-.prod-div-shortdesc {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: flex-start;  
-  width: 100%;
-  padding: .2rem;
-  font-size: 8pt;
-  text-transform: none;
-  color: #8c8c8c;
-}
-
-/* >>>>>>>>>>>> PRODUCT INDIVIDUAL VIEW SETTINGS ------~~~~~~~~~~~~----- */
-
-.prod-display-individual, .prod-display-individual-narrow  {
-  display: flex;
-  flex-direction: column;  
-  flex: 1;
-  justify-content: flex-start;
-  width: 50%;
-  padding: 1rem;
-  background-color: #f2f2f2;
-  
-} 
- 
-.prod-display-individual h2 {
- font-weight: bold;
-
-} 
-
-.prod-price-gold {
-  margin-right: auto;
-  font-size: 2.5em;
-  color: goldenrod;
-}
-
-/* COLS = NARROW */
-.product-details-rows, .product-details-cols {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  text-align: left;
-}
-
-/* SMALL SCREEN */
-.prod-display-individual-narrow {
-  position: relative;    
-  width: 100%;
-} 
-
-.prod-display-individual-narrow h4 {
-  font-weight: bold;
-  margin: 0;
- } 
-
- .prod-price-gold-narrow {
-  margin-right: auto;
-  font-size: 1.3em;
-  color: goldenrod;
-}
-
-.product-details-cols {
-  flex-direction: column;
-}
-
-.prod-img-view, .prod-img-view-narrow{
-  width: 50%;
-  background-color: white;
-  position: relative;
-  box-shadow: 0 0 1px 1px white;
-}
-
-.prod-img-view img, .prod-img-view-narrow img{
-  max-width: 90%;
-  background-color: white;
-  position: relative;
-  box-shadow: 0 0 1px 1px white;
-  margin: 2rem;
-  padding: 2rem;
-}
-
-/* SMALL SCREEN _________________________ */
-.prod-img-view-narrow {
-  width: 100%;
-  box-shadow: 0 0 0 0;
-  border-bottom: 1px solid #8c8c8c;
-}
-
-.prod-img-view-narrow img{
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  box-shadow: 0 0 0 0;
-}
-
-.prod-div-holds-cartbtn {
-  display: flex;
-  justify-content: center;
-
-}
-
-.prod-div-inner-text {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: stretch;  
-  align-self: flex-start;
-  padding: .2rem;
-  color: #8c8c8c;
-  
-}
-
-/*................................. ADD TO CART, QUANTITY OPTIONS (in individ. product view)*/
-
-.choice-holders, .choice-holders-NARROW {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
-}
-
-.choice-holders-NARROW {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
-
-}
-
-.prod-div h6 {
-  color: #8c8c8c;
-}
-
-.add-to-cart {
-  align-content: center;  
-  width: 120px;
-  height: 40px;
-  background-color: #f2f2f2;
-  color: #666666;
-  border: 1px solid #666666;
-}
-
-.add-to-cart:hover {
-  color: darkgoldenrod;
-  border-color: darkgoldenrod;
-}
-
-.prod-div input {
-  width: 100px;
-  height: 40px;
-  font-size: 1.5em;
-  color: #8c8c8c;
-  border: 1px solid #d9d9d9;
-  background-color: #f2f2f2;
-  text-align: center;
-}
-
-.return-to-catalog, .return-to-catalog-narrow {
-  font-size: 1.6em;
-  font-style: italic;
-  color: goldenrod;
-  cursor: pointer;  
-}
-
-.return-to-catalog:hover, .return-to-catalog-narrow:hover {
-  color: darkgoldenrod;
-  cursor: pointer;
-}
-
-.return-to-catalog-narrow {
-font-size: 1.2em;
-font-weight: bold;
-color: goldenrod;
-margin-bottom: 5px;
-text-decoration: underline;
-
-}
-
-.addtocart-confirm {
-  text-align: center;
-}
-
-
-
-
 /* PAGINATION ---------------------------------------------------------------------------------- */
 .pgs-outer, .pgs-inner, .pgs-active, a {
   display: flex;
@@ -580,7 +361,6 @@ text-decoration: underline;
   font-size: 1.1em;
   font-weight: bolder;
   color: gray;
-  
 }
 
 .pgs-nav {
@@ -603,12 +383,13 @@ text-decoration: underline;
   align-items: center;
   background-color: #f2f2f2;
   border: 1px solid #d9d9d9;
+  border-radius: 3px;
   padding-left: 25%;
 }
 
 .pgs-active {
   background-color: black;
-  color: #ffffff;
+  color: #fff;
 }
 
 .pgs-active a, .pgs-active a:link, .pgs-active a:visited, .pgs-active a:active, .pgs-active a:hover {
@@ -617,8 +398,13 @@ font-weight: bold;
 text-decoration: none;
 }
 
+
 .pgs-inner a, .pgs-inner a:link, .pgs-inner a:visited, .pgs-inner a:active, .pgs-inner a:hover {
   color: gray;
   font-weight: bold;
   text-decoration: none;
+  }
+
+  .pgs-inner:hover {
+    background-color: #000000;
   }

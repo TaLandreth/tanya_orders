@@ -13,7 +13,7 @@ class Catalog extends Component {
     this.state = {
       //Paging
       startVal: 0,
-      viewAmt: 6,
+      viewAmt: 10,
       activePage: 1,
       productView: false,
       width: window.innerWidth,
@@ -32,7 +32,7 @@ class Catalog extends Component {
 
     if (this.state.width > 800) {
       let instructions = {
-        viewAmt: 8,
+        viewAmt: 10,
         startVal: this.state.startVal,
       }
       this.setState(instructions)
@@ -77,7 +77,7 @@ class Catalog extends Component {
       }
 
       if (this.state.width > 800) {
-        instructions.viewAmt = 8
+        instructions.viewAmt = 10
       }
 
       else {
@@ -88,6 +88,10 @@ class Catalog extends Component {
 
       this.setState({ activePage: pageNumber })
       getProducts(this.props.dispatch, instructions)
+
+      //On page change, scroll to top
+      document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+      document.documentElement.scrollTop = 0; // For IE and Firefox
   }
 
   seeProduct(product) {

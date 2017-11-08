@@ -30,17 +30,14 @@ class Product extends Component {
     render() {
 
             return (
-                <div className="prod-display-alt1" key={this.props.prod.id}>
-                    <div className="prod-img" onClick={this.props.seeProduct.bind(this, this.props.prod)}>
+                <div>
+                <figure onClick={this.props.seeProduct.bind(this, this.props.prod)}>
                     <img src={this.props.prod.image} alt="Product"/>
-                    </div>
-                    <div className="prod-div-inner-duo"><div>{this.props.prod.name}</div>
-                    <div className="">{"$" + this.props.prod.price.toFixed(2)}</div>
-                    </div>
-                    <div className="prod-div-inner">
+                    <div className="prod-div-inner-duo"><div className="prod-pad">{this.props.prod.name}</div>
+                    <div className="prod-pad">{"$" + this.props.prod.price.toFixed(2)}</div></div>
                     <div className="prod-div-shortdesc">{this.props.prod.shortDesc}</div>
-                    </div>
-               </div>
+                </figure>
+                </div>
             )
     }// end render
 }//end component

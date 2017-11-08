@@ -1,0 +1,168 @@
+/* >>>>>>>>>>>> PRODUCT INDIVIDUAL VIEW SETTINGS ------~~~~~~~~~~~~----- */
+
+.prod-display-individual, .prod-display-individual-narrow  {
+    display: flex;
+    flex-direction: column;  
+    flex: 1;
+    justify-content: flex-start;
+    width: 50%;
+    padding: 1rem;
+    background-color: #f2f2f2;
+    
+  } 
+   
+  .prod-display-individual h2 {
+   font-weight: bold;
+  
+  } 
+  
+  .prod-price-gold {
+    margin-right: auto;
+    font-size: 2.5em;
+    color: goldenrod;
+  }
+  
+  /* COLS = NARROW */
+  .product-details-rows, .product-details-cols {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  
+  /* SMALL SCREEN */
+  .prod-display-individual-narrow {
+    position: relative;    
+    width: 100%;
+  } 
+  
+  .prod-display-individual-narrow h4 {
+    font-weight: bold;
+    margin: 0;
+   } 
+  
+   .prod-price-gold-narrow {
+    margin-right: auto;
+    font-size: 1.3em;
+    color: goldenrod;
+  }
+  
+  .product-details-cols {
+    flex-direction: column;
+  }
+  
+  .prod-img-view, .prod-img-view-narrow{
+    width: 50%;
+    background-color: white;
+    position: relative;
+    box-shadow: 0 0 1px 1px white;
+  }
+  
+  .prod-img-view img, .prod-img-view-narrow img{
+    max-width: 90%;
+    background-color: white;
+    position: relative;
+    box-shadow: 0 0 1px 1px white;
+    margin: 2rem;
+    padding: 2rem;
+  }
+  
+  /* SMALL SCREEN _________________________ */
+  .prod-img-view-narrow {
+    width: 100%;
+    box-shadow: 0 0 0 0;
+    border-bottom: 1px solid #8c8c8c;
+  }
+  
+  .prod-img-view-narrow img{
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 0 0 0;
+  }
+  
+  .prod-div-holds-cartbtn {
+    display: flex;
+    justify-content: center;
+  
+  }
+  
+  .prod-div-inner-text {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: stretch;  
+    align-self: flex-start;
+    padding: .2rem;
+    color: #8c8c8c;
+    
+  }
+  
+  /*................................. ADD TO CART, QUANTITY OPTIONS (in individ. product view)*/
+  
+  .choice-holders, .choice-holders-NARROW {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+  
+  .choice-holders-NARROW {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+  
+  }
+  
+  .prod-div h6 {
+    color: #8c8c8c;
+  }
+  
+  .add-to-cart {
+    align-content: center;  
+    width: 120px;
+    height: 40px;
+    background-color: #f2f2f2;
+    color: #666666;
+    border: 1px solid #666666;
+  }
+  
+  .add-to-cart:hover {
+    color: darkgoldenrod;
+    border-color: darkgoldenrod;
+  }
+  
+  .prod-div input {
+    width: 100px;
+    height: 40px;
+    font-size: 1.5em;
+    color: #8c8c8c;
+    border: 1px solid #d9d9d9;
+    background-color: #f2f2f2;
+    text-align: center;
+  }
+  
+  .return-to-catalog, .return-to-catalog-narrow {
+    font-size: 1.6em;
+    font-style: italic;
+    color: goldenrod;
+    cursor: pointer;  
+  }
+  
+  .return-to-catalog:hover, .return-to-catalog-narrow:hover {
+    color: darkgoldenrod;
+    cursor: pointer;
+  }
+  
+  .return-to-catalog-narrow {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: goldenrod;
+  margin-bottom: 5px;
+  text-decoration: underline;
+  
+  }
+  
+  .addtocart-confirm {
+    text-align: center;
+  }
+  

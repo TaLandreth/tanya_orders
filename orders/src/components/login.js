@@ -39,12 +39,13 @@ class Login extends Component {
 
             onLogin(credentials, this.props.dispatch)
 
-            this.setState({loggingin: true})
+            this.setState({ loggingin: true })
 
-                setTimeout(() => {
-                    if (this.props.userId.customerId && this.props.userId.username) {
-                    this.props.loggedIn()}
-                  }, 800)
+            setTimeout(() => {
+                if (this.props.userId.customerId && this.props.userId.username) {
+                    this.props.loggedIn()
+                }
+            }, 800)
         }
     }
 
@@ -52,30 +53,46 @@ class Login extends Component {
 
         return (
             <div className="login-container">
-                <h1 className="login">Login</h1>
-                <div className="form-group">
+
+                <div className="login-tabs-group">
+                    <div className="login-tab"><h4>Login</h4></div>
+                    <div className="login-tab-register"><h4>Sign Up</h4></div>
+                </div>
+                <div className="login-tabs-group">
+                <div className="login-tab-divider">Already have an account? Login below!</div>
+            </div>
+
+                <div className="form">
                     <input name="username"
                         type="text"
                         value={this.state.username}
                         placeholder="Email" onChange={this.changeInputs.bind(this)} />
                 </div>
-                <div className="form-group">
+                <div className="form">
                     <input name="password"
                         type="password"
                         value={this.state.password}
                         placeholder="Password" onChange={this.changeInputs.bind(this)} />
                 </div>
 
+
                 <div className="login-btn-container">
-                    <button onClick={this.onLogin} className="btn btn-default">Login</button>
+                    <button onClick={this.onLogin} className="login-btn">LOGIN</button>
                     <div className="msg">
                         <h3>
                             {this.state.error ? "Please provide your login credentials" : ""}
                             {this.props.APICallFailed ? "Login failed!" : ""}</h3>
                         <h2> {this.state.loggingin ? "Logging In...." : ""}</h2>
-                            
-                            </div>
+
+                    </div>
                 </div>
+
+                <div className="login-tabs-group">
+                    <div className="login-tab">&nbsp;</div>
+                    <div className="login-tab-right" onClick={this.props.nevermind}>Cancel</div>
+                </div>
+
+
             </div>
         )
     }

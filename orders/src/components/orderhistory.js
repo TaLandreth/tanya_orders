@@ -12,7 +12,7 @@ class OrderHistory extends Component {
     this.state = {
       //Paging
       startVal: 0,
-      viewAmt: 6,
+      viewAmt: 12,
       page: 1,
     };
 
@@ -68,7 +68,8 @@ class OrderHistory extends Component {
   render() {
     return (
       <div className="order-container">
-        <div className="order-title"><h3>Order History</h3></div>
+        <div className="order-title"><h3>Order History</h3>
+        <h5>Customer #{this.props.userId.customerId}</h5></div>
 
         {/* RESPONSIVE */}
         <MediaQuery query="(max-device-width: 600px)">
@@ -95,6 +96,7 @@ class OrderHistory extends Component {
                 activeClass="pgs-active"
                 activePage={this.state.page}
                 itemsCountPerPage={this.state.viewAmt}
+                pageRangeDisplayed={this.state.viewAmt}
                 hideNavigation={true}
                 totalItemsCount={this.props.orderCount}
                 onChange={this.getMoreOrders.bind(this)}

@@ -1,106 +1,119 @@
-/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ORDER HISTORY & DETAILS ------------------------------------- */
-/*Contains all ORDER -- title, map, etc.*/
-.order-container {
+  /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ORDER HISTORY & DETAILS ------------------------------------- */
+  /*Contains all ORDER -- title, map, etc.*/
+  .order-container {
   display: flex;
   flex-direction: column;
   justify-content: center;  
   align-items: center;
-width: 100%;
+  width: 100%;
+
   }
 
-/*div right before MAP to orderdetails component*/
-/*responsive*/
+  /*div right before MAP to orderdetails component*/
+  /*responsive*/
   .order-list-narrow { 
-  margin-bottom: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 325px;
   } 
-/*standard*/
+  /*standard*/
   .order-list { 
-  margin-bottom: 10rem;
-  width: 600px;
+  width: 600px;  
+  font-size: 1em;
+  
   } 
 
 
-/*inside the orderdetails component: ORDER GRID CELLS....................*/
-/*Outer Div*/
-.order-item {
+  /*inside the orderdetails component: ORDER GRID CELLS....................*/
+
+  .order-bundle {
+    border: 1px solid #b6b4af;
+    
+  margin-bottom: 10px;
+  }
+
+  /*Outer Div*/
+  .order-item {
   display: flex;
   justify-content: space-between;
-    margin: 5px;
-    padding: 5px;
-    /* border-bottom: 1px solid #b6b4af; */
+  color: #000000;
+  }
 
-    border: 1px solid yellow;
-    
-
-}
-/*Heading for order # & date*/
+  /*Heading for order # & date*/
   .order-div-heading {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  flex-grow: 1;
-  max-width: 40%;
-  color: darkgoldenrod;  
-
-  border: 1px solid red;
-    
-} 
-/*Inside the heading*/
-.order-div {
   display: flex;
-  font-size: 1em;
-  text-transform: uppercase;  
-  font-weight: bold;
-  min-height: 50%;
-
-  border: 1px solid turquoise;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 100%;
   
-  }
-/*header div for cancel button*/
-  .order-div-actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  align-items: flex-end;
-min-width: 25%;
-  border: 1px solid greenyellow;
-  
-  }
 
-/*after header, inner divs w/ actual data*/
-.order-div-inner, .order-div-inner-btn, .green, .goldenrod, .red {
-  display: inline-flex;
+  } 
+
+  .order-div-heading-narrow {
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  font-size: 1em;
+
+  }
+
+  /*Inside the heading*/
+  .order-div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: bold;
+  min-height: 100%;
+  min-width: 33%;
+  font-size: .9em;
+  }
+
+  .order-div-inner-side {
+  }
+
+  .order-title h3, h5 {
+  text-align: center;
+  }
+
+  /*after header, inner divs w/ actual data*/
+  .order-div-inner, .order-div-inner-btn{
+  font-size: 1.2em;
   text-transform: none;
   font-weight: bold;
-  min-width: 30%;
-  border: 1px solid magenta;
-  
-}
+  min-width: 100%;
 
-/*For status*/
-.green {
-color: #33cc33;
-}
+  }
 
-.goldenrod {
-color: goldenrod;
-}
+  .green, .goldenrod, .red {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.2em;
+  max-width: 100%;
 
-.red {
+  }
+
+  /*For status*/
+  .green {
+  color: #33cc33;
+  }
+
+  .goldenrod {
+  color: goldenrod;
+  }
+
+  .red {
   color: #bf4040;
-}
+  }
 
-    /*The cancel button*/
-.cancel-order-btn {
+  /*The cancel button*/
+  .cancel-order-btn {
   width: 100px;
   height: 30px;
   background-color: #fff;
   color: #666666;
   border: 1px solid #b6b4af;
-}
+  border-radius: 3px;
+  }
 
