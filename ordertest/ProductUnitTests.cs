@@ -3,8 +3,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using tanya_orders;
-using tanya_orders.Services;
+using orders_library;
+using orders_library.Services;
 
 namespace ordertest                     //ADDRESS & PRODUCT
 {
@@ -220,94 +220,6 @@ namespace ordertest                     //ADDRESS & PRODUCT
                 Assert.AreEqual(newProd3.Name, query.First().Name);
             }
         }
-
-        [TestMethod]
-        public void ProductDeleteTest()
-        {
-            int prodnum = 0; //zero will always assert null
-
-            ProductManager mgr = new ProductManager();
-
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
-            {
-                //Arrange - remove
-                mgr.RemoveProduct(prodnum);
-
-                //Act .... verify product is no longer found
-                var prodDeleted = from Product a in context.Product
-                                  where a.Id == prodnum
-                                  select a;
-                //Assert
-                Assert.IsNull(prodDeleted.FirstOrDefault(x => x.Id == prodnum));
-            }
-        }
-
-
-
-
-
-
-        //end unit test class
-
-
-
-        /*
-        [TestMethod]
-        public void OrdersExist()
-        {
-            //OrderFactory factory = new OrderFactory();
-            //Assert.IsTrue(factory.GetOrders().Count() > 0);
-
-
-        }
-
-        [TestMethod]
-        public void TestQuery() {
-
-            OrderFactory factory = new OrderFactory();
-
-            var query = from OrderDetails ord in factory.GetOrders()
-                        where ord.Customer.Addresses.Any(a => a.Addresstype == Address.AddressTypes.BILLING && a.Zip == 676767)
-                        select ord.Lineitems;
-
-            Assert.AreEqual(query.Count(), 1);      //check if 1 found
-            Assert.AreEqual(query.First().First().Product.Name, "Widget P");   //verify 1st item is = what you're loooking for
-        }
-
-        [TestMethod]
-        public void TestShippingMethod()
-        {
-            //Arrange
-            OrderFactory factory = new OrderFactory();
-
-            //Act
-            var query = from OrderDetails ord in factory.GetOrders()
-                        where ord.Shipmethod.Method.Equals("Overnight")
-                        select ord.Ordernumber;
-
-            //Assert:  Check for order numbers that have OVERNIGHT shipping
-            Assert.AreEqual(query.Count(), 1);          //check if 1 found
-            Assert.AreEqual(query.First(), 2);          //it found the one order with OVERNIGHT shipping
-        }
-
-        [TestMethod]
-        public void TestProductPrice()
-        {
-            //Arrange
-            OrderFactory factory = new OrderFactory();
-
-            //Act
-            var query = from OrderDetails ord in factory.GetOrders()
-            where ord.Lineitems.Any(a => a.Product.Price >= 50.00)
-            select ord;
-
-            //Assert:  Test for products of price > 50.00
-            Assert.AreEqual(query.Count(), 3);          //check if 3 found (per the query)
-            Assert.AreEqual(query.First().Ordernumber, 1); //is the first orderid found # 1?
-            Assert.AreEqual(query.First().Lineitems.First().Product.Price, 2.99); //is the first order's first line item's product price = 2.99?
-        }
-
-*/
 
     }//end class
 }//end nmspc
