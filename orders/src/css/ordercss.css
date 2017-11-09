@@ -12,8 +12,12 @@
 
   .order-list, .order-list-narrow tr, td { 
     font-size: 1.2em;
-  min-width: 95%;
+  min-width: 100%;
   } 
+
+  .order-list {
+    min-width: 100%;
+  }
 
   .order-list-narrow tr, td {
     font-size: .95em;
@@ -35,8 +39,8 @@
     padding: 2px;
   }
 
-  .order-cell, .order-cell-red, .order-cell-green, .order-cell-goldenrod {
-    min-width: 25%;
+  .order-cell, .order-cell-red, .order-cell-green, .order-cell-goldenrod, .order-cell-cancel , .order-cell-click {
+    width: 120px;
     text-align: left;
   }
   
@@ -54,6 +58,14 @@
     color: #bf4040;
     }
 
+    .order-cell-cancel {
+      text-align: right;
+    }
+
+    .order-cell-click:hover {
+      background-color: gold;
+    }
+
   .order-title h3, h5 {
   text-align: center;
   }
@@ -64,7 +76,89 @@
   color: #666666;
   border: 1px solid #b6b4af;
   border-radius: 2px;
-  width: 50px;
   font-size: .8em;
   }
 
+  /*View INDIVIDUAL ORDER */
+
+  .one-order-display {
+display: flex;
+flex-direction: column;
+
+padding: 4%;
+
+background-color: #f2f2f2;
+
+
+
+  }
+
+  .one-order-heading {
+
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 2px solid #b6b4af;
+    padding: 2px;
+background-color: #000000;
+color: #fff;
+
+  }
+
+.one-order-details {
+  display: flex;
+  flex-direction: row;
+  margin: 2px;
+  border-bottom: 2px solid #000000;
+}
+
+.one-order-items {
+  display: table-column;
+  align-self: center;
+  padding: 2px;
+  min-width: 100%;
+  min-height: 12.5rem;
+  background-color: #f2f2f2;
+  vertical-align: center;
+  border-bottom: 1px solid #b6b4af;
+  margin-bottom: 10px;
+
+}
+
+.one-order-items img {
+  max-height: 8rem;
+  border: 1px solid #000000;
+}
+
+.one-order-itemdetails {
+  display: flex;
+  flex-direction: column;
+justify-content: space-between;
+  min-width: 38%;
+  background-color: #f2f2f2;
+
+}
+
+.close-order-popup {
+  text-align: center;
+
+}
+
+.cancel-confirm {
+  font-weight: normal;
+  text-align: center;
+  padding: 5px;
+}
+
+.confirm-button, .cancel-button {
+  background-color: black;
+  color: white;
+  border: 1px solid #666666;
+  margin: 3px;
+
+}
+
+.confirm-button {
+  background-color: #bf4040;
+}

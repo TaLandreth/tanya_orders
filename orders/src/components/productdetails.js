@@ -92,8 +92,6 @@ class ProductDetails extends Component {
                         <div className="prod-img-view"><img src={this.props.prod.image} alt="Product" /></div>
                         <div className="prod-display-individual" key={this.props.prod.id}>
 
-
-
                             <div className="prod-div-inner"><h2>{this.props.prod.name}</h2></div>
                             <div className="prod-price-gold">{"$" + this.props.prod.price.toFixed(2)}</div>
 
@@ -126,8 +124,6 @@ class ProductDetails extends Component {
 
                             <div className="return-to-catalog" onClick={this.props.returnToCatalog}>
                                 <span className="glyphicon glyphicon-hand-left"></span>&nbsp;RETURN TO CATALOG</div>
-
-
                         </div>
                         
                     </div>

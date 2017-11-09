@@ -35,9 +35,6 @@ export function viewProduct(dispatch, instructions) {
     dispatch({
         type: "VIEW_PRODUCT_STARTED"
     })
-
-console.log(instructions.product)
-
     dispatch({ type: "VIEW_PRODUCT_FINISHED", payload: instructions })
 }
 
@@ -57,6 +54,21 @@ export function getOrders(dispatch, instructions) {
             dispatch({ type: "CALL_FAILED", payload: err })
         })
 }
+
+//RETRIEVE ORDERS - 
+export function getOrderById(dispatch, id) {
+    
+        dispatch({
+            type: "GET_ORDER_BY_ID_STARTED"
+        })
+        axios.post(BASE_URL + "/ordernumber/" + id)
+            .then((response) => {
+                dispatch({ type: "GET_ORDER_BY_ID_FINISHED", payload: response.data })
+            })
+            .catch((err) => {
+                dispatch({ type: "CALL_FAILED", payload: err })
+            })
+    }
 
 //CANCEL ORDER
 export function cancelOrder(dispatch, id, instructions) {

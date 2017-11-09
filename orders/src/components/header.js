@@ -64,7 +64,13 @@ class Header extends Component {
         this.setState({
             username: ''
         })
-        this.props.displayCatalog()
+        
+        let instructions = {
+            catalogView: true,
+            productView: false,
+            ordersView: false
+        }
+        menuChoice(this.props.dispatch, instructions)
     }
 
     handleOpenModal() {
@@ -197,7 +203,7 @@ class Header extends Component {
                                     MENU
                                     <div className="navs-narrow">
                                         <ul className="navs">
-                                        <li onClick={this.goToCatalog}>PRODUCT CATALOG</li>
+                                        <li onClick={this.goToCatalog}>CATALOG</li>
                                         <li onClick={this.goToOrders}>ORDERS</li>
                                         <li onClick={this.onLogout.bind(this)}>LOGOUT</li>
                                         </ul>

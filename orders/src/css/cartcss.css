@@ -119,8 +119,7 @@
     
     /* button */
     .place-order {
-      background-color: #b6b4af;
-      font-size: 1em;
+      font-size: 1.5em;
       
     }
     
@@ -153,15 +152,15 @@
       margin: 3px;
     } 
     
-    select {
+    .cart-div-checkout select, select {
       width: 150px;
-      font-size: 2em;
-      border: 0;
+      font-size: 1.5em;
       background-color: #d9d9d9;
       padding: 3px;
       margin: 3px;
       border-radius: 0;
       border: 1px solid #8c8c8c;
+      color: #666666;
       
     }
     

@@ -61,7 +61,7 @@ namespace orders_library.Services
         }
 
 
-        //RETRIEVE - BY CUSTOMER ID & FILTER
+        //RETRIEVE ALL ORDERS - BY CUSTOMER ID & FILTER
         public IEnumerable<CustomerOrders> GetCustomerOrders(Instructions instr) //by cust id/status
         {
             using (var context = DbContextFactory.Create())
@@ -89,6 +89,43 @@ namespace orders_library.Services
                 catch (Exception)
                 {
                     Console.WriteLine("*** Error retrieving orders....");
+                    return null;
+                }
+            }
+        }
+
+        //RETRIEVE - SINGLE ORDER BY CUSTOMER ID
+        public OneOrder GetOrder(int id) //by cust id/status
+        {
+            using (var context = DbContextFactory.Create())
+            {
+                try
+                {
+                    var ord = context.OrderDetails
+                                     .Include(s => s.Shipmethod)
+                                     .Include(c => c.CustomerDetails).Include(a => a.CustomerDetails.Addresses)
+                                     .Include(l => l.Lineitems).ThenInclude(p => p.ProductDetails)
+                                     .Where(o => o.Id == id).First();
+
+                    var returnOrder = new OneOrder();
+
+                    returnOrder.Id = ord.Id;
+                    returnOrder.CustomerDetails = ord.CustomerDetails;
+                    returnOrder.Shipmethod = ord.Shipmethod;
+                    returnOrder.Addresses = ord.CustomerDetails.Addresses;
+                    returnOrder.Lineitems = ord.Lineitems.Where(l => l.OrderDetails.Id == id);
+                    returnOrder.ProductDetails = ord.Lineitems.Select(p => p.ProductDetails);
+                    returnOrder.OrderStatus = (orders_library.OneOrder.ShippingStatus)ord.OrderStatus;
+                    returnOrder.OrderDate = ord.OrderDate;
+
+                    Console.WriteLine($"Order #{ord.Id} retrieved for user: {ord.CustomerDetails.Id}");
+
+                    return returnOrder;
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("*** Error retrieving order....");
                     return null;
                 }
             }

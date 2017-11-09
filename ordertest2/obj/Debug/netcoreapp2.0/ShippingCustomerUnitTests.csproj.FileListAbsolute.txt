@@ -1,0 +1,16 @@
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ShippingCustomerUnitTests.deps.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ShippingCustomerUnitTests.runtimeconfig.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ShippingCustomerUnitTests.runtimeconfig.dev.json
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ShippingCustomerUnitTests.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/ShippingCustomerUnitTests.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/orders_library.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/bin/Debug/netcoreapp2.0/orders_library.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ShippingCustomerUnitTests.csprojResolveAssemblyReference.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ShippingCustomerUnitTests.csproj.CoreCompileInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ShippingCustomerUnitTests.AssemblyInfoInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ShippingCustomerUnitTests.AssemblyInfo.cs
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ShippingCustomerUnitTests.dll
+/Users/tanyalandreth/Desktop/tanya_orders/ordertest2/obj/Debug/netcoreapp2.0/ShippingCustomerUnitTests.pdb

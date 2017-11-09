@@ -1,0 +1,16 @@
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/LineOrderUnitTests.deps.json
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/LineOrderUnitTests.runtimeconfig.json
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/LineOrderUnitTests.runtimeconfig.dev.json
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/LineOrderUnitTests.dll
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/LineOrderUnitTests.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/orders_library.dll
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/bin/Debug/netcoreapp2.0/orders_library.pdb
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/obj/Debug/netcoreapp2.0/LineOrderUnitTests.csprojResolveAssemblyReference.cache
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/obj/Debug/netcoreapp2.0/LineOrderUnitTests.csproj.CoreCompileInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/obj/Debug/netcoreapp2.0/LineOrderUnitTests.AssemblyInfoInputs.cache
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/obj/Debug/netcoreapp2.0/LineOrderUnitTests.AssemblyInfo.cs
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/obj/Debug/netcoreapp2.0/LineOrderUnitTests.dll
+/Users/tanyalandreth/Desktop/tanya_orders/LineOrderUnitTests/obj/Debug/netcoreapp2.0/LineOrderUnitTests.pdb

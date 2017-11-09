@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using tanya_orders;
-using tanya_orders.Services;
+using orders_library;
+using orders_library.Services;
 
-namespace ordertest                         //SHIPPING METHOD & CUSTOMER
+namespace ShippingAndCustomerTests                         //SHIPPING METHOD & CUSTOMER
 {
     [TestClass]
     public class UnitTest1
@@ -25,7 +25,7 @@ namespace ordertest                         //SHIPPING METHOD & CUSTOMER
 
                 //Assert... 
                 Assert.AreEqual("Ground", query.First().Method);
-                Assert.AreEqual(1, query.First().Id);
+                Assert.AreEqual(3, query.First().Id);
             }
         }
 
@@ -59,26 +59,6 @@ namespace ordertest                         //SHIPPING METHOD & CUSTOMER
             }
         }//end update test
 
-        [TestMethod] //--------------->THIS HAS ORDER DEPENDENCIES.
-        public void ShippingMethodDeleteTest()
-        {
-            int m = 6;
-
-            ShipMethodManager mgr = new ShipMethodManager();
-
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
-            {
-                //Act
-                mgr.RemoveShipMethod(m);
-
-                //Act ... RETRIEVE
-                var methodDelete = from ShippingMethod a in context.ShippingMethod
-                                 where a.Id == m
-                                 select a;
-
-                Assert.IsNull(methodDelete.FirstOrDefault(x => x.Id == m));
-            }
-        }
 
         [TestMethod]
         public void CreateShipMethodTest()
@@ -86,12 +66,13 @@ namespace ordertest                         //SHIPPING METHOD & CUSTOMER
             //Arrange
             ShippingMethod newMethod = new ShippingMethod
             {
-                Method = "By Boat"
+                Carrier = "Local",
+                Method = "Local Pickup"
             };
 
             ShipMethodManager mgr = new ShipMethodManager();
 
-            //mgr.CreateShipMethod(newMethod);
+            mgr.CreateShipMethod(newMethod);
 
             using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
             {
@@ -99,7 +80,7 @@ namespace ordertest                         //SHIPPING METHOD & CUSTOMER
                                    where s.Method == newMethod.Method
                                    select s;
                 
-                Assert.AreEqual(5, query.First().Id);
+                //Assert.AreEqual(5, query.First().Id);
                 Assert.AreEqual(newMethod.Method, query.First().Method);
             }
         }
@@ -124,13 +105,13 @@ namespace ordertest                         //SHIPPING METHOD & CUSTOMER
         [TestMethod]
         public void CustomerUpdateTest()
         {
-            int id = 3;
+            int id = 10;
 
             //Arrange ... 
             Customer updatedCust = new Customer
             {
                 Id = id,
-                Name = "TK Industries"
+                Name = "Welding Professionals, Inc."
             };
 
             CustomerManager mgr = new CustomerManager();
@@ -146,31 +127,10 @@ namespace ordertest                         //SHIPPING METHOD & CUSTOMER
                             select c;
 
                 //Assert... compare - updated details to the original update request
-                Assert.AreEqual(updatedCust.Id, query.First().Id);
                 Assert.AreEqual(updatedCust.Name, query.First().Name);
             }
         }//end update test
 
-        [TestMethod] //---------------->THIS HAS ORDER DEPENDENCIES.
-        public void CustomerDeleteTest()
-        {
-            int custid = 11;
-
-            CustomerManager mgr = new CustomerManager();
-
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
-            {
-                //Act
-                //mgr.RemoveCustomer(custid);
-
-                //Act ... RETRIEVE
-                var deletedCust = from Customer c in context.Customer
-                                   where c.Id == custid
-                                   select c;
-
-                Assert.IsNull(deletedCust.FirstOrDefault(x => x.Id == custid));
-            }
-        }
 
         [TestMethod]
         public void CreateCustomerTest()
@@ -211,7 +171,6 @@ namespace ordertest                         //SHIPPING METHOD & CUSTOMER
                             select c;
 
             //Assert
-                Assert.AreEqual(8, query.First().Id);
                 Assert.AreEqual(newCustomer.Name, query.First().Name);
             }
         }

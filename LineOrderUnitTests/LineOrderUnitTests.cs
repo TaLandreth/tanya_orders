@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using tanya_orders;
-using tanya_orders.Services;
+using orders_library;
+using orders_library.Services;
 
 namespace LineOrderUnitTests
 {
@@ -17,16 +17,16 @@ namespace LineOrderUnitTests
         {
             int lineid = 10;
 
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
+            using (var context = DbContextFactory.Create())
             {
                 //RETRIEVE BY id
                 var query = from LineItem l in context.LineItem
-                            where l.Id == lineid     //remove this line to retireve all
+                            where l.Id == lineid
                             select l;
 
                 //Assert... 
-                Assert.AreEqual(2, query.First().ProductDetails);
-                Assert.AreEqual(12, query.First().Quantity);
+                Assert.AreEqual(lineid, query.First().Id);
+                Assert.AreEqual(1, query.First().Quantity);
             }
         }
 
@@ -37,10 +37,7 @@ namespace LineOrderUnitTests
             LineItem updateLine = new LineItem
             {
                 Id = 5,
-                Quantity = 10000,
-                Discount = 0.10,
-                OrderDetailsId = 2,
-                ProductDetailsId = 5
+                Quantity = 100
             };
 
             LineItemManager mgr = new LineItemManager();
@@ -62,76 +59,22 @@ namespace LineOrderUnitTests
             }
         }//end update test
 
-        [TestMethod] //Abandoned for now --------------->THIS HAS ORDER DEPENDENCIES.
-        public void LineItemDeleteTest()
-        {
-            /*
-            int m = 6;
-
-            ShipMethodManager mgr = new ShipMethodManager();
-
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
-            {
-                //Act
-                mgr.RemoveShipMethod(m);
-
-                //Act ... RETRIEVE
-                var methodDelete = from ShippingMethod a in context.ShippingMethod
-                                   where a.Id == m
-                                   select a;
-
-                Assert.IsNull(methodDelete.FirstOrDefault(x => x.Id == m));
-            }
-            */
-        }
-
-
         //ORDER TESTS ------------------------------------------------------------
         //RETRIEVE 1 ORDER
         [TestMethod]
         public void OrderRetrievalTest()
         {
-            int id = 1;
+            int id = 32;
 
             OrderManager mgr = new OrderManager();
+            OneOrder.ShippingStatus orderstatus = OneOrder.ShippingStatus.PROCESSING;
 
             var ord = mgr.GetOrder(id);
 
             //Assert... 
-            Assert.AreEqual(1, ord.Id);
+            Assert.AreEqual(id, ord.Id);
             Assert.IsNotNull(ord);
-
-            //??????????
-            Assert.AreEqual(2, ord.Lineitems.Count());
-
-        }
-
-        //CREATE ORDER
-        [TestMethod]
-        public void CreateOrderTest()
-        {
-            OrderManager mgr = new OrderManager();
-
-            var newOrder = new OrderDetails
-            {
-                OrderDate = DateTime.Now.ToString("yyyy-MM-dd"),
-                CustomerDetailsId = 2,
-                Shipmethod = { Id = 1 },
-                Lineitems = new LineItem[]
-    {
-                    new LineItem { ProductDetailsId = 6, Quantity = 22,
-                        Discount = 0 },
-                    new LineItem { ProductDetailsId = 5, Quantity = 1,
-                        Discount = 0 }
-    },
-                OrderStatus = OrderDetails.ShippingStatus.PROCESSING
-            };
-
-            mgr.CreateOrder(newOrder);
-
-            //Assert... 
-            Assert.AreEqual(6, newOrder.Id);
-            //Assert.IsNotNull(newOrder.Lineitems);
+            Assert.AreEqual(orderstatus, ord.OrderStatus);
 
         }
 
@@ -139,11 +82,11 @@ namespace LineOrderUnitTests
         [TestMethod]
         public void OrderCancelTest()
         {
-            int m = 1;
+            int m = 76;
 
             OrderManager mgr = new OrderManager();
 
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
+            using (var context = DbContextFactory.Create())
             {
                 //Act
                 mgr.CancelOrder(m);
@@ -162,9 +105,7 @@ namespace LineOrderUnitTests
             int m = 1;
             OrderDetails.ShippingStatus orderstatus = OrderDetails.ShippingStatus.PROCESSING;
 
-            OrderManager mgr = new OrderManager();
-
-            using (var context = DbContextFactory.Create())   //no 'NEW' b/c of static class
+            using (var context = DbContextFactory.Create())
             {
                 //Act
                 var ord = context.OrderDetails
@@ -174,7 +115,7 @@ namespace LineOrderUnitTests
                  {
                      OrderId = x.Id,
                      Date = x.OrderDate,
-                     CustomerId = x.CustomerDetailsId,
+                     CustomerId = x.CustomerDetails.Id,
                      OrderStat = x.OrderStatus,
                      Total = x.Lineitems.Sum(item => item.Quantity * item.ProductDetails.Price)
                  });

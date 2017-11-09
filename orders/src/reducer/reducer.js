@@ -12,6 +12,7 @@ let initialState = {
     APICallFailed: null,
     cartView: false,
     loginError: false,
+    oneOrder: null,
 
     catalogView: true,
     ordersView: false,
@@ -50,6 +51,19 @@ export default function reducer(store = initialState, action) {
             console.log('### Retrieval finished!')
 
             return { ...store, orderList: action.payload, APICallInProgress: false }
+        }
+
+        //GET ORDERS_______________________________________________________________________:
+        case "GET_ORDER_BY_ID_STARTED": {
+            console.log("### Retrieving 1 ORDER.....")
+            return { ...store, APICallInProgress: true, APICallFailed: null }
+        }
+        case "GET_ORDER_BY_ID_FINISHED": {
+            console.log('### Retrieval finished!')
+
+            console.log(action.payload)
+
+            return { ...store, oneOrder: action.payload, APICallInProgress: false }
         }
 
         //ADD TO CART_____________________________________________________________:
@@ -113,12 +127,14 @@ export default function reducer(store = initialState, action) {
         }
         case "VIEW_PRODUCT_FINISHED": {
             console.log("### View product finished.....")
-            return { ...store, 
+            return {
+                ...store,
                 productDetails: action.payload.product,
-                catalogView: action.payload.catalogView, 
-                productView: action.payload.productView, 
+                catalogView: action.payload.catalogView,
+                productView: action.payload.productView,
                 ordersView: action.payload.ordersView,
-                APICallInProgress: false }
+                APICallInProgress: false
+            }
         }
 
         //GET PRODUCT COUNT -----------------------------------------------------------
@@ -151,10 +167,12 @@ export default function reducer(store = initialState, action) {
 
             console.log(action.payload)
 
-            return { ...store, 
-                catalogView: action.payload.catalogView, 
-                productView: action.payload.productView, 
-                ordersView: action.payload.ordersView, APICallInProgress: false }
+            return {
+                ...store,
+                catalogView: action.payload.catalogView,
+                productView: action.payload.productView,
+                ordersView: action.payload.ordersView, APICallInProgress: false
+            }
         }
 
         default: {

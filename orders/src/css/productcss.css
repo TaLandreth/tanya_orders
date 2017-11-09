@@ -72,6 +72,7 @@
     width: 100%;
     box-shadow: 0 0 0 0;
     border-bottom: 1px solid #8c8c8c;
+    z-index: -1;
   }
   
   .prod-img-view-narrow img{
@@ -142,6 +143,7 @@
   }
   
   .return-to-catalog, .return-to-catalog-narrow {
+    margin-top: 10rem;
     font-size: 1.6em;
     font-style: italic;
     color: goldenrod;
@@ -158,7 +160,7 @@
   font-weight: bold;
   color: goldenrod;
   margin-bottom: 5px;
-  text-decoration: underline;
+  margin-top: 0;
   
   }
   

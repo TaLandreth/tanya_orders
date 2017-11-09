@@ -66,21 +66,21 @@ class Cart extends Component {
                     {/* RESPONSIVE */}
                     <MediaQuery query="(max-device-width: 600px)">
                         <div className="cart-div-product-narrow" key={this.props.line.productname}>{this.props.line.productname}
-                        <div className="cart-div-container-narrow">
-                            <div className="cart-div" key={this.props.line.quantity}>
+                            <div className="cart-div-container-narrow">
+                                <div className="cart-div" key={this.props.line.quantity}>
 
-                                <input type="number" min="1" max="4000" value={this.state.qty}
-                                    name="qty" placeholder={this.props.line.quantity} onChange={this.inputUpdate.bind(this, this.props.line.productdetailsid)} />
-                                 @ ${this.props.line.productprice.toFixed(2)} each</div>
+                                    <input type="number" min="1" max="4000" value={this.state.qty}
+                                        name="qty" placeholder={this.props.line.quantity} onChange={this.inputUpdate.bind(this)} />
+                                    @ ${this.props.line.productprice.toFixed(2)} each</div>
                                 <div className="fromcart" key={i++} onClick={this.updateItem.bind(this, this.props.line.productdetailsid, this.props.line.productprice)}>
-                                <span className="glyphicon glyphicon-saved"></span>
-                            </div>
-                            <div className="fromcart" key={"B" + i++} onClick={this.removeItem.bind(this, this.props.line.productdetailsid)}>
-                                <span className="glyphicon glyphicon-trash"></span>
-                            </div>
+                                    <span className="glyphicon glyphicon-saved"></span>
+                                </div>
+                                <div className="fromcart" key={"B" + i++} onClick={this.removeItem.bind(this, this.props.line.productdetailsid)}>
+                                    <span className="glyphicon glyphicon-trash"></span>
+                                </div>
 
-                        </div>
-                        <div className="cart-div-total" key={"A" + i++}>SubTotal: ${this.props.line.subtotal.toFixed(2)}
+                            </div>
+                            <div className="cart-div-total" key={"A" + i++}>SubTotal: ${this.props.line.subtotal.toFixed(2)}
                             </div>
                         </div>
                     </MediaQuery>
@@ -88,21 +88,21 @@ class Cart extends Component {
                     {/* STANDARD */}
                     <MediaQuery query="(min-device-width: 600px)">
                         <div className="cart-div-product" key={this.props.line.productname}>{this.props.line.productname}
-                        <div className="cart-div-container">
-                            <div className="cart-div" key={this.props.line.quantity}>
-                                <input type="number" min="1" max="4000" value={this.state.qty}
-                                    name="qty" placeholder={this.props.line.quantity} onChange={this.inputUpdate.bind(this)} />
-                                 @ ${this.props.line.productprice.toFixed(2)} each</div>
+                            <div className="cart-div-container">
+                                <div className="cart-div" key={this.props.line.quantity}>
+                                    <input type="number" min="1" max="4000" value={this.state.qty}
+                                        name="qty" placeholder={this.props.line.quantity} onChange={this.inputUpdate.bind(this)} />
+                                    @ ${this.props.line.productprice.toFixed(2)} each</div>
 
-                            <div className="fromcart" key={i++} onClick={this.updateItem.bind(this, this.props.line.productdetailsid, this.props.line.productprice)}>
-                                <span className="glyphicon glyphicon-saved"></span>
-                            </div>
-                            <div className="fromcart" key={"B" + i++} onClick={this.removeItem.bind(this, this.props.line.productdetailsid)}>
-                                <span className="glyphicon glyphicon-trash"></span>
+                                <div className="fromcart" key={i++} onClick={this.updateItem.bind(this, this.props.line.productdetailsid, this.props.line.productprice)}>
+                                    <span className="glyphicon glyphicon-saved"></span>
+                                </div>
+                                <div className="fromcart" key={"B" + i++} onClick={this.removeItem.bind(this, this.props.line.productdetailsid)}>
+                                    <span className="glyphicon glyphicon-trash"></span>
 
+                                </div>
                             </div>
-                        </div>
-                        <div className="cart-div-total" key={"A" + i++}>SubTotal: ${this.props.line.subtotal.toFixed(2)}
+                            <div className="cart-div-total" key={"A" + i++}>SubTotal: ${this.props.line.subtotal.toFixed(2)}
                             </div>
                         </div>
                     </MediaQuery>

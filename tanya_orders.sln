@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tanya_orders", "tanya_orders\tanya_orders.csproj", "{FDF882CE-5527-41EE-BF60-CB24CB24CB6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressProductUnitTests", "ordertest\AddressProductUnitTests.csproj", "{C4D69273-EA96-42FA-B1FF-925272767914}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingCustomerUnitTests", "ordertest2\ShippingCustomerUnitTests.csproj", "{FE92CFCD-5BBC-4E9D-964D-41F1267D7926}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineOrderUnitTests", "LineOrderUnitTests\LineOrderUnitTests.csproj", "{02A9E421-E6F6-4349-89DF-85259178516D}"
@@ -25,10 +23,6 @@ Global
 		{FDF882CE-5527-41EE-BF60-CB24CB24CB6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDF882CE-5527-41EE-BF60-CB24CB24CB6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDF882CE-5527-41EE-BF60-CB24CB24CB6D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4D69273-EA96-42FA-B1FF-925272767914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4D69273-EA96-42FA-B1FF-925272767914}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4D69273-EA96-42FA-B1FF-925272767914}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4D69273-EA96-42FA-B1FF-925272767914}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE92CFCD-5BBC-4E9D-964D-41F1267D7926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FE92CFCD-5BBC-4E9D-964D-41F1267D7926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE92CFCD-5BBC-4E9D-964D-41F1267D7926}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,7 +41,6 @@ Global
 		{A122296A-3D5D-4D72-95FD-0A8DF52B690C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C4D69273-EA96-42FA-B1FF-925272767914} = {FA1EF4D4-EBEF-4A90-8E84-3C47F6D2E32A}
 		{02A9E421-E6F6-4349-89DF-85259178516D} = {FA1EF4D4-EBEF-4A90-8E84-3C47F6D2E32A}
 		{FE92CFCD-5BBC-4E9D-964D-41F1267D7926} = {FA1EF4D4-EBEF-4A90-8E84-3C47F6D2E32A}
 	EndGlobalSection

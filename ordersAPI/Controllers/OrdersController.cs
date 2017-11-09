@@ -72,6 +72,38 @@ namespace ordersAPI.Controllers
 
     }
 
+
+
+    //Retrieval - orders
+    [Route("api/ordernumber")]
+    public class RetrieveOrderById : Controller
+    {
+        
+        [HttpPost("{id}")]
+        public OneOrder GetOrder(int id)
+        {
+
+            if (id == 0)
+            {
+                return null;
+            }
+
+            var retrieval = new OrderManager().GetOrder(id);
+
+            if (retrieval != null) { 
+
+                return retrieval; 
+            }
+            else
+            {
+                Console.WriteLine("Failed to get orders...");
+                return null;
+            }
+        }
+
+    }
+
+
     //CANCEL order
     [Route("api/ordercancel")]
     public class OrderCancelController : Controller
