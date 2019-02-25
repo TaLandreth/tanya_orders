@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{5A407D47-D871-4F7C-B664-699CE7CA44D6}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
+  <MonoDevelop.Ide.ItemProperties.tanya__orders PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="tanya_orders/tanya_orders.csproj">
+    <Files>
+      <File FileName="orders_library/orders_library.csproj" Line="17" Column="1" />
+      <File FileName="ordersAPI/ordersAPI.csproj" Line="12" Column="22" />
+      <File FileName="tanya_orders/tanya_orders.csproj" Line="5" Column="35" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.ordersAPI PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
